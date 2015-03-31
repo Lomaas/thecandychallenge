@@ -8,18 +8,36 @@
 
 import UIKit
 
-class WelcomeViewController: UIViewController {
+class WelcomeViewController: UIViewController, FBSDKLoginButtonDelegate {
 
+    @IBOutlet weak var fbLoginButton: FBSDKLoginButton!
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        if ((FBSDKAccessToken.currentAccessToken()) != nil) {
+            
+        }
+        
+        fbLoginButton.delegate = self;
+        FBSDKProfile.enableUpdatesOnAccessTokenChange(true)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "onProfileUpdated:", name:FBSDKProfileDidChangeNotification, object: nil)
+        
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    func onProfileUpdated(notification: NSNotification) {
+        println("OnprofileUpdated")
+        
     }
+    
+    func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!){
+        println("loginButton")
+   
+    }
+    
+    func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
+        println("did logout")
 
+    }
 
 }
 

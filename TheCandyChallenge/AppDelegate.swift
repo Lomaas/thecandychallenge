@@ -15,8 +15,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
-        return true
+        Parse.enableLocalDatastore()
+        Parse.setApplicationId("2PnxXdV0kFB4DNl2IU8Vph87TAlK4tL0AoO6SE6j", clientKey: "8C7I5LeYspFbEM9QdIFwoBJjIeiGt4u82fYcWCdj")
+        var test:PFObject = PFObject(className: "TestObject")
+        test["foo"] = "bar"
+        test.saveInBackground()
+        return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
 
     func applicationWillResignActive(application: UIApplication) {
@@ -41,6 +45,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
-
+    
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
+        return FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)
+    }
 }
 

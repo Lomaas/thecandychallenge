@@ -30,6 +30,7 @@
 		85C32E721ACB2F280053EFF7 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 85C32E711ACB2F280053EFF7 /* libsqlite3.dylib */; };
 		85C32E741ACB31810053EFF7 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85C32E731ACB31810053EFF7 /* Bolts.framework */; };
 		85C32E771ACB3D990053EFF7 /* PasswordGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C32E761ACB3D990053EFF7 /* PasswordGenerator.swift */; };
+		85C32E7C1ACB4CA80053EFF7 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C32E7B1ACB4CA80053EFF7 /* ContainerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,7 @@
 		85C32E711ACB2F280053EFF7 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		85C32E731ACB31810053EFF7 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		85C32E761ACB3D990053EFF7 /* PasswordGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordGenerator.swift; sourceTree = "<group>"; };
+		85C32E7B1ACB4CA80053EFF7 /* ContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +134,7 @@
 				85C32E551ACB27300053EFF7 /* bridge */,
 				8586EF8A1AC34C1F00F47C20 /* AppDelegate.swift */,
 				8586EF8C1AC34C1F00F47C20 /* WelcomeViewController.swift */,
+				85C32E7B1ACB4CA80053EFF7 /* ContainerViewController.swift */,
 				8586EF8E1AC34C1F00F47C20 /* Main.storyboard */,
 				8586EF911AC34C1F00F47C20 /* Images.xcassets */,
 				8586EF931AC34C1F00F47C20 /* LaunchScreen.xib */,
@@ -307,6 +310,7 @@
 			files = (
 				85C32E771ACB3D990053EFF7 /* PasswordGenerator.swift in Sources */,
 				8586EF8D1AC34C1F00F47C20 /* WelcomeViewController.swift in Sources */,
+				85C32E7C1ACB4CA80053EFF7 /* ContainerViewController.swift in Sources */,
 				85C32E4F1ACB14A90053EFF7 /* InviteFriendsViewController.swift in Sources */,
 				8586EF8B1AC34C1F00F47C20 /* AppDelegate.swift in Sources */,
 			);

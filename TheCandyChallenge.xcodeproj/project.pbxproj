@@ -8,11 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		8586EF8B1AC34C1F00F47C20 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8586EF8A1AC34C1F00F47C20 /* AppDelegate.swift */; };
-		8586EF8D1AC34C1F00F47C20 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8586EF8C1AC34C1F00F47C20 /* ViewController.swift */; };
+		8586EF8D1AC34C1F00F47C20 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8586EF8C1AC34C1F00F47C20 /* WelcomeViewController.swift */; };
 		8586EF901AC34C1F00F47C20 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8586EF8E1AC34C1F00F47C20 /* Main.storyboard */; };
 		8586EF921AC34C1F00F47C20 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8586EF911AC34C1F00F47C20 /* Images.xcassets */; };
 		8586EF951AC34C1F00F47C20 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8586EF931AC34C1F00F47C20 /* LaunchScreen.xib */; };
 		8586EFA11AC34C1F00F47C20 /* TheCandyChallengeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8586EFA01AC34C1F00F47C20 /* TheCandyChallengeTests.swift */; };
+		85C32E4F1ACB14A90053EFF7 /* InviteFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C32E4E1ACB14A90053EFF7 /* InviteFriendsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,13 +30,14 @@
 		8586EF851AC34C1F00F47C20 /* TheCandyChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheCandyChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8586EF891AC34C1F00F47C20 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8586EF8A1AC34C1F00F47C20 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		8586EF8C1AC34C1F00F47C20 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		8586EF8C1AC34C1F00F47C20 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		8586EF8F1AC34C1F00F47C20 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8586EF911AC34C1F00F47C20 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		8586EF941AC34C1F00F47C20 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		8586EF9A1AC34C1F00F47C20 /* TheCandyChallengeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TheCandyChallengeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8586EF9F1AC34C1F00F47C20 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8586EFA01AC34C1F00F47C20 /* TheCandyChallengeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheCandyChallengeTests.swift; sourceTree = "<group>"; };
+		85C32E4E1ACB14A90053EFF7 /* InviteFriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteFriendsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,11 +80,12 @@
 			isa = PBXGroup;
 			children = (
 				8586EF8A1AC34C1F00F47C20 /* AppDelegate.swift */,
-				8586EF8C1AC34C1F00F47C20 /* ViewController.swift */,
+				8586EF8C1AC34C1F00F47C20 /* WelcomeViewController.swift */,
 				8586EF8E1AC34C1F00F47C20 /* Main.storyboard */,
 				8586EF911AC34C1F00F47C20 /* Images.xcassets */,
 				8586EF931AC34C1F00F47C20 /* LaunchScreen.xib */,
 				8586EF881AC34C1F00F47C20 /* Supporting Files */,
+				85C32E4E1ACB14A90053EFF7 /* InviteFriendsViewController.swift */,
 			);
 			path = TheCandyChallenge;
 			sourceTree = "<group>";
@@ -212,7 +215,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8586EF8D1AC34C1F00F47C20 /* ViewController.swift in Sources */,
+				8586EF8D1AC34C1F00F47C20 /* WelcomeViewController.swift in Sources */,
+				85C32E4F1ACB14A90053EFF7 /* InviteFriendsViewController.swift in Sources */,
 				8586EF8B1AC34C1F00F47C20 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -407,6 +411,7 @@
 				8586EFA61AC34C1F00F47C20 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8586EFA71AC34C1F00F47C20 /* Build configuration list for PBXNativeTarget "TheCandyChallengeTests" */ = {
 			isa = XCConfigurationList;
@@ -415,6 +420,7 @@
 				8586EFA91AC34C1F00F47C20 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

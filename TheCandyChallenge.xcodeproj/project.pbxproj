@@ -29,6 +29,7 @@
 		85C32E701ACB2F1F0053EFF7 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 85C32E6F1ACB2F1F0053EFF7 /* libz.dylib */; };
 		85C32E721ACB2F280053EFF7 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 85C32E711ACB2F280053EFF7 /* libsqlite3.dylib */; };
 		85C32E741ACB31810053EFF7 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85C32E731ACB31810053EFF7 /* Bolts.framework */; };
+		85C32E771ACB3D990053EFF7 /* PasswordGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C32E761ACB3D990053EFF7 /* PasswordGenerator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 		85C32E6F1ACB2F1F0053EFF7 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		85C32E711ACB2F280053EFF7 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		85C32E731ACB31810053EFF7 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
+		85C32E761ACB3D990053EFF7 /* PasswordGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordGenerator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +128,7 @@
 		8586EF871AC34C1F00F47C20 /* TheCandyChallenge */ = {
 			isa = PBXGroup;
 			children = (
+				85C32E751ACB3D4B0053EFF7 /* util */,
 				85C32E551ACB27300053EFF7 /* bridge */,
 				8586EF8A1AC34C1F00F47C20 /* AppDelegate.swift */,
 				8586EF8C1AC34C1F00F47C20 /* WelcomeViewController.swift */,
@@ -191,6 +194,14 @@
 				85C32E561ACB27410053EFF7 /* TheCandyChallenge-Bridging-Header.h */,
 			);
 			name = bridge;
+			sourceTree = "<group>";
+		};
+		85C32E751ACB3D4B0053EFF7 /* util */ = {
+			isa = PBXGroup;
+			children = (
+				85C32E761ACB3D990053EFF7 /* PasswordGenerator.swift */,
+			);
+			name = util;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -294,6 +305,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				85C32E771ACB3D990053EFF7 /* PasswordGenerator.swift in Sources */,
 				8586EF8D1AC34C1F00F47C20 /* WelcomeViewController.swift in Sources */,
 				85C32E4F1ACB14A90053EFF7 /* InviteFriendsViewController.swift in Sources */,
 				8586EF8B1AC34C1F00F47C20 /* AppDelegate.swift in Sources */,

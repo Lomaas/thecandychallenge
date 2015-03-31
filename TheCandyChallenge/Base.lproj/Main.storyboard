@@ -107,9 +107,7 @@
                                     </mask>
                                 </variation>
                                 <connections>
-                                    <segue destination="qvu-V5-KWx" kind="popoverPresentation" popoverAnchorView="8yA-4L-Ac0" id="PeM-hS-h8h">
-                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                    </segue>
+                                    <action selector="test:" destination="BYZ-38-t0r" eventType="touchUpInside" id="z3g-dP-kU0"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="THE CANDY CHALLENGE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fcn-Ow-gw9">

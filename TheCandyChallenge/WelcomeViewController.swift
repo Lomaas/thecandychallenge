@@ -92,7 +92,7 @@ class WelcomeViewController: UIViewController, FBSDKLoginButtonDelegate {
         user["name"] = name
         user["fbId"] = fbId
         user.username = email
-        user.password = NSUUID().UUIDString
+        user.password = NSUUID().UUIDString     // TODO - Fix password
         
         user.signUpInBackgroundWithBlock { (success: Bool, error: NSError!) -> Void in
             if let error = error {
@@ -116,7 +116,8 @@ class WelcomeViewController: UIViewController, FBSDKLoginButtonDelegate {
     }
     
     func userAlreadyRegister() {
-        
+        NSNotificationCenter.defaultCenter().postNotificationName("NavigateToNewView", object:nil, userInfo:["key" : Constants.VIEWS.InviteFriendsView.rawValue])
+
     }
 }
 

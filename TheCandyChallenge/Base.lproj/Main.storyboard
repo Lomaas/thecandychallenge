@@ -1,10 +1,83 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="KPV-xV-66z">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="nxr-G1-dC5">
+            <objects>
+                <navigationController id="KPV-xV-66z" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Zbw-A2-Nh8">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="5We-nB-KTd" kind="relationship" relationship="rootViewController" id="JZI-qY-nPC"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zIG-Jx-fUW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-181.5" y="-386"/>
+        </scene>
+        <!--Container View Controller-->
+        <scene sceneID="2ZT-KS-HaB">
+            <objects>
+                <viewController id="5We-nB-KTd" customClass="ContainerViewController" customModule="TheCandyChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="N8Q-F2-lIl"/>
+                        <viewControllerLayoutGuide type="bottom" id="hWZ-SV-CCg"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="WpW-1s-YSu">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="vIL-hP-O3U">
+                                <rect key="frame" x="-10" y="-10" width="20" height="20"/>
+                                <color key="color" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="180" y="169" width="37" height="37"/>
+                                </variation>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" name="controlDarkShadowColor" catalog="System" colorSpace="catalog"/>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="vIL-hP-O3U"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="vIL-hP-O3U"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <navigationItem key="navigationItem" id="5hV-r3-J5w"/>
+                    <connections>
+                        <outlet property="spinner" destination="vIL-hP-O3U" id="Wdo-Qh-8WH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Tzd-mz-hmn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="550.5" y="-386"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="GK6-S0-CNo">
+            <objects>
+                <viewController id="1QW-2o-cRu" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="7tn-8G-NAq"/>
+                        <viewControllerLayoutGuide type="bottom" id="94e-k8-nrc"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="uQ6-kF-Gcc">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" name="controlDarkShadowColor" catalog="System" colorSpace="catalog"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0RS-gx-dfq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1411.5" y="-386"/>
+        </scene>
         <!--Welcome View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -241,7 +314,7 @@
         <!--Title-->
         <scene sceneID="Vo6-ag-7aj">
             <objects>
-                <viewController id="o0C-1N-wIw" customClass="InviteFriendsViewController" customModule="TheCandyChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="InviteFriends" id="o0C-1N-wIw" customClass="InviteFriendsViewController" customModule="TheCandyChallenge" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ZVa-DL-opG"/>
                         <viewControllerLayoutGuide type="bottom" id="ZEA-vh-rW8"/>
@@ -677,9 +750,6 @@
                                                 <exclude reference="tND-lY-kzx"/>
                                             </mask>
                                         </variation>
-                                        <connections>
-                                            <segue destination="o0C-1N-wIw" kind="presentation" id="GoG-92-6Hi"/>
-                                        </connections>
                                     </button>
                                     <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="center" image="icon-mail" translatesAutoresizingMaskIntoConstraints="NO" id="4oi-vV-Nnj" customClass="SpringImageView" customModule="Spring">
                                         <rect key="frame" x="30" y="121" width="26" height="18"/>

@@ -31,6 +31,10 @@
 		85C32E741ACB31810053EFF7 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85C32E731ACB31810053EFF7 /* Bolts.framework */; };
 		85C32E771ACB3D990053EFF7 /* PasswordGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C32E761ACB3D990053EFF7 /* PasswordGenerator.swift */; };
 		85C32E7C1ACB4CA80053EFF7 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C32E7B1ACB4CA80053EFF7 /* ContainerViewController.swift */; };
+		85C32E7F1ACC0A2D0053EFF7 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C32E7E1ACC0A2D0053EFF7 /* Constants.swift */; };
+		85C32E811ACC22C60053EFF7 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C32E801ACC22C60053EFF7 /* UserService.swift */; };
+		85C32E831ACC243C0053EFF7 /* ProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C32E821ACC243C0053EFF7 /* ProgressViewController.swift */; };
+		85C32E851ACC24B20053EFF7 /* ChallengeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C32E841ACC24B20053EFF7 /* ChallengeService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +77,10 @@
 		85C32E731ACB31810053EFF7 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		85C32E761ACB3D990053EFF7 /* PasswordGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordGenerator.swift; sourceTree = "<group>"; };
 		85C32E7B1ACB4CA80053EFF7 /* ContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
+		85C32E7E1ACC0A2D0053EFF7 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		85C32E801ACC22C60053EFF7 /* UserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		85C32E821ACC243C0053EFF7 /* ProgressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressViewController.swift; sourceTree = "<group>"; };
+		85C32E841ACC24B20053EFF7 /* ChallengeService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,12 +142,14 @@
 				85C32E551ACB27300053EFF7 /* bridge */,
 				8586EF8A1AC34C1F00F47C20 /* AppDelegate.swift */,
 				8586EF8C1AC34C1F00F47C20 /* WelcomeViewController.swift */,
+				85C32E7D1ACC09FC0053EFF7 /* services */,
 				85C32E7B1ACB4CA80053EFF7 /* ContainerViewController.swift */,
+				85C32E4E1ACB14A90053EFF7 /* InviteFriendsViewController.swift */,
+				85C32E821ACC243C0053EFF7 /* ProgressViewController.swift */,
 				8586EF8E1AC34C1F00F47C20 /* Main.storyboard */,
 				8586EF911AC34C1F00F47C20 /* Images.xcassets */,
 				8586EF931AC34C1F00F47C20 /* LaunchScreen.xib */,
 				8586EF881AC34C1F00F47C20 /* Supporting Files */,
-				85C32E4E1ACB14A90053EFF7 /* InviteFriendsViewController.swift */,
 			);
 			path = TheCandyChallenge;
 			sourceTree = "<group>";
@@ -203,8 +213,18 @@
 			isa = PBXGroup;
 			children = (
 				85C32E761ACB3D990053EFF7 /* PasswordGenerator.swift */,
+				85C32E7E1ACC0A2D0053EFF7 /* Constants.swift */,
 			);
 			name = util;
+			sourceTree = "<group>";
+		};
+		85C32E7D1ACC09FC0053EFF7 /* services */ = {
+			isa = PBXGroup;
+			children = (
+				85C32E801ACC22C60053EFF7 /* UserService.swift */,
+				85C32E841ACC24B20053EFF7 /* ChallengeService.swift */,
+			);
+			name = services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -308,11 +328,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				85C32E851ACC24B20053EFF7 /* ChallengeService.swift in Sources */,
+				85C32E811ACC22C60053EFF7 /* UserService.swift in Sources */,
 				85C32E771ACB3D990053EFF7 /* PasswordGenerator.swift in Sources */,
 				8586EF8D1AC34C1F00F47C20 /* WelcomeViewController.swift in Sources */,
+				85C32E831ACC243C0053EFF7 /* ProgressViewController.swift in Sources */,
 				85C32E7C1ACB4CA80053EFF7 /* ContainerViewController.swift in Sources */,
 				85C32E4F1ACB14A90053EFF7 /* InviteFriendsViewController.swift in Sources */,
 				8586EF8B1AC34C1F00F47C20 /* AppDelegate.swift in Sources */,
+				85C32E7F1ACC0A2D0053EFF7 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

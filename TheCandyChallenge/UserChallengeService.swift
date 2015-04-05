@@ -1,19 +1,16 @@
 //
-//  ChallengeService.swift
+//  UserChallengeService.swift
 //  TheCandyChallenge
 //
 //  Created by Simen Johannessen on 01/04/15.
 //  Copyright (c) 2015 Simen Lomås Johannessen. All rights reserved.
 //
 
-import Foundation
-
-struct ChallengeService {
-    
-    func getMyChallenges(userId: String, successHandler: (challenge: [PFObject]) -> Void) {
-        var query = PFQuery(className:"Challenge")
+struct UserChallengeService {
+    func getMyChallenges(successHandler: (challenge: [PFObject]) -> Void) {
+        var query = PFQuery(className:"UserChallenge")
         
-        query.whereKey("userId", equalTo: userId)
+        query.whereKey("user", equalTo: PFUser.currentUser())
         query.findObjectsInBackgroundWithBlock {
             (objects: [AnyObject]!, error: NSError!) -> Void in
             if error == nil {
@@ -32,7 +29,8 @@ struct ChallengeService {
     }
     
     func storeMyChallenge() {
-        var challenge = PFObject(className: "Challenge")
+        var challenge = PFObject(className: "UserChallenge")
         challenge["user"] = PFUser.currentUser()
+        challenge["date"] = NSDate()
     }
 }

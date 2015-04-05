@@ -35,6 +35,9 @@
 		85C32E811ACC22C60053EFF7 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C32E801ACC22C60053EFF7 /* UserService.swift */; };
 		85C32E831ACC243C0053EFF7 /* ProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C32E821ACC243C0053EFF7 /* ProgressViewController.swift */; };
 		85C32E851ACC24B20053EFF7 /* ChallengeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C32E841ACC24B20053EFF7 /* ChallengeService.swift */; };
+		85C32E891ACC469C0053EFF7 /* UserChallenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C32E881ACC469C0053EFF7 /* UserChallenge.swift */; };
+		85C32E8B1ACC46D10053EFF7 /* UserChallengeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C32E8A1ACC46D10053EFF7 /* UserChallengeService.swift */; };
+		85FFE6541AD15DC700C6D56F /* ParseFacebookUtilsV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85FFE6531AD15DC700C6D56F /* ParseFacebookUtilsV4.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +84,9 @@
 		85C32E801ACC22C60053EFF7 /* UserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		85C32E821ACC243C0053EFF7 /* ProgressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressViewController.swift; sourceTree = "<group>"; };
 		85C32E841ACC24B20053EFF7 /* ChallengeService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeService.swift; sourceTree = "<group>"; };
+		85C32E881ACC469C0053EFF7 /* UserChallenge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserChallenge.swift; sourceTree = "<group>"; };
+		85C32E8A1ACC46D10053EFF7 /* UserChallengeService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserChallengeService.swift; sourceTree = "<group>"; };
+		85FFE6531AD15DC700C6D56F /* ParseFacebookUtilsV4.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtilsV4.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +104,7 @@
 				85C32E661ACB2EED0053EFF7 /* MobileCoreServices.framework in Frameworks */,
 				85C32E641ACB2EE40053EFF7 /* CoreLocation.framework in Frameworks */,
 				85C32E621ACB2EDE0053EFF7 /* CoreGraphics.framework in Frameworks */,
+				85FFE6541AD15DC700C6D56F /* ParseFacebookUtilsV4.framework in Frameworks */,
 				85C32E601ACB2ED70053EFF7 /* CFNetwork.framework in Frameworks */,
 				85C32E5E1ACB2ED00053EFF7 /* AudioToolbox.framework in Frameworks */,
 				85C32E5A1ACB28410053EFF7 /* FBSDKLoginKit.framework in Frameworks */,
@@ -138,14 +145,12 @@
 		8586EF871AC34C1F00F47C20 /* TheCandyChallenge */ = {
 			isa = PBXGroup;
 			children = (
-				85C32E751ACB3D4B0053EFF7 /* util */,
-				85C32E551ACB27300053EFF7 /* bridge */,
 				8586EF8A1AC34C1F00F47C20 /* AppDelegate.swift */,
-				8586EF8C1AC34C1F00F47C20 /* WelcomeViewController.swift */,
+				85C32E751ACB3D4B0053EFF7 /* util */,
+				85C32E871ACC46840053EFF7 /* model */,
+				85C32E551ACB27300053EFF7 /* bridge */,
 				85C32E7D1ACC09FC0053EFF7 /* services */,
-				85C32E7B1ACB4CA80053EFF7 /* ContainerViewController.swift */,
-				85C32E4E1ACB14A90053EFF7 /* InviteFriendsViewController.swift */,
-				85C32E821ACC243C0053EFF7 /* ProgressViewController.swift */,
+				85C32E861ACC39AD0053EFF7 /* viewcontrollers */,
 				8586EF8E1AC34C1F00F47C20 /* Main.storyboard */,
 				8586EF911AC34C1F00F47C20 /* Images.xcassets */,
 				8586EF931AC34C1F00F47C20 /* LaunchScreen.xib */,
@@ -182,6 +187,7 @@
 		85C32E501ACB26150053EFF7 /* frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				85FFE6531AD15DC700C6D56F /* ParseFacebookUtilsV4.framework */,
 				85C32E711ACB2F280053EFF7 /* libsqlite3.dylib */,
 				85C32E6F1ACB2F1F0053EFF7 /* libz.dylib */,
 				85C32E6D1ACB2F160053EFF7 /* SystemConfiguration.framework */,
@@ -222,9 +228,29 @@
 			isa = PBXGroup;
 			children = (
 				85C32E801ACC22C60053EFF7 /* UserService.swift */,
+				85C32E8A1ACC46D10053EFF7 /* UserChallengeService.swift */,
 				85C32E841ACC24B20053EFF7 /* ChallengeService.swift */,
 			);
 			name = services;
+			sourceTree = "<group>";
+		};
+		85C32E861ACC39AD0053EFF7 /* viewcontrollers */ = {
+			isa = PBXGroup;
+			children = (
+				85C32E7B1ACB4CA80053EFF7 /* ContainerViewController.swift */,
+				85C32E4E1ACB14A90053EFF7 /* InviteFriendsViewController.swift */,
+				85C32E821ACC243C0053EFF7 /* ProgressViewController.swift */,
+				8586EF8C1AC34C1F00F47C20 /* WelcomeViewController.swift */,
+			);
+			name = viewcontrollers;
+			sourceTree = "<group>";
+		};
+		85C32E871ACC46840053EFF7 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				85C32E881ACC469C0053EFF7 /* UserChallenge.swift */,
+			);
+			name = model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -328,8 +354,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				85C32E891ACC469C0053EFF7 /* UserChallenge.swift in Sources */,
 				85C32E851ACC24B20053EFF7 /* ChallengeService.swift in Sources */,
 				85C32E811ACC22C60053EFF7 /* UserService.swift in Sources */,
+				85C32E8B1ACC46D10053EFF7 /* UserChallengeService.swift in Sources */,
 				85C32E771ACB3D990053EFF7 /* PasswordGenerator.swift in Sources */,
 				8586EF8D1AC34C1F00F47C20 /* WelcomeViewController.swift in Sources */,
 				85C32E831ACC243C0053EFF7 /* ProgressViewController.swift in Sources */,

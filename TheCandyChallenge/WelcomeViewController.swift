@@ -8,20 +8,12 @@
 
 import UIKit
 
-class WelcomeViewController: UIViewController, FBSDKLoginButtonDelegate {
+class WelcomeViewController: UIViewController {
 
-    @IBOutlet weak var fbLoginButton: FBSDKLoginButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if ((FBSDKAccessToken.currentAccessToken()) != nil) {
-            self.userAlreadyRegister()
-            return
-        }
-        
-        fbLoginButton.delegate = self;
         FBSDKProfile.enableUpdatesOnAccessTokenChange(true)
-        self.fbLoginButton.readPermissions = ["public_profile", "email", "user_friends"]
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "onProfileUpdated:", name:FBSDKProfileDidChangeNotification, object: nil)
     }
@@ -32,37 +24,21 @@ class WelcomeViewController: UIViewController, FBSDKLoginButtonDelegate {
     }
     
     @IBAction func test(sender: AnyObject) {
-        returnUserData()
-    }
-    func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!){
-        println("User Logged In")
+//        returnUserData()
+        PFFacebookUtils.logInInBackgroundWithReadPermissions(["public_profile", "email", "user_friends"], block: { (user, error) -> Void in
+            if (user != nil) {
+                if (user.isNew) {
+                    println("User signed up")
+                    self.returnUserData()
+                } else {
+                    println("User logged in")
+                    self.returnUserData()
+                }
+            }
+        })
         
-        if ((error) != nil)
-        {
-            // Process error
-        }
-        else if result.isCancelled {
-            // Handle cancellations
-        }
-        else {
-            // If you ask for multiple permissions at once, you
-            // should check if specific permissions missing
-            if result.grantedPermissions.containsObject("email") {
-                self.returnUserData()
-            }
-            else {
-                var alert = UIAlertController(title: "Ups", message: "The application needs the email in order to work. You can register normally below", preferredStyle: UIAlertControllerStyle.Alert)
-                alert.addAction(UIAlertAction(title: "Login again?", style: UIAlertActionStyle.Default, handler: { action in
-                        // Send user back to facebook
-                }))
-                self.presentViewController(alert, animated: true, completion:nil)
-            }
-        }
     }
-    
-    func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
-        println("did logout")
-    }
+  
     
     func returnUserData() {
         let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: nil)
@@ -87,32 +63,19 @@ class WelcomeViewController: UIViewController, FBSDKLoginButtonDelegate {
     }
     
     func storeUserDataToServer(email: String, name: String, fbId: String) {
-        var user:PFUser = PFUser()
+        var user:PFUser = PFUser.currentUser()
         user["email"] = email
         user["name"] = name
         user["fbId"] = fbId
-        user.username = email
-        user.password = NSUUID().UUIDString     // TODO - Fix password
         
-        user.signUpInBackgroundWithBlock { (success: Bool, error: NSError!) -> Void in
-            if let error = error {
-                println("Error \(error.localizedDescription), \(error.code)")
-                
-                switch error.code {
-                case 202:
-                    println("202")
-                    self.userAlreadyRegister()
-                default:
-                    println("NOT DEFAUlt CASE")
-                }
-            }
-            
+        user.saveInBackgroundWithBlock({ (success, error) -> Void in
             if success {
                 println("success")
+                self.userAlreadyRegister()
             } else {
                 println("problems")
             }
-        }
+        })
     }
     
     func userAlreadyRegister() {

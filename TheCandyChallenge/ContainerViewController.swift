@@ -19,9 +19,10 @@ class ContainerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if (!UserService.isLoggedIn()) {
-            goToView(Constants.VIEWS.ProgressView.rawValue)
-            return
+        if (UserService.isLoggedIn()) {
+            self.goToView(Constants.VIEWS.ProgressView.rawValue)
+        } else {
+            self.goToView(Constants.VIEWS.WelcomeView.rawValue)
         }
         
         NSNotificationCenter.defaultCenter().addObserver(
@@ -37,19 +38,20 @@ class ContainerViewController: UIViewController {
     }
     
     func goToView(key: Int) {
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        
         switch key {
         case Constants.VIEWS.InviteFriendsView.rawValue:
-            println("welcomeview")
-            var vc: InviteFriendsViewController = UIStoryboard().instantiateViewControllerWithIdentifier("InviteFriends")
+            let vc: InviteFriendsViewController = sb.instantiateViewControllerWithIdentifier("InviteFriends")
                 as InviteFriendsViewController
-            
-            UINavigationController().presentViewController(vc, animated: true, completion: nil)
+            self.presentViewController(vc, animated: true, completion: nil)
         case Constants.VIEWS.ProgressView.rawValue:
-            var vc: InviteFriendsViewController = UIStoryboard().instantiateViewControllerWithIdentifier("InviteFriends")
-                as InviteFriendsViewController
-            
-            UINavigationController().presentViewController(vc, animated: true, completion: nil)
-            
+            let vc: ProgressViewController = sb.instantiateViewControllerWithIdentifier("progress")
+                as ProgressViewController
+            self.presentViewController(vc, animated: false, completion: nil)
+        case Constants.VIEWS.WelcomeView.rawValue:
+            let vc = sb.instantiateViewControllerWithIdentifier("welcome") as WelcomeViewController
+            self.presentViewController(vc, animated: true, completion: nil)
         default:
             println("No known key")
         }

@@ -24,7 +24,8 @@
                             <exclude reference="rkU-6p-9Cq"/>
                         </mask>
                     </variation>
-                    <variation key="widthClass=compact">
+                    <variation key="widthClass=compact" misplaced="YES">
+                        <rect key="frame" x="20" y="438" width="441" height="22"/>
                         <mask key="constraints">
                             <include reference="rkU-6p-9Cq"/>
                         </mask>
@@ -71,33 +72,6 @@
                         </mask>
                     </variation>
                 </label>
-                <imageView userInteractionEnabled="NO" alpha="0.79999999999999982" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logotest" translatesAutoresizingMaskIntoConstraints="NO" id="aK5-Ud-Cc5">
-                    <rect key="frame" x="102" y="232" width="277" height="199"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="760" id="DmC-1Q-iNE"/>
-                        <constraint firstAttribute="width" constant="277" id="JGp-Df-YGH">
-                            <variation key="widthClass=compact" constant="428"/>
-                        </constraint>
-                        <constraint firstAttribute="height" constant="199" id="TlB-0f-nY6">
-                            <variation key="widthClass=compact" constant="308"/>
-                        </constraint>
-                        <constraint firstAttribute="height" constant="363" id="kTd-Da-lrS"/>
-                    </constraints>
-                    <variation key="default">
-                        <mask key="constraints">
-                            <exclude reference="DmC-1Q-iNE"/>
-                            <exclude reference="kTd-Da-lrS"/>
-                        </mask>
-                    </variation>
-                    <variation key="widthClass=compact">
-                        <mask key="constraints">
-                            <include reference="DmC-1Q-iNE"/>
-                            <exclude reference="JGp-Df-YGH"/>
-                            <exclude reference="TlB-0f-nY6"/>
-                            <include reference="kTd-Da-lrS"/>
-                        </mask>
-                    </variation>
-                </imageView>
             </subviews>
             <color key="backgroundColor" name="controlDarkShadowColor" catalog="System" colorSpace="catalog"/>
             <constraints>
@@ -121,25 +95,13 @@
                 <constraint firstItem="C9z-OZ-Fm7" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="88" id="Oal-5f-7Xe">
                     <variation key="widthClass=compact" constant="80"/>
                 </constraint>
-                <constraint firstItem="8ie-xW-0ye" firstAttribute="top" secondItem="aK5-Ud-Cc5" secondAttribute="bottom" constant="8" symbolic="YES" id="VRu-6x-UnX">
-                    <variation key="widthClass=compact" constant="74"/>
-                </constraint>
-                <constraint firstItem="aK5-Ud-Cc5" firstAttribute="centerX" secondItem="8ie-xW-0ye" secondAttribute="centerX" id="WBw-AT-Z7Y"/>
                 <constraint firstAttribute="centerX" secondItem="8ie-xW-0ye" secondAttribute="centerX" id="ZEH-qu-HZ9"/>
                 <constraint firstAttribute="bottom" secondItem="8ie-xW-0ye" secondAttribute="bottom" constant="216" id="aQu-iK-Aeu"/>
-                <constraint firstItem="aK5-Ud-Cc5" firstAttribute="centerX" secondItem="8ie-xW-0ye" secondAttribute="centerX" id="cKG-HO-vM9"/>
                 <constraint firstItem="kId-c2-rCX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" symbolic="YES" id="fvb-Df-36g">
                     <variation key="widthClass=compact" constant="88"/>
                 </constraint>
                 <constraint firstItem="C9z-OZ-Fm7" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="115" id="iSf-bx-g0g">
                     <variation key="widthClass=compact" constant="35"/>
-                </constraint>
-                <constraint firstItem="aK5-Ud-Cc5" firstAttribute="top" secondItem="kId-c2-rCX" secondAttribute="bottom" constant="49" id="j3V-BD-3od">
-                    <variation key="widthClass=compact" constant="-207"/>
-                </constraint>
-                <constraint firstItem="aK5-Ud-Cc5" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="qzw-MJ-pwr"/>
-                <constraint firstItem="aK5-Ud-Cc5" firstAttribute="top" secondItem="kId-c2-rCX" secondAttribute="bottom" constant="53" id="waZ-x7-Dxs">
-                    <variation key="widthClass=compact" constant="8"/>
                 </constraint>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
@@ -155,9 +117,6 @@
                     <exclude reference="A1v-Gr-82R"/>
                     <exclude reference="Oal-5f-7Xe"/>
                     <exclude reference="iSf-bx-g0g"/>
-                    <exclude reference="cKG-HO-vM9"/>
-                    <exclude reference="qzw-MJ-pwr"/>
-                    <exclude reference="waZ-x7-Dxs"/>
                     <exclude reference="80D-1I-hPd"/>
                     <exclude reference="aQu-iK-Aeu"/>
                 </mask>
@@ -176,15 +135,9 @@
                     <exclude reference="fvb-Df-36g"/>
                     <include reference="Oal-5f-7Xe"/>
                     <include reference="iSf-bx-g0g"/>
-                    <exclude reference="WBw-AT-Z7Y"/>
-                    <include reference="cKG-HO-vM9"/>
-                    <exclude reference="j3V-BD-3od"/>
-                    <include reference="qzw-MJ-pwr"/>
-                    <include reference="waZ-x7-Dxs"/>
                     <include reference="80D-1I-hPd"/>
                     <exclude reference="Kzo-t9-V3l"/>
                     <exclude reference="MfP-vx-nX0"/>
-                    <exclude reference="VRu-6x-UnX"/>
                     <exclude reference="ZEH-qu-HZ9"/>
                     <include reference="aQu-iK-Aeu"/>
                 </mask>
@@ -192,7 +145,4 @@
             <point key="canvasLocation" x="548" y="553"/>
         </view>
     </objects>
-    <resources>
-        <image name="logotest" width="800" height="800"/>
-    </resources>
 </document>

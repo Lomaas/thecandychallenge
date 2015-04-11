@@ -10,10 +10,15 @@ import Foundation
 
 struct ChallengeService {
     
-    func getMyChallenges(userId: String, successHandler: (challenge: [PFObject]) -> Void) {
+    static func hasChallengeOnGoing() -> String? {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        return defaults.objectForKey("challengeId") as? String
+    }
+    
+    static func getMyChallenges(userId: String, successHandler: (challenge: [PFObject]) -> Void) {
         var query = PFQuery(className:"Challenge")
         
-        query.whereKey("userId", equalTo: userId)
+        query.whereKey("objectId", equalTo: userId)
         query.findObjectsInBackgroundWithBlock {
             (objects: [AnyObject]!, error: NSError!) -> Void in
             if error == nil {
@@ -31,8 +36,18 @@ struct ChallengeService {
         }
     }
     
-    func storeMyChallenge() {
+    static func storeMyChallenge(successHandler: ((challenge: PFObject) -> Void)) {
         var challenge = PFObject(className: "Challenge")
-        challenge["user"] = PFUser.currentUser()
+        challenge.saveInBackgroundWithBlock ({ (success, error) -> Void in
+            println("Challenge save")
+            println("object id \(challenge.objectId)")
+
+            if (success) {
+                UserChallengeService.storeMyChallenge(challenge)
+                successHandler(challenge: challenge)
+            } else {
+                println("Error storeMyChallenge")
+            }
+        })
     }
 }

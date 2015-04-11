@@ -10,14 +10,6 @@ import Foundation
 
 struct UserService {
     static func hasSignedUp() -> Bool {
-        if ((FBSDKAccessToken.currentAccessToken()) != nil && PFUser.currentUser() != nil) {
-            return true;
-        }
-        
-        return false
-    }
-    
-    static func isLoggedIn() -> Bool {
         if ((PFUser.currentUser() != nil) && (PFFacebookUtils.isLinkedWithUser(PFUser.currentUser()))) {
             return true
         }

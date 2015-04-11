@@ -7,20 +7,22 @@
 //
 
 struct UserChallengeService {
-    func getMyChallenges(successHandler: (challenge: [PFObject]) -> Void) {
+    static func getMyChallenge(successHandler: (userChallenge: PFObject) -> Void) {
         var query = PFQuery(className:"UserChallenge")
         
         query.whereKey("user", equalTo: PFUser.currentUser())
         query.findObjectsInBackgroundWithBlock {
             (objects: [AnyObject]!, error: NSError!) -> Void in
             if error == nil {
-                println("Successfully retrieved \(objects.count) scores.")
+                println("Successfully retrieved \(objects.count) UserChallenges.")
+                
                 if let objects = objects as? [PFObject] {
                     for object in objects {
                         println(object.objectId)
                     }
-                    
-                    successHandler(challenge: objects)
+                    if objects.count > 0 {
+                        successHandler(userChallenge: objects[0] as PFObject)
+                    }
                 }
             } else {
                 println("Error: \(error) \(error.userInfo!)")
@@ -28,9 +30,36 @@ struct UserChallengeService {
         }
     }
     
-    func storeMyChallenge() {
-        var challenge = PFObject(className: "UserChallenge")
-        challenge["user"] = PFUser.currentUser()
-        challenge["date"] = NSDate()
+    static func storeMyChallenge(challenge: PFObject) {
+        var userChallenge = PFObject(className: "UserChallenge")
+        userChallenge["date"] = NSDate()
+        userChallenge["challenge"] = challenge
+        userChallenge["user"] = PFUser.currentUser()
+
+        userChallenge["calories"] = 0
+        userChallenge["moneySaved"] = 0
+        userChallenge.pinInBackground()
+        userChallenge.saveInBackgroundWithBlock { (success, error) -> Void in
+            if success {
+                println("user challenged saved")
+                
+            } else {
+                println("Error: \(error) \(error.userInfo!)")
+            }
+        }
+    }
+    
+    static func getMyChallengeFromLocalStorage(succesHandler: (userChallenge: PFObject) -> Void, errorHandler: () -> Void) {
+        let query = PFQuery(className:"UserChallenge")
+        query.fromLocalDatastore()
+        query.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]!, error) -> Void in
+            if error == nil {
+                if objects.count == 0 {
+                    errorHandler()
+                } else {
+                    succesHandler(userChallenge: objects[0] as PFObject)
+                }
+            }
+        })
     }
 }

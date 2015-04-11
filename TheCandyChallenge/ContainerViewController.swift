@@ -8,10 +8,16 @@
 
 import UIKit
 
-class ContainerViewController: UIViewController {
-    var controllers : [UIViewController] = [];
+class ContainerViewController: UIPageViewController {
+    var challenge: PFObject?
+    lazy var _controllers : [UIViewController] = {
+        let progressView = self.storyboard?.instantiateViewControllerWithIdentifier("progress") as ProgressViewController
+        
+        return [progressView]
+        }()
     
     @IBOutlet weak var spinner: UIActivityIndicatorView!
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
     }
@@ -19,17 +25,17 @@ class ContainerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if (UserService.isLoggedIn()) {
-            self.goToView(Constants.VIEWS.ProgressView.rawValue)
-        } else {
-            self.goToView(Constants.VIEWS.WelcomeView.rawValue)
-        }
-        
         NSNotificationCenter.defaultCenter().addObserver(
             self,
             selector: "goToViewNotification:",
             name: "NavigateToNewView",
             object: nil)
+        
+        if (UserService.hasSignedUp()) {
+            self.goToView(Constants.VIEWS.ProgressView.rawValue)
+        } else {
+            self.goToView(Constants.VIEWS.WelcomeView.rawValue)
+        }
     }
     
     func goToViewNotification(notification: NSNotification) {
@@ -54,6 +60,28 @@ class ContainerViewController: UIViewController {
             self.presentViewController(vc, animated: true, completion: nil)
         default:
             println("No known key")
+        }
+    }
+    
+    func turnToPage(index: Int) {
+        let controller = _controllers[index]
+        
+        var direction = UIPageViewControllerNavigationDirection.Forward
+        
+        if let currentViewController = viewControllers.first as? UIViewController {
+            let currentIndex = (_controllers as NSArray).indexOfObject(currentViewController)
+            
+            if currentIndex > index {
+                direction = UIPageViewControllerNavigationDirection.Reverse
+            }
+        }
+        
+        
+        
+        setViewControllers([controller],
+            direction: direction,
+            animated: true) { (completion) -> Void in
+                
         }
     }
 }

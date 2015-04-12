@@ -1,46 +1,59 @@
-//
-//  ContainerViewController.swift
-//  TheCandyChallenge
-//
-//  Created by Simen Johannessen on 31/03/15.
-//  Copyright (c) 2015 Simen Lomås Johannessen. All rights reserved.
-//
-
 import UIKit
 
-class ContainerViewController: UIPageViewController {
+class ContainerViewController: UIViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
+    var pageIndex = 0
+    private var pageViewController: UIPageViewController?
     var challenge: PFObject?
+    
     lazy var _controllers : [UIViewController] = {
-        let progressView = self.storyboard?.instantiateViewControllerWithIdentifier("progress") as ProgressViewController
-        
-        return [progressView]
-        }()
-    
-    @IBOutlet weak var spinner: UIActivityIndicatorView!
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
-    }
+        let progressView = self.storyboard?.instantiateViewControllerWithIdentifier("ProgressViewController") as ProgressViewController
+        let dayView = self.storyboard?.instantiateViewControllerWithIdentifier("DayViewController") as DayViewController
+        let formView = self.storyboard?.instantiateViewControllerWithIdentifier("FormViewController") as FormViewController
+        return [dayView, progressView, formView]
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        createPageViewController()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "goToViewNotification:", name: "NavigateToNewView", object: nil)
         
-        NSNotificationCenter.defaultCenter().addObserver(
-            self,
-            selector: "goToViewNotification:",
-            name: "NavigateToNewView",
-            object: nil)
-        
-        if (UserService.hasSignedUp()) {
-            self.goToView(Constants.VIEWS.ProgressView.rawValue)
-        } else {
+        if (!UserService.hasSignedUp()) {
             self.goToView(Constants.VIEWS.WelcomeView.rawValue)
         }
     }
     
+    private func createPageViewController() {
+        let pageController = self.storyboard!.instantiateViewControllerWithIdentifier("PageController") as UIPageViewController
+        pageController.dataSource = self
+        
+        let firstController = _controllers[0]
+        let startingViewControllers: NSArray = [firstController]
+        pageController.setViewControllers(startingViewControllers, direction: UIPageViewControllerNavigationDirection.Forward, animated: false, completion: nil)
+    
+        pageViewController = pageController
+        addChildViewController(pageViewController!)
+        self.view.addSubview(pageViewController!.view)
+        pageViewController!.didMoveToParentViewController(self)
+    }
+
     func goToViewNotification(notification: NSNotification) {
         let key = notification.userInfo?["key"] as Int
         goToView(key)
+    }
+    
+    
+    func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
+        
+        if viewController.isEqual(_controllers[1]) { return _controllers[0] }
+        if viewController.isEqual(_controllers[2]) { return _controllers[1] }
+        return nil
+    }
+    
+    func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
+        
+        if viewController.isEqual(_controllers[0]) { return _controllers[1] }
+        if viewController.isEqual(_controllers[1]) { return _controllers[2] }
+        return nil
     }
     
     func goToView(key: Int) {
@@ -60,28 +73,6 @@ class ContainerViewController: UIPageViewController {
             self.presentViewController(vc, animated: true, completion: nil)
         default:
             println("No known key")
-        }
-    }
-    
-    func turnToPage(index: Int) {
-        let controller = _controllers[index]
-        
-        var direction = UIPageViewControllerNavigationDirection.Forward
-        
-        if let currentViewController = viewControllers.first as? UIViewController {
-            let currentIndex = (_controllers as NSArray).indexOfObject(currentViewController)
-            
-            if currentIndex > index {
-                direction = UIPageViewControllerNavigationDirection.Reverse
-            }
-        }
-        
-        
-        
-        setViewControllers([controller],
-            direction: direction,
-            animated: true) { (completion) -> Void in
-                
         }
     }
 }

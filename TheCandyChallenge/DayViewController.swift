@@ -86,6 +86,10 @@ class DayViewController: UIViewController, WeatherServiceDelegate, CLLocationMan
     }
     
     func showRain() {
+        var updateTimer = NSTimer.scheduledTimerWithTimeInterval(0.3, target: self, selector: "addNewRainDrop", userInfo: nil, repeats: true)
+    }
+    
+    func addNewRainDrop() {
         let rainView = RainView(frame: self.view.bounds)
         rainView.backgroundColor = UIColor.clearColor()
         self.view.addSubview(rainView)

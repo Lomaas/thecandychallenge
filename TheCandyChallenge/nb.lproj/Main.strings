@@ -1,0 +1,69 @@
+
+/* Class = "UILabel"; text = "In these days you have saved 2904,-"; ObjectID = "08n-QU-o4M"; */
+"08n-QU-o4M.text" = "In these days you have saved 2904,-";
+
+/* Class = "UILabel"; text = "Welcome to"; ObjectID = "1De-vg-5xG"; */
+"1De-vg-5xG.text" = "Welcome to";
+
+/* Class = "UILabel"; text = "You have saved 10 094 kcal. That is a lot of fat. What chubby elephant would you have been without me?"; ObjectID = "8Dp-FY-ezC"; */
+"8Dp-FY-ezC.text" = "You have saved 10 094 kcal. That is a lot of fat. What chubby elephant would you have been without me?";
+
+/* Class = "UIButton"; normalTitle = "Sign in with Facebook"; ObjectID = "8yA-4L-Ac0"; */
+"8yA-4L-Ac0.normalTitle" = "Sign in with Facebook";
+
+/* Class = "UILabel"; text = "1..5"; ObjectID = "9Ag-AS-9nT"; */
+"9Ag-AS-9nT.text" = "1..5";
+
+/* Class = "UINavigationItem"; title = "The Candy Challenge"; ObjectID = "AZy-jg-FCF"; */
+"AZy-jg-FCF.title" = "The Candy Challenge";
+
+/* Class = "UILabel"; text = "Name your"; ObjectID = "Aha-X2-RT9"; */
+"Aha-X2-RT9.text" = "Name your";
+
+/* Class = "UIButton"; normalTitle = "Save"; ObjectID = "BR5-gw-Q3I"; */
+"BR5-gw-Q3I.normalTitle" = "Save";
+
+/* Class = "UILabel"; text = "Signing up with Facebook will give you exclusive local offers if you make it"; ObjectID = "EbZ-pn-cAs"; */
+"EbZ-pn-cAs.text" = "Signing up with Facebook will give you exclusive local offers if you make it";
+
+/* Class = "UIButton"; normalTitle = "I havent eaten any candy today"; ObjectID = "MJd-Ye-Npr"; */
+"MJd-Ye-Npr.normalTitle" = "I havent eaten any candy today";
+
+/* Class = "UILabel"; text = "enemies"; ObjectID = "MfY-Rl-roK"; */
+"MfY-Rl-roK.text" = "enemies";
+
+/* Class = "UITextField"; placeholder = "Enemy eg. chocklate"; ObjectID = "OhU-3d-H9d"; */
+"OhU-3d-H9d.placeholder" = "Enemy eg. chocklate";
+
+/* Class = "UILabel"; text = "Preben Nygaard"; ObjectID = "Peg-ZD-hEO"; */
+"Peg-ZD-hEO.text" = "Preben Nygaard";
+
+/* Class = "UILabel"; text = "Select some friends to join you on your challenge"; ObjectID = "WTF-Fe-wxb"; */
+"WTF-Fe-wxb.text" = "Select some friends to join you on your challenge";
+
+/* Class = "UITextField"; placeholder = "Amount you spend"; ObjectID = "ZYq-2y-BLV"; */
+"ZYq-2y-BLV.placeholder" = "Amount you spend";
+
+/* Class = "UINavigationItem"; title = "Title"; ObjectID = "a49-yy-fQb"; */
+"a49-yy-fQb.title" = "Title";
+
+/* Class = "UIButton"; normalTitle = "Skip"; ObjectID = "aDz-nK-R6e"; */
+"aDz-nK-R6e.normalTitle" = "Skip";
+
+/* Class = "UILabel"; text = "You have been candy free for"; ObjectID = "cmY-Vq-UDw"; */
+"cmY-Vq-UDw.text" = "You have been candy free for";
+
+/* Class = "UIButton"; normalTitle = "Next"; ObjectID = "fN6-Wk-Yl6"; */
+"fN6-Wk-Yl6.normalTitle" = "Next";
+
+/* Class = "UIButton"; normalTitle = "Next"; ObjectID = "sJc-qm-ShA"; */
+"sJc-qm-ShA.normalTitle" = "Next";
+
+/* Class = "UILabel"; text = "An easy day huh? Monday isnt a problem. You just had weekend"; ObjectID = "w8F-q4-s1N"; */
+"w8F-q4-s1N.text" = "An easy day huh? Monday isnt a problem. You just had weekend";
+
+/* Class = "UILabel"; text = "We encourage you to take the challenge with somebody. It will be more motivaiting and a competition to make it"; ObjectID = "ybs-UZ-sw3"; */
+"ybs-UZ-sw3.text" = "We encourage you to take the challenge with somebody. It will be more motivaiting and a competition to make it";
+
+/* Class = "UILabel"; text = "5 days 19 houres 19 minutes"; ObjectID = "yvi-PH-JVI"; */
+"yvi-PH-JVI.text" = "5 days 19 houres 19 minutes";

@@ -8,10 +8,13 @@
 
 import Foundation
 import UIKit
+import CoreLocation
 
-class DayViewController: UIViewController {
+class DayViewController: UIViewController, WeatherServiceDelegate, CLLocationManagerDelegate {
     var blueCloud: UIImageView?
     var viewDidDisapper: Bool = false
+    var weatherService: WeatherService?
+    let locationManager = CLLocationManager()
 
     @IBOutlet weak var background: UIImageView!
     @IBOutlet weak var mainWeatherImage: UIImageView!
@@ -29,6 +32,10 @@ class DayViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        weatherService = WeatherService()
+        weatherService!.delegate = self
+        
         isEarlyDay() ? showEarlyDayScreen() : showLateDayScreen()
         if isCloudy() { showClouds() }
         if isSunny() {  showSun() }
@@ -78,8 +85,25 @@ class DayViewController: UIViewController {
         self.view.addSubview(blueCloud!)
     }
     
+    func showRain() {
+        let rainView = RainView(frame: self.view.bounds)
+        rainView.backgroundColor = UIColor.clearColor()
+        self.view.addSubview(rainView)
+        self.animateRain(rainView)
+    }
+    
     func stopAnimation() {
         
+    }
+ 
+    func animateRain(view: RainView) {
+        UIView.animateWithDuration(4, delay: 0, options: UIViewAnimationOptions.CurveLinear, animations: {
+            var viewFrame = view.frame
+            viewFrame.origin.y = self.view.frame.size.height
+            view.frame = viewFrame
+            }, completion: { finished in
+            
+        })
     }
     
     func animateBlueCloud() {
@@ -204,6 +228,24 @@ class DayViewController: UIViewController {
             view.frame = viewFrame
             }, completion: { finished in
                 completion(finished: finished)
+        })
+    }
+    
+    func localWeather(weather: Weather) {
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            switch weather {
+            case Weather.clear:
+                self.showRain()
+            case Weather.sunny:
+                self.showSun()
+            case Weather.cloudy:
+                self.showClouds()
+            case Weather.rain:
+                self.showRain()
+            default:
+                println("Weather view not implemented yet")
+            }
+            
         })
     }
 }

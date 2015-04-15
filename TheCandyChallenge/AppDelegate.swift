@@ -12,12 +12,18 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
-
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         Parse.enableLocalDatastore()
         Parse.setApplicationId("2PnxXdV0kFB4DNl2IU8Vph87TAlK4tL0AoO6SE6j", clientKey: "8C7I5LeYspFbEM9QdIFwoBJjIeiGt4u82fYcWCdj")
-        PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions)
+        var options: [NSObject: AnyObject]
+        
+        if launchOptions == nil {
+            options = [NSObject: AnyObject]()
+        } else {
+            options = launchOptions!
+        }
+        PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(options)
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
 

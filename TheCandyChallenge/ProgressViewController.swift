@@ -60,7 +60,7 @@ class ProgressViewController: UIViewController {
         
         UserChallengeService.getMyChallengeFromLocalStorage({ (userChallenge: PFObject) -> Void in
             self.challenge = userChallenge
-            var f: String = self.challenge!.objectId
+            var f: String = self.challenge!.objectId!
             println("Has challenge with objectID: \(f)")
             userChallenge.pinInBackground()
             self.updateScreen()

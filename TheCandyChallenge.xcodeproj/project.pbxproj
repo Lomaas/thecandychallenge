@@ -19,10 +19,12 @@
 		8586EF921AC34C1F00F47C20 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8586EF911AC34C1F00F47C20 /* Images.xcassets */; };
 		8586EF951AC34C1F00F47C20 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8586EF931AC34C1F00F47C20 /* LaunchScreen.xib */; };
 		8586EFA11AC34C1F00F47C20 /* TheCandyChallengeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8586EFA01AC34C1F00F47C20 /* TheCandyChallengeTests.swift */; };
+		85BF633F1ADD8DF6004A7B42 /* ParseFacebookUtilsV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85BF633E1ADD8DF6004A7B42 /* ParseFacebookUtilsV4.framework */; };
+		85BF63421ADD8E17004A7B42 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85BF63401ADD8E17004A7B42 /* Bolts.framework */; };
+		85BF63431ADD8E17004A7B42 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85BF63411ADD8E17004A7B42 /* Parse.framework */; };
 		85C32E4F1ACB14A90053EFF7 /* InviteFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C32E4E1ACB14A90053EFF7 /* InviteFriendsViewController.swift */; };
 		85C32E541ACB26450053EFF7 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85C32E531ACB26450053EFF7 /* FBSDKCoreKit.framework */; };
 		85C32E5A1ACB28410053EFF7 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85C32E591ACB28410053EFF7 /* FBSDKLoginKit.framework */; };
-		85C32E5C1ACB2EB90053EFF7 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85C32E5B1ACB2EB90053EFF7 /* Parse.framework */; };
 		85C32E5E1ACB2ED00053EFF7 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85C32E5D1ACB2ED00053EFF7 /* AudioToolbox.framework */; };
 		85C32E601ACB2ED70053EFF7 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85C32E5F1ACB2ED70053EFF7 /* CFNetwork.framework */; };
 		85C32E621ACB2EDE0053EFF7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85C32E611ACB2EDE0053EFF7 /* CoreGraphics.framework */; };
@@ -34,7 +36,6 @@
 		85C32E6E1ACB2F160053EFF7 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85C32E6D1ACB2F160053EFF7 /* SystemConfiguration.framework */; };
 		85C32E701ACB2F1F0053EFF7 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 85C32E6F1ACB2F1F0053EFF7 /* libz.dylib */; };
 		85C32E721ACB2F280053EFF7 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 85C32E711ACB2F280053EFF7 /* libsqlite3.dylib */; };
-		85C32E741ACB31810053EFF7 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85C32E731ACB31810053EFF7 /* Bolts.framework */; };
 		85C32E771ACB3D990053EFF7 /* PasswordGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C32E761ACB3D990053EFF7 /* PasswordGenerator.swift */; };
 		85C32E7C1ACB4CA80053EFF7 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C32E7B1ACB4CA80053EFF7 /* ContainerViewController.swift */; };
 		85C32E7F1ACC0A2D0053EFF7 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C32E7E1ACC0A2D0053EFF7 /* Constants.swift */; };
@@ -43,7 +44,6 @@
 		85C32E851ACC24B20053EFF7 /* ChallengeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C32E841ACC24B20053EFF7 /* ChallengeService.swift */; };
 		85C32E891ACC469C0053EFF7 /* UserChallenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C32E881ACC469C0053EFF7 /* UserChallenge.swift */; };
 		85C32E8B1ACC46D10053EFF7 /* UserChallengeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C32E8A1ACC46D10053EFF7 /* UserChallengeService.swift */; };
-		85FFE6541AD15DC700C6D56F /* ParseFacebookUtilsV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85FFE6531AD15DC700C6D56F /* ParseFacebookUtilsV4.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,11 +76,13 @@
 		8586EF9A1AC34C1F00F47C20 /* TheCandyChallengeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TheCandyChallengeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8586EF9F1AC34C1F00F47C20 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8586EFA01AC34C1F00F47C20 /* TheCandyChallengeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheCandyChallengeTests.swift; sourceTree = "<group>"; };
+		85BF633E1ADD8DF6004A7B42 /* ParseFacebookUtilsV4.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtilsV4.framework; sourceTree = "<group>"; };
+		85BF63401ADD8E17004A7B42 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
+		85BF63411ADD8E17004A7B42 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		85C32E4E1ACB14A90053EFF7 /* InviteFriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteFriendsViewController.swift; sourceTree = "<group>"; };
 		85C32E531ACB26450053EFF7 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = ../../Documents/FacebookSDK/FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		85C32E561ACB27410053EFF7 /* TheCandyChallenge-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TheCandyChallenge-Bridging-Header.h"; sourceTree = "<group>"; };
 		85C32E591ACB28410053EFF7 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = ../../Documents/FacebookSDK/FBSDKLoginKit.framework; sourceTree = "<group>"; };
-		85C32E5B1ACB2EB90053EFF7 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		85C32E5D1ACB2ED00053EFF7 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		85C32E5F1ACB2ED70053EFF7 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		85C32E611ACB2EDE0053EFF7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -92,7 +94,6 @@
 		85C32E6D1ACB2F160053EFF7 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		85C32E6F1ACB2F1F0053EFF7 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		85C32E711ACB2F280053EFF7 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
-		85C32E731ACB31810053EFF7 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		85C32E761ACB3D990053EFF7 /* PasswordGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordGenerator.swift; sourceTree = "<group>"; };
 		85C32E7B1ACB4CA80053EFF7 /* ContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 		85C32E7E1ACC0A2D0053EFF7 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -101,7 +102,6 @@
 		85C32E841ACC24B20053EFF7 /* ChallengeService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeService.swift; sourceTree = "<group>"; };
 		85C32E881ACC469C0053EFF7 /* UserChallenge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserChallenge.swift; sourceTree = "<group>"; };
 		85C32E8A1ACC46D10053EFF7 /* UserChallengeService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserChallengeService.swift; sourceTree = "<group>"; };
-		85FFE6531AD15DC700C6D56F /* ParseFacebookUtilsV4.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtilsV4.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,22 +110,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				85C32E641ACB2EE40053EFF7 /* CoreLocation.framework in Frameworks */,
-				85C32E741ACB31810053EFF7 /* Bolts.framework in Frameworks */,
 				85C32E721ACB2F280053EFF7 /* libsqlite3.dylib in Frameworks */,
 				85C32E701ACB2F1F0053EFF7 /* libz.dylib in Frameworks */,
 				85C32E6E1ACB2F160053EFF7 /* SystemConfiguration.framework in Frameworks */,
 				85C32E6C1ACB2F0F0053EFF7 /* StoreKit.framework in Frameworks */,
 				85C32E6A1ACB2F080053EFF7 /* Security.framework in Frameworks */,
+				85BF63431ADD8E17004A7B42 /* Parse.framework in Frameworks */,
 				85C32E681ACB2EF40053EFF7 /* QuartzCore.framework in Frameworks */,
 				85C32E661ACB2EED0053EFF7 /* MobileCoreServices.framework in Frameworks */,
 				85C32E621ACB2EDE0053EFF7 /* CoreGraphics.framework in Frameworks */,
-				85FFE6541AD15DC700C6D56F /* ParseFacebookUtilsV4.framework in Frameworks */,
 				85C32E601ACB2ED70053EFF7 /* CFNetwork.framework in Frameworks */,
 				8578AABA1AD99D48004A2CE6 /* HealthKit.framework in Frameworks */,
 				85C32E5E1ACB2ED00053EFF7 /* AudioToolbox.framework in Frameworks */,
 				85C32E5A1ACB28410053EFF7 /* FBSDKLoginKit.framework in Frameworks */,
-				85C32E5C1ACB2EB90053EFF7 /* Parse.framework in Frameworks */,
+				85BF633F1ADD8DF6004A7B42 /* ParseFacebookUtilsV4.framework in Frameworks */,
 				85C32E541ACB26450053EFF7 /* FBSDKCoreKit.framework in Frameworks */,
+				85BF63421ADD8E17004A7B42 /* Bolts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -214,7 +214,9 @@
 		85C32E501ACB26150053EFF7 /* frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				85FFE6531AD15DC700C6D56F /* ParseFacebookUtilsV4.framework */,
+				85BF63401ADD8E17004A7B42 /* Bolts.framework */,
+				85BF63411ADD8E17004A7B42 /* Parse.framework */,
+				85BF633E1ADD8DF6004A7B42 /* ParseFacebookUtilsV4.framework */,
 				85C32E711ACB2F280053EFF7 /* libsqlite3.dylib */,
 				85C32E6F1ACB2F1F0053EFF7 /* libz.dylib */,
 				85C32E6D1ACB2F160053EFF7 /* SystemConfiguration.framework */,
@@ -226,8 +228,6 @@
 				85C32E611ACB2EDE0053EFF7 /* CoreGraphics.framework */,
 				85C32E5F1ACB2ED70053EFF7 /* CFNetwork.framework */,
 				85C32E5D1ACB2ED00053EFF7 /* AudioToolbox.framework */,
-				85C32E731ACB31810053EFF7 /* Bolts.framework */,
-				85C32E5B1ACB2EB90053EFF7 /* Parse.framework */,
 				85C32E591ACB28410053EFF7 /* FBSDKLoginKit.framework */,
 				85C32E531ACB26450053EFF7 /* FBSDKCoreKit.framework */,
 			);
@@ -543,6 +543,7 @@
 					"\"/Users/simen johannessen/Documents/FacebookSDK\"",
 				);
 				INFOPLIST_FILE = TheCandyChallenge/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -566,6 +567,7 @@
 					"\"/Users/simen johannessen/Documents/FacebookSDK\"",
 				);
 				INFOPLIST_FILE = TheCandyChallenge/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

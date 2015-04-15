@@ -21,10 +21,7 @@ class DayViewController: UIViewController, WeatherServiceDelegate, CLLocationMan
     @IBOutlet weak var interactionButton: UIButton!
     @IBOutlet weak var headerImage: UIImageView!
     @IBOutlet weak var mainText: UILabel!
-    
-    @IBAction func isPanning(sender: UIPanGestureRecognizer) {
-        println("Ispannign")
-    }
+
     @IBAction func interactionButtonPressed(sender: UIButton) {
         println("Interaction button pressed")
         self.dismissViewControllerAnimated(true, completion: nil)
@@ -77,6 +74,9 @@ class DayViewController: UIViewController, WeatherServiceDelegate, CLLocationMan
     }
     
     func showClouds() {
+        for x in 0...100 {
+            
+        }
         var cloud =  UIImageView(frame: CGRectMake(30, 30, 100, 100))
         cloud.image = UIImage(named: "bluecloud")
         cloud.contentMode = .ScaleAspectFit
@@ -93,6 +93,7 @@ class DayViewController: UIViewController, WeatherServiceDelegate, CLLocationMan
         let rainView = RainView(frame: self.view.bounds)
         rainView.backgroundColor = UIColor.clearColor()
         self.view.addSubview(rainView)
+        self.view.sendSubviewToBack(rainView)
         self.animateRain(rainView)
     }
     
@@ -106,7 +107,7 @@ class DayViewController: UIViewController, WeatherServiceDelegate, CLLocationMan
             viewFrame.origin.y = self.view.frame.size.height
             view.frame = viewFrame
             }, completion: { finished in
-            
+                view.removeFromSuperview()
         })
     }
     
@@ -136,7 +137,7 @@ class DayViewController: UIViewController, WeatherServiceDelegate, CLLocationMan
         interactionButton.hidden = true
         var text: String
         var image: String
-        var backgroundName: String
+        var backgroundName: String?
         let dayOfWeek: Int = getWeekDay(NSDate())
         println("DayOf Week: \(dayOfWeek)")
         
@@ -148,24 +149,24 @@ class DayViewController: UIViewController, WeatherServiceDelegate, CLLocationMan
             backgroundName = "background3"
         case Days.tuesday:
             image = "tuesday"
-            text = NSLocalizedString("Its tuesday. Hope you can stay away from candy offers", comment: "")
-            backgroundName = "background1"
+            text = NSLocalizedString("Its tuesday. There are always sales on candy. You will regret i badly", comment: "")
+            self.view.backgroundColor = UIColor(red: 6.0/255.0, green: 138.0/255.0, blue: 194.0/255.0, alpha: 1)
         case Days.wedensday:
             image = "wedensday"
-            text = NSLocalizedString("Dont you hate when someone offers you candy? It is hard to resist and you dont want to be unpolite?", comment: "")
-            backgroundName = "background1"
+            text = NSLocalizedString("LALALLALA WEDENSDAAAY WUUUHOO HIYAA", comment: "")
+            backgroundName = "background3"
         case Days.thursday:
             image = "thursday"
-            text = NSLocalizedString("Fake it until you make it them say. Well here you have to stick with it", comment: "")
-            backgroundName = "background1"
+            text = NSLocalizedString("Fake it until you make it them say. Well, it doesnt work in this challenge", comment: "")
+            backgroundName = "background3"
         case Days.friday:
             image = "friday"
             text = NSLocalizedString("Aaaaah! Weekend is here. Your first real test", comment: "")
-            backgroundName = "background1"
+            backgroundName = "background3"
         case Days.saturday:
             image = "saturday"
             text = NSLocalizedString("Today you´ll have MASSIVE cravings for candy! Can you stay away?", comment: "")
-            backgroundName = "background2"
+            backgroundName = "background3"
         case Days.sunday:
             image = "sunday"
             text = NSLocalizedString("Sunday funday! Go out and enjoy the world", comment: "")
@@ -201,7 +202,7 @@ class DayViewController: UIViewController, WeatherServiceDelegate, CLLocationMan
             backgroundName = "background1"
         case Days.thursday:
             image = "thursday"
-            text = NSLocalizedString("Bragging right is everything", comment: "")
+            text = NSLocalizedString("Bragging right is everything. ", comment: "")
             backgroundName = "background1"
         case Days.friday:
             image = "friday"

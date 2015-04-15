@@ -6,29 +6,33 @@ class ContainerViewController: UIViewController, UIPageViewControllerDataSource,
     var challenge: PFObject?
     
     lazy var _controllers : [UIViewController] = {
-        let progressView = self.storyboard?.instantiateViewControllerWithIdentifier("ProgressViewController") as ProgressViewController
-        let dayView = self.storyboard?.instantiateViewControllerWithIdentifier("DayViewController") as DayViewController
-        let formView = self.storyboard?.instantiateViewControllerWithIdentifier("FormViewController") as FormViewController
+        let progressView = self.storyboard?.instantiateViewControllerWithIdentifier("ProgressViewController") as! ProgressViewController
+        let dayView = self.storyboard?.instantiateViewControllerWithIdentifier("DayViewController") as! DayViewController
+        let formView = self.storyboard?.instantiateViewControllerWithIdentifier("FormViewController") as! FormViewController
         return [dayView, progressView, formView]
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        createPageViewController()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "goToViewNotification:", name: "NavigateToNewView", object: nil)
-        
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
         if (!UserService.hasSignedUp()) {
             self.goToView(Constants.VIEWS.WelcomeView.rawValue)
+        } else {
+            createPageViewController()
         }
     }
     
     private func createPageViewController() {
-        let pageController = self.storyboard!.instantiateViewControllerWithIdentifier("PageController") as UIPageViewController
+        let pageController = self.storyboard!.instantiateViewControllerWithIdentifier("PageController") as! UIPageViewController
         pageController.dataSource = self
         
         let firstController = _controllers[0]
         let startingViewControllers: NSArray = [firstController]
-        pageController.setViewControllers(startingViewControllers, direction: UIPageViewControllerNavigationDirection.Forward, animated: false, completion: nil)
+        pageController.setViewControllers(startingViewControllers as [AnyObject], direction: UIPageViewControllerNavigationDirection.Forward, animated: false, completion: nil)
     
         pageViewController = pageController
         addChildViewController(pageViewController!)
@@ -37,7 +41,7 @@ class ContainerViewController: UIViewController, UIPageViewControllerDataSource,
     }
 
     func goToViewNotification(notification: NSNotification) {
-        let key = notification.userInfo?["key"] as Int
+        let key = notification.userInfo?["key"] as! Int
         goToView(key)
     }
     
@@ -62,14 +66,14 @@ class ContainerViewController: UIViewController, UIPageViewControllerDataSource,
         switch key {
         case Constants.VIEWS.InviteFriendsView.rawValue:
             let vc: InviteFriendsViewController = sb.instantiateViewControllerWithIdentifier("InviteFriends")
-                as InviteFriendsViewController
+                as! InviteFriendsViewController
             self.presentViewController(vc, animated: true, completion: nil)
         case Constants.VIEWS.ProgressView.rawValue:
             let vc: ProgressViewController = sb.instantiateViewControllerWithIdentifier("progress")
-                as ProgressViewController
+                as! ProgressViewController
             self.presentViewController(vc, animated: false, completion: nil)
         case Constants.VIEWS.WelcomeView.rawValue:
-            let vc = sb.instantiateViewControllerWithIdentifier("welcome") as WelcomeViewController
+            let vc = sb.instantiateViewControllerWithIdentifier("welcome") as! WelcomeViewController
             self.presentViewController(vc, animated: true, completion: nil)
         default:
             println("No known key")

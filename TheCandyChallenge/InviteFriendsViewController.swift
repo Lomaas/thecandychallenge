@@ -25,7 +25,7 @@ class InviteFriendsViewController: UIViewController, UITextFieldDelegate {
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let progressViewController = segue.destinationViewController as ProgressViewController
+        let progressViewController = segue.destinationViewController as! ProgressViewController
         progressViewController.challenge = challenge
     }
 }

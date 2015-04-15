@@ -27,7 +27,7 @@ struct HealthKitService {
             return;
         }
         
-        healthKitStore.requestAuthorizationToShareTypes(nil, readTypes: healthKitTypesToRead) { (success, error) -> Void in
+        healthKitStore.requestAuthorizationToShareTypes(nil, readTypes: healthKitTypesToRead as Set<NSObject>) { (success, error) -> Void in
             
             if( completion != nil )
             {
@@ -38,7 +38,7 @@ struct HealthKitService {
     
     func readMostRecentSample(sampleType:HKSampleType , completion: ((HKSample!, NSError!) -> Void)!) {
         // 1. Build the Predicate
-        let past = NSDate.distantPast() as NSDate
+        let past = NSDate.distantPast() as! NSDate
         let now   = NSDate()
         let mostRecentPredicate = HKQuery.predicateForSamplesWithStartDate(past, endDate:now, options: .None)
         

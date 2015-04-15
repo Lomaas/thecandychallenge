@@ -19,10 +19,9 @@ struct ChallengeService {
         var query = PFQuery(className:"Challenge")
         
         query.whereKey("objectId", equalTo: userId)
-        query.findObjectsInBackgroundWithBlock {
-            (objects: [AnyObject]!, error: NSError!) -> Void in
+        query.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
             if error == nil {
-                println("Successfully retrieved \(objects.count) scores.")
+                println("Successfully retrieved \(objects!.count) scores.")
                 if let objects = objects as? [PFObject] {
                     for object in objects {
                         println(object.objectId)
@@ -31,9 +30,9 @@ struct ChallengeService {
                     successHandler(challenge: objects)
                 }
             } else {
-                println("Error: \(error) \(error.userInfo!)")
+                println("Error: \(error) \(error!.userInfo!)")
             }
-        }
+        })
     }
     
     static func storeMyChallenge(successHandler: ((challenge: PFObject) -> Void)) {

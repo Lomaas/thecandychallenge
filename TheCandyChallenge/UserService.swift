@@ -10,7 +10,7 @@ import Foundation
 
 struct UserService {
     static func hasSignedUp() -> Bool {
-        if ((PFUser.currentUser() != nil) && (PFFacebookUtils.isLinkedWithUser(PFUser.currentUser()))) {
+        if ((PFUser.currentUser() != nil) && (PFFacebookUtils.isLinkedWithUser(PFUser.currentUser()!))) {
             return true
         }
         return false

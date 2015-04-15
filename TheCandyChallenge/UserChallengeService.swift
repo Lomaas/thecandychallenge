@@ -10,11 +10,10 @@ struct UserChallengeService {
     static func getMyChallenge(successHandler: (userChallenge: PFObject) -> Void) {
         var query = PFQuery(className:"UserChallenge")
         
-        query.whereKey("user", equalTo: PFUser.currentUser())
-        query.findObjectsInBackgroundWithBlock {
-            (objects: [AnyObject]!, error: NSError!) -> Void in
+        query.whereKey("user", equalTo: PFUser.currentUser()!)
+        query.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
             if error == nil {
-                println("Successfully retrieved \(objects.count) UserChallenges.")
+                println("Successfully retrieved \(objects!.count) UserChallenges.")
                 
                 if let objects = objects as? [PFObject] {
                     for object in objects {
@@ -25,9 +24,9 @@ struct UserChallengeService {
                     }
                 }
             } else {
-                println("Error: \(error) \(error.userInfo!)")
+                println("Error: \(error!) \(error!.userInfo!)")
             }
-        }
+        })
     }
     
     static func storeMyChallenge(challenge: PFObject) {
@@ -43,7 +42,8 @@ struct UserChallengeService {
             if success {
                 println("user challenged saved")
                 
-            } else {
+            }
+            if let error = error {
                 println("Error: \(error) \(error.userInfo!)")
             }
         }
@@ -52,12 +52,14 @@ struct UserChallengeService {
     static func getMyChallengeFromLocalStorage(succesHandler: (userChallenge: PFObject) -> Void, errorHandler: () -> Void) {
         let query = PFQuery(className:"UserChallenge")
         query.fromLocalDatastore()
-        query.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]!, error) -> Void in
+        query.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
             if error == nil {
-                if objects.count == 0 {
+                if objects?.count == 0 {
                     errorHandler()
                 } else {
-                    succesHandler(userChallenge: objects[0] as PFObject)
+                    if let userChallenge = objects!.first as? PFObject {
+                        succesHandler(userChallenge: userChallenge)
+                    }
                 }
             }
         })

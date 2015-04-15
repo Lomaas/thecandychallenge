@@ -27,7 +27,7 @@ class WelcomeViewController: UIViewController {
 //        returnUserData()
         PFFacebookUtils.logInInBackgroundWithReadPermissions(["public_profile", "email", "user_friends"], block: { (user, error) -> Void in
             if (user != nil) {
-                if (user.isNew) {
+                if (user!.isNew) {
                     println("User signed up")
                     self.returnUserData()
                 } else {
@@ -52,18 +52,18 @@ class WelcomeViewController: UIViewController {
             else
             {
                 println("fetched user: \(result)")
-                let name : NSString = result.valueForKey("name") as NSString
+                let name : NSString = result.valueForKey("name") as! NSString
                 println("User Name is: \(name)")
-                let email : NSString = result.valueForKey("email") as NSString
-                let fbId : String = result.valueForKey("id") as String
-                self.storeUserDataToServer(email, name: name, fbId: fbId)
+                let email = result.valueForKey("email") as! String
+                let fbId : String = result.valueForKey("id") as! String
+                self.storeUserDataToServer(email, name: name as String, fbId: fbId)
                 println("User Email is: \(email)")
             }
         })
     }
     
     func storeUserDataToServer(email: String, name: String, fbId: String) {
-        var user:PFUser = PFUser.currentUser()
+        var user:PFUser = PFUser.currentUser()!
         user["email"] = email
         user["name"] = name
         user["fbId"] = fbId
@@ -76,6 +76,11 @@ class WelcomeViewController: UIViewController {
                 println("problems")
             }
         })
+    }
+    
+    func goToInviteScreen() {
+        let vc = self.storyboard?.instantiateViewControllerWithIdentifier("StartUpNavigationController") as! UINavigationController
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func userAlreadyRegister() {

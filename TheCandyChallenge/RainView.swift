@@ -16,10 +16,10 @@ class RainView: UIView {
         let xStart = CGFloat(Int.random(5...maxStartingWidth))
         let yStart = CGFloat(-15)
 
-        CGContextSetStrokeColorWithColor(context, UIColor.blackColor().CGColor)
+        CGContextSetStrokeColorWithColor(context, UIColor(red: 3, green: 74, blue: 236, alpha: 0.9).CGColor)
         CGContextSetLineWidth(context, 1.5)
         CGContextMoveToPoint(context, xStart, yStart)
-        CGContextAddLineToPoint(context, xStart, yStart + 30)
+        CGContextAddLineToPoint(context, xStart, yStart + 18)
         CGContextDrawPath(context, kCGPathStroke)
     }
 }

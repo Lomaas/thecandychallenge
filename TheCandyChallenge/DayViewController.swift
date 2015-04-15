@@ -34,14 +34,13 @@ class DayViewController: UIViewController, WeatherServiceDelegate, CLLocationMan
         weatherService!.delegate = self
         
         isEarlyDay() ? showEarlyDayScreen() : showLateDayScreen()
-        if isCloudy() { showClouds() }
-        if isSunny() {  showSun() }
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         viewDidDisapper = false
-        if isCloudy() { animateBlueCloud() }
+        if isCloudy() { showClouds() }
+        showRain()
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -61,33 +60,44 @@ class DayViewController: UIViewController, WeatherServiceDelegate, CLLocationMan
         let components = NSCalendarUnit.CalendarUnitDay | NSCalendarUnit.CalendarUnitHour | NSCalendarUnit.CalendarUnitSecond | NSCalendarUnit.CalendarUnitMinute
         let date = NSCalendar.currentCalendar().components(components, fromDate: NSDate())
         
-        println("IS easrly day view: \(date.hour)")
         
         if date.hour >= 21 {
+            println("IS easrly day view: \(date.hour)")
             return false
         }
+        println("Is late day view: \(date.hour)")
+
         return true
     }
+    
+    // MARK: Show and add views
     
     func showSun() {
         mainWeatherImage.image = UIImage(named: "sunandcloud")
     }
     
     func showClouds() {
-        for x in 0...100 {
-            
+        for x in 0...5 {
+            addNewCloud()
         }
-        var cloud =  UIImageView(frame: CGRectMake(30, 30, 100, 100))
-        cloud.image = UIImage(named: "bluecloud")
-        cloud.contentMode = .ScaleAspectFit
-        cloud.layer.zPosition = 1;
-        blueCloud = cloud
-        self.view.addSubview(blueCloud!)
     }
     
     func showRain() {
         var updateTimer = NSTimer.scheduledTimerWithTimeInterval(0.3, target: self, selector: "addNewRainDrop", userInfo: nil, repeats: true)
     }
+    
+    func addNewCloud() {
+        let size = Int.random(50...140)
+        let cloud =  UIImageView(frame: CGRectMake(CGFloat(-140), CGFloat(Int.random(20...150)), CGFloat(size), CGFloat(size)))
+        cloud.alpha = 0.8
+        cloud.image = UIImage(named: "bluecloud")
+        cloud.contentMode = .ScaleAspectFit
+        cloud.layer.zPosition = 1;
+        self.view.addSubview(cloud)
+        
+        animateCloud(cloud)
+    }
+    
     
     func addNewRainDrop() {
         let rainView = RainView(frame: self.view.bounds)
@@ -97,10 +107,19 @@ class DayViewController: UIViewController, WeatherServiceDelegate, CLLocationMan
         self.animateRain(rainView)
     }
     
-    func stopAnimation() {
-        
+    // MARK: - animation
+    
+    func animateCloud(view: UIImageView) {
+        let delay = Int.random(0...7)
+        let duration = Int.random(13...15)
+        animateFrame(view, duration: Double(duration), delay: Double(delay), completion: { (finished) -> Void in
+            if self.viewDidDisapper != true {
+                view.removeFromSuperview()
+                self.addNewCloud()
+            }
+        })
     }
- 
+    
     func animateRain(view: RainView) {
         UIView.animateWithDuration(4, delay: 0, options: UIViewAnimationOptions.CurveLinear, animations: {
             var viewFrame = view.frame
@@ -111,17 +130,14 @@ class DayViewController: UIViewController, WeatherServiceDelegate, CLLocationMan
         })
     }
     
-    func animateBlueCloud() {
-        if let blueCloud = blueCloud {
-            animateFrame(blueCloud, completion: { (finished) -> Void in
-                if self.viewDidDisapper != true {
-                    var viewFrame = blueCloud.frame
-                    viewFrame.origin.x = -100
-                    blueCloud.frame = viewFrame
-                    self.animateBlueCloud()
-                }
-            })
-        }
+    func animateFrame(view: UIView, duration: Double, delay: Double, completion: (finished: Bool) -> Void) {
+        UIView.animateWithDuration(duration, delay: delay, options: UIViewAnimationOptions.CurveLinear, animations: {
+            var viewFrame = view.frame
+            viewFrame.origin.x = self.view.frame.size.width
+            view.frame = viewFrame
+            }, completion: { finished in
+                completion(finished: finished)
+        })
     }
     
     func updateView(imageName: String, text: String, backgroundName: String?) {
@@ -150,11 +166,10 @@ class DayViewController: UIViewController, WeatherServiceDelegate, CLLocationMan
         case Days.tuesday:
             image = "tuesday"
             text = NSLocalizedString("Its tuesday. There are always sales on candy. You will regret i badly", comment: "")
-            self.view.backgroundColor = UIColor(red: 6.0/255.0, green: 138.0/255.0, blue: 194.0/255.0, alpha: 1)
         case Days.wedensday:
             image = "wedensday"
-            text = NSLocalizedString("LALALLALA WEDENSDAAAY WUUUHOO HIYAA", comment: "")
-            backgroundName = "background3"
+            text = NSLocalizedString("Sugar rush sugar crush... hope its not raining", comment: "")
+            self.view.backgroundColor = UIColor(red: 6.0/255.0, green: 138.0/255.0, blue: 194.0/255.0, alpha: 0.5)
         case Days.thursday:
             image = "thursday"
             text = NSLocalizedString("Fake it until you make it them say. Well, it doesnt work in this challenge", comment: "")
@@ -182,39 +197,39 @@ class DayViewController: UIViewController, WeatherServiceDelegate, CLLocationMan
     func showLateDayScreen() {
         var text: String
         var image: String
-        var backgroundName: String
+        var backgroundName: String?
+        
         interactionButton.hidden = false
-        interactionButton.setTitle(NSLocalizedString("No candy for me today!", comment: ""), forState: UIControlState.Normal)
+        interactionButton.setTitle(NSLocalizedString("No candy for me today?", comment: ""), forState: UIControlState.Normal)
+        self.view.backgroundColor = UIColor(red: 44.0/255.0, green: 62/255.0, blue: 80/255.0, alpha: 1)
+        mainWeatherImage.image = UIImage(named: "moon")
         let dayOfWeek: Int = getWeekDay(NSDate())
         
         switch dayOfWeek {
         case Days.monday:
-            println("Monday")
-            headerImage.image = UIImage(named: "monday")
-            mainText.text = NSLocalizedString("An easy day huh? Monday isnt a problem. You just had weekend", comment: "")
+            image = "monday"
+            text = NSLocalizedString("An easy day huh? Monday isnt a problem. You just had weekend", comment: "")
         case Days.tuesday:
             image = "tuesday"
             text = NSLocalizedString("Did you see any candy offers today? And you resisted them. Well done", comment: "")
-            backgroundName = "background1"
         case Days.wedensday:
             image = "wedensday"
             text = NSLocalizedString("Oh so you did avoid your coworkers well meant offer", comment: "")
-            backgroundName = "background1"
         case Days.thursday:
             image = "thursday"
             text = NSLocalizedString("Bragging right is everything. ", comment: "")
-            backgroundName = "background1"
         case Days.friday:
             image = "friday"
             text = NSLocalizedString("You are brilliant", comment: "")
-            backgroundName = "background1"
         case Days.saturday:
-            println("Saturday")
-            headerImage.image = UIImage(named: "saturday")
-            mainText.text = NSLocalizedString("I guess you had massive CRAVINGS today I congratulate you if you made it. By the way, you owe me if you are lying", comment: "")
+            image = "saturday"
+            text = NSLocalizedString("I guess you had massive CRAVINGS today I congratulate you if you made it. By the way, you owe me if you are lying", comment: "")
         default:
             println("Did not match any days \(dayOfWeek)")
+            fatalError("No matching weekday found")
         }
+        
+        updateView(image, text: text, backgroundName: backgroundName)
     }
     
     func shouldShowEarlyDayScreen() -> Bool {
@@ -226,21 +241,11 @@ class DayViewController: UIViewController, WeatherServiceDelegate, CLLocationMan
         return myComponents
     }
     
-    func animateFrame(view: UIView, completion: (finished: Bool) -> Void) {
-        UIView.animateWithDuration(15, delay: 0, options: UIViewAnimationOptions.CurveLinear, animations: {
-            var viewFrame = view.frame
-            viewFrame.origin.x = self.view.frame.size.width
-            view.frame = viewFrame
-            }, completion: { finished in
-                completion(finished: finished)
-        })
-    }
-    
     func localWeather(weather: Weather) {
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
             switch weather {
             case Weather.clear:
-                self.showRain()
+                println("Weather is clear")
             case Weather.sunny:
                 self.showSun()
             case Weather.cloudy:
@@ -250,7 +255,6 @@ class DayViewController: UIViewController, WeatherServiceDelegate, CLLocationMan
             default:
                 println("Weather view not implemented yet")
             }
-            
         })
     }
 }

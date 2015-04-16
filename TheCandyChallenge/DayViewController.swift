@@ -39,8 +39,6 @@ class DayViewController: UIViewController, WeatherServiceDelegate, CLLocationMan
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         viewDidDisapper = false
-        if isCloudy() { showClouds() }
-        showRain()
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -156,7 +154,8 @@ class DayViewController: UIViewController, WeatherServiceDelegate, CLLocationMan
         var backgroundName: String?
         let dayOfWeek: Int = getWeekDay(NSDate())
         println("DayOf Week: \(dayOfWeek)")
-        
+        self.view.backgroundColor = UIColor(red: 6.0/255.0, green: 138.0/255.0, blue: 194.0/255.0, alpha: 0.5)
+
         switch dayOfWeek {
         case Days.monday:
             println("Monday")
@@ -169,10 +168,9 @@ class DayViewController: UIViewController, WeatherServiceDelegate, CLLocationMan
         case Days.wedensday:
             image = "wedensday"
             text = NSLocalizedString("Sugar rush sugar crush... hope its not raining", comment: "")
-            self.view.backgroundColor = UIColor(red: 6.0/255.0, green: 138.0/255.0, blue: 194.0/255.0, alpha: 0.5)
         case Days.thursday:
             image = "thursday"
-            text = NSLocalizedString("Fake it until you make it them say. Well, it doesnt work in this challenge", comment: "")
+            text = NSLocalizedString("Its thursday! Stay healthy, avoid spiking blood sugar, stay away from the candy, and you will be fine.", comment: "")
             backgroundName = "background3"
         case Days.friday:
             image = "friday"
@@ -203,6 +201,7 @@ class DayViewController: UIViewController, WeatherServiceDelegate, CLLocationMan
         interactionButton.setTitle(NSLocalizedString("No candy for me today?", comment: ""), forState: UIControlState.Normal)
         self.view.backgroundColor = UIColor(red: 44.0/255.0, green: 62/255.0, blue: 80/255.0, alpha: 1)
         mainWeatherImage.image = UIImage(named: "moon")
+        mainText.textColor = UIColor.whiteColor()
         let dayOfWeek: Int = getWeekDay(NSDate())
         
         switch dayOfWeek {

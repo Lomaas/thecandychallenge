@@ -45,12 +45,10 @@ class ProgressViewController: UIViewController {
                     // 4. Update UI in the main thread
                     dispatch_async(dispatch_get_main_queue(), { () -> Void in
 //                        self.calories.text = sample.
-                        
                     });
                 })
             }
-            else
-            {
+            else {
                 println("HealthKit authorization denied!")
                 if error != nil {
                     println("\(error)")
@@ -78,33 +76,17 @@ class ProgressViewController: UIViewController {
     }
     
     func updateScreen() {
-        if shouldShowDayView() { showDayView() }
-        
-//        calories.text = challenge?["calories"] as? String
-        daysLabel.text = getDaysSinceStarted(challenge!.createdAt!)
-//        moneySaved.text = challenge?["moneySaved"] as? String
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            println("Day since started: \(self.challenge!.createdAt)")
+    //        calories.text = challenge?["calories"] as? String
+            self.daysLabel.text = self.getDaysSinceStarted(self.challenge!.createdAt!)
+    //        moneySaved.text = challenge?["moneySaved"] as? String
+        })
     }
     
     func getDaysSinceStarted(date: NSDate) -> String {
         let components = NSCalendarUnit.CalendarUnitDay | NSCalendarUnit.CalendarUnitHour | NSCalendarUnit.CalendarUnitSecond | NSCalendarUnit.CalendarUnitMinute
         let date = NSCalendar.currentCalendar().components(components, fromDate: date, toDate: NSDate(), options: nil)
         return "\(date.day) days  \(date.hour) hours \(date.minute) minutes"
-    }
-    
-    func shouldShowDayView() -> Bool {
-        let defaults = NSUserDefaults.standardUserDefaults()
-
-        if defaults.objectForKey("seenTodayView") != nil {
-            defaults.setObject("yes", forKey: "seenTodayView")
-            NSUserDefaults.standardUserDefaults().synchronize()
-            return true
-        }
-        else {
-            return false
-        }
-    }
-    
-    func showDayView() {
-        performSegueWithIdentifier("dayViewController", sender: self)
     }
 }

@@ -75,8 +75,9 @@ class WeatherService: NSObject, CLLocationManagerDelegate {
             }
             else {
                 if let parseJSON = json {
-                    let weather = parseJSON["weather"] as? NSArray
-                    self.parseJSON(weather!)
+                    if let weather = parseJSON["weather"] as? NSArray {
+                        self.parseJSON(weather)
+                    }
                 }
                 else {
                     let jsonStr = NSString(data: data, encoding: NSUTF8StringEncoding)

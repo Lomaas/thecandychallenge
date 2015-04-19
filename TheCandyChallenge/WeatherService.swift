@@ -14,6 +14,7 @@ enum Weather {
     case sunny
     case clear
     case rain
+    case lightRain
 }
 
 protocol WeatherServiceDelegate {
@@ -22,9 +23,7 @@ protocol WeatherServiceDelegate {
 
 class WeatherService: NSObject, CLLocationManagerDelegate {
     var delegate: WeatherServiceDelegate?
-    var weather: String?
     var isFetchingWeather = false
-    
     let locationManager = CLLocationManager()
     
     override init() {
@@ -32,26 +31,25 @@ class WeatherService: NSObject, CLLocationManagerDelegate {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
-        locationManager.startUpdatingLocation()
+
     }
     
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
-//        println("\(locations.last)")
         fetchWeather(manager.location.coordinate.latitude, lon: manager.location.coordinate.longitude)
     }
     
+    func startFetchingWeather() {
+        locationManager.startUpdatingLocation()
+    }
+    
     private func fetchWeather(lat: Double, lon: Double) {
+        println("FetchWeather")
         if isFetchingWeather { return }
-
-        if let weather = weather {
-            mapWeather(weather)
-            return
-        }
         
-        locationManager.delegate = nil
+        locationManager.stopUpdatingLocation()
         isFetchingWeather = true
-        
-        let url = "http://api.openweathermap.org/data/2.5/weather?lat=\(lat)&lon=\(lon)"
+
+        let url = "http://api.openweathermap.org/data/2.5/weather?lat=67&lon=15"
         var request = NSMutableURLRequest(URL: NSURL(string: url)!)
         var session = NSURLSession.sharedSession()
         
@@ -84,27 +82,27 @@ class WeatherService: NSObject, CLLocationManagerDelegate {
                     println("Error could not parse JSON: \(jsonStr)")
                 }
             }
-            
         })
         task.resume()
     }
     
     func parseJSON(weatherArray: NSArray) {
-        if let description = weatherArray[0]["main"] as? String {
-            weather = description
-            mapWeather(description)
-        }
+        let main = weatherArray[0]["main"] as? String ?? ""
+        let description = weatherArray[0]["description"] as? String ?? ""
+        mapWeather(main, description: description)
     }
     
-    private func mapWeather(description: String) {
-        println("Weather: \(description)")
-        switch description {
+    private func mapWeather(main: String, description: String) {
+        println("Weather: \(main), description: \(description)")
+        switch main {
             case "Clear":
                 self.delegate?.localWeather(Weather.clear)
             case "Sun":
                 self.delegate?.localWeather(Weather.sunny)
+            case "Rain":
+                self.delegate?.localWeather(Weather.rain)
             default:
-            println("Weather not mapped yet: \(description)")
+            println("Weather not mapped yet: \(main)")
         }
     }
 }

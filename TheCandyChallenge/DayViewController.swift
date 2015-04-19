@@ -13,7 +13,7 @@ import CoreLocation
 class DayViewController: UIViewController, WeatherServiceDelegate, CLLocationManagerDelegate {
     var blueCloud: UIImageView?
     var viewDidDisapper: Bool = false
-    var weatherService: WeatherService?
+    let weatherService = WeatherService()
     let locationManager = CLLocationManager()
 
     @IBOutlet weak var background: UIImageView!
@@ -30,8 +30,8 @@ class DayViewController: UIViewController, WeatherServiceDelegate, CLLocationMan
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        weatherService = WeatherService()
-        weatherService!.delegate = self
+        weatherService.delegate = self
+        weatherService.startFetchingWeather()
         
         isEarlyDay() ? showEarlyDayScreen() : showLateDayScreen()
     }
@@ -57,15 +57,7 @@ class DayViewController: UIViewController, WeatherServiceDelegate, CLLocationMan
     func isEarlyDay() -> Bool {
         let components = NSCalendarUnit.CalendarUnitDay | NSCalendarUnit.CalendarUnitHour | NSCalendarUnit.CalendarUnitSecond | NSCalendarUnit.CalendarUnitMinute
         let date = NSCalendar.currentCalendar().components(components, fromDate: NSDate())
-        
-        
-        if date.hour >= 21 {
-            println("IS easrly day view: \(date.hour)")
-            return false
-        }
-        println("Is late day view: \(date.hour)")
-
-        return true
+        return date.hour >= 21 ? false : true
     }
     
     // MARK: Show and add views
@@ -152,43 +144,10 @@ class DayViewController: UIViewController, WeatherServiceDelegate, CLLocationMan
         var text: String
         var image: String
         var backgroundName: String?
-        let dayOfWeek: Int = getWeekDay(NSDate())
-        println("DayOf Week: \(dayOfWeek)")
+
         self.view.backgroundColor = UIColor(red: 6.0/255.0, green: 138.0/255.0, blue: 194.0/255.0, alpha: 0.5)
 
-        switch dayOfWeek {
-        case Days.monday:
-            println("Monday")
-            image = "monday"
-            text = NSLocalizedString("Its monday baby! Stay healthy, avoid spiking blood sugar, stay away from the candy, and you will be fine.", comment: "")
-            backgroundName = "background3"
-        case Days.tuesday:
-            image = "tuesday"
-            text = NSLocalizedString("Its tuesday. There are always sales on candy. You will regret i badly", comment: "")
-        case Days.wedensday:
-            image = "wedensday"
-            text = NSLocalizedString("Sugar rush sugar crush... hope its not raining", comment: "")
-        case Days.thursday:
-            image = "thursday"
-            text = NSLocalizedString("Its thursday! Stay healthy, avoid spiking blood sugar, stay away from the candy, and you will be fine.", comment: "")
-            backgroundName = "background3"
-        case Days.friday:
-            image = "friday"
-            text = NSLocalizedString("Aaaaah! Weekend is here. Your first real test", comment: "")
-            backgroundName = "background3"
-        case Days.saturday:
-            image = "saturday"
-            text = NSLocalizedString("Today you´ll have MASSIVE cravings for candy! Can you stay away?", comment: "")
-            backgroundName = "background3"
-        case Days.sunday:
-            image = "sunday"
-            text = NSLocalizedString("Sunday funday! Go out and enjoy the world", comment: "")
-            backgroundName = "venezia"
-        default:
-            println("Did not match any days \(dayOfWeek)")
-            fatalError("No matching weekday found")
-        }
-        
+        (text, image, backgroundName) = DayService.getEarlyDayScreen()
         updateView(image, text: text, backgroundName: backgroundName)
     }
     
@@ -202,42 +161,9 @@ class DayViewController: UIViewController, WeatherServiceDelegate, CLLocationMan
         self.view.backgroundColor = UIColor(red: 44.0/255.0, green: 62/255.0, blue: 80/255.0, alpha: 1)
         mainWeatherImage.image = UIImage(named: "moon")
         mainText.textColor = UIColor.whiteColor()
-        let dayOfWeek: Int = getWeekDay(NSDate())
         
-        switch dayOfWeek {
-        case Days.monday:
-            image = "monday"
-            text = NSLocalizedString("An easy day huh? Monday isnt a problem. You just had weekend", comment: "")
-        case Days.tuesday:
-            image = "tuesday"
-            text = NSLocalizedString("Did you see any candy offers today? And you resisted them. Well done", comment: "")
-        case Days.wedensday:
-            image = "wedensday"
-            text = NSLocalizedString("Oh so you did avoid your coworkers well meant offer", comment: "")
-        case Days.thursday:
-            image = "thursday"
-            text = NSLocalizedString("Bragging right is everything. ", comment: "")
-        case Days.friday:
-            image = "friday"
-            text = NSLocalizedString("You are brilliant", comment: "")
-        case Days.saturday:
-            image = "saturday"
-            text = NSLocalizedString("I guess you had massive CRAVINGS today I congratulate you if you made it. By the way, you owe me if you are lying", comment: "")
-        default:
-            println("Did not match any days \(dayOfWeek)")
-            fatalError("No matching weekday found")
-        }
-        
+        (text, image, backgroundName) = DayService.getLateDayScreen()
         updateView(image, text: text, backgroundName: backgroundName)
-    }
-    
-    func shouldShowEarlyDayScreen() -> Bool {
-        return true
-    }
-    
-    func getWeekDay(date: NSDate) -> Int {
-        let myComponents = NSCalendar.currentCalendar().component(NSCalendarUnit.WeekdayCalendarUnit, fromDate: date)
-        return myComponents
     }
     
     func localWeather(weather: Weather) {

@@ -32,30 +32,6 @@ class ProgressViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        HealthKitService().authorizeHealthKit { (authorized, error) -> Void in
-            if authorized {
-                println("HealthKit authorization received.")
-                let sampleType = HKSampleType.quantityTypeForIdentifier(HKQuantityTypeIdentifierActiveEnergyBurned)
-                HealthKitService().readMostRecentSample(sampleType, completion: { ( energyBurned, error) -> Void in
-                    if( error != nil ) {
-                        println("Error reading weight from HealthKit Store: \(error.localizedDescription)")
-                        return
-                    }
-                    
-                    // 4. Update UI in the main thread
-                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
-//                        self.calories.text = sample.
-                    });
-                })
-            }
-            else {
-                println("HealthKit authorization denied!")
-                if error != nil {
-                    println("\(error)")
-                }
-            }
-        }
-        
         UserChallengeService.getMyChallengeFromLocalStorage({ (userChallenge: PFObject) -> Void in
             self.challenge = userChallenge
             var f: String = self.challenge!.objectId!

@@ -1,11 +1,3 @@
-//
-//  DayViewController.swift
-//  TheCandyChallenge
-//
-//  Created by Simen Johannessen on 11/04/15.
-//  Copyright (c) 2015 Simen Lomås Johannessen. All rights reserved.
-//
-
 import Foundation
 import UIKit
 import CoreLocation
@@ -23,7 +15,7 @@ class DayViewController: UIViewController, WeatherServiceDelegate, CLLocationMan
     @IBOutlet weak var mainText: UILabel!
 
     @IBAction func interactionButtonPressed(sender: UIButton) {
-        println("Interaction button pressed")
+        print("Interaction button pressed")
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -55,7 +47,7 @@ class DayViewController: UIViewController, WeatherServiceDelegate, CLLocationMan
     }
     
     func isEarlyDay() -> Bool {
-        let components = NSCalendarUnit.CalendarUnitDay | NSCalendarUnit.CalendarUnitHour | NSCalendarUnit.CalendarUnitSecond | NSCalendarUnit.CalendarUnitMinute
+        let components: NSCalendarUnit = NSCalendarUnit.CalendarUnitDay | NSCalendarUnit.CalendarUnitHour | NSCalendarUnit.CalendarUnitSecond | NSCalendarUnit.CalendarUnitMinute
         let date = NSCalendar.currentCalendar().components(components, fromDate: NSDate())
         return date.hour >= 21 ? false : true
     }
@@ -170,7 +162,7 @@ class DayViewController: UIViewController, WeatherServiceDelegate, CLLocationMan
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
             switch weather {
             case Weather.clear:
-                println("Weather is clear")
+                print("Weather is clear")
             case Weather.sunny:
                 self.showSun()
             case Weather.cloudy:
@@ -178,7 +170,7 @@ class DayViewController: UIViewController, WeatherServiceDelegate, CLLocationMan
             case Weather.rain:
                 self.showRain()
             default:
-                println("Weather view not implemented yet")
+                print("Weather view not implemented yet")
             }
         })
     }

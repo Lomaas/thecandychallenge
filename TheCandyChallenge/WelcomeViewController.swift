@@ -14,78 +14,63 @@ class WelcomeViewController: UIViewController {
         super.viewDidLoad()
         
         FBSDKProfile.enableUpdatesOnAccessTokenChange(true)
-        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "onProfileUpdated:", name:FBSDKProfileDidChangeNotification, object: nil)
     }
     
     func onProfileUpdated(notification: NSNotification) {
-        println("OnprofileUpdated")
-        
+        print("OnprofileUpdated")
     }
     
     @IBAction func test(sender: AnyObject) {
-//        returnUserData()
         PFFacebookUtils.logInInBackgroundWithReadPermissions(["public_profile", "email", "user_friends"], block: { (user, error) -> Void in
             if (user != nil) {
                 if (user!.isNew) {
-                    println("User signed up")
+                    print("User signed up")
                     self.returnUserData()
                 } else {
-                    println("User logged in")
+                    print("User logged in")
                     self.returnUserData()
                 }
             }
         })
-        
     }
-  
     
     func returnUserData() {
         let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: nil)
         graphRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
-            
-            if ((error) != nil)
-            {
-                // Process error
-                println("Error: \(error)")
-            }
-            else
-            {
-                println("fetched user: \(result)")
+            if ((error) != nil) {
+                print("Error: \(error)")
+            } else {
+                print("fetched user: \(result)")
                 let name : NSString = result.valueForKey("name") as! NSString
-                println("User Name is: \(name)")
+                print("User Name is: \(name)")
                 let email = result.valueForKey("email") as! String
                 let fbId : String = result.valueForKey("id") as! String
                 self.storeUserDataToServer(email, name: name as String, fbId: fbId)
-                println("User Email is: \(email)")
+                print("User Email is: \(email)")
             }
         })
     }
     
     func storeUserDataToServer(email: String, name: String, fbId: String) {
-        var user:PFUser = PFUser.currentUser()!
+        let user:PFUser = PFUser.currentUser()!
         user["email"] = email
         user["name"] = name
         user["fbId"] = fbId
         
         user.saveInBackgroundWithBlock({ (success, error) -> Void in
             if success {
-                println("success")
-                self.userAlreadyRegister()
+                print("success")
+                self.finishedUserSetup()
             } else {
-                println("problems")
+                print("problems")
             }
         })
     }
     
-    func goToInviteScreen() {
-        let vc = self.storyboard?.instantiateViewControllerWithIdentifier("StartUpNavigationController") as! UINavigationController
-        self.navigationController?.pushViewController(vc, animated: true)
-    }
-    
-    func userAlreadyRegister() {
-        NSNotificationCenter.defaultCenter().postNotificationName("NavigateToNewView", object:nil, userInfo:["key" : Constants.VIEWS.InviteFriendsView.rawValue])
-
+    func finishedUserSetup() {
+        ChallengeService.createChallenge()
+        self.performSegueWithIdentifier("goToProgressView", sender: nil)
     }
 }
 

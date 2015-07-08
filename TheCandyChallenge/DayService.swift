@@ -15,11 +15,11 @@ struct DayService {
         var image: String
         var backgroundName: String?
         let dayOfWeek: Int = getWeekDay(NSDate())
-        println("DayOf Week: \(dayOfWeek)")
+        print("DayOf Week: \(dayOfWeek)")
         
         switch dayOfWeek {
         case Days.monday:
-            println("Monday")
+            print("Monday")
             image = "monday"
             text = NSLocalizedString("Its monday baby! Stay healthy, avoid spiking blood sugar, stay away from the candy, and you will be fine.", comment: "")
             backgroundName = "background3"
@@ -46,7 +46,7 @@ struct DayService {
             text = NSLocalizedString("Sunday funday! Go out and enjoy the world", comment: "")
             backgroundName = "venezia"
         default:
-            println("Did not match any days \(dayOfWeek)")
+            print("Did not match any days \(dayOfWeek)")
             fatalError("No matching weekday found")
         }
         
@@ -56,7 +56,7 @@ struct DayService {
     static func getLateDayScreen() -> (text: String, image: String, backgroundName: String?) {
         var text: String
         var image: String
-        var backgroundName: String?
+        let backgroundName: String? = nil
         let dayOfWeek: Int = getWeekDay(NSDate())
         
         switch dayOfWeek {
@@ -79,7 +79,7 @@ struct DayService {
             image = "saturday"
             text = NSLocalizedString("I guess you had massive CRAVINGS today I congratulate you if you made it. By the way, you owe me if you are lying", comment: "")
         default:
-            println("Did not match any days \(dayOfWeek)")
+            print("Did not match any days \(dayOfWeek)")
             fatalError("No matching weekday found")
         }
         
@@ -87,7 +87,7 @@ struct DayService {
     }
     
     static func getWeekDay(date: NSDate) -> Int {
-        let myComponents = NSCalendar.currentCalendar().component(NSCalendarUnit.WeekdayCalendarUnit, fromDate: date)
+        let myComponents = NSCalendar.currentCalendar().component(NSCalendarUnit.CalendarUnitWeekday, fromDate: date)
         return myComponents
     }
 }

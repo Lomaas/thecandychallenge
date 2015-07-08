@@ -1,11 +1,3 @@
-//
-//  UserService.swift
-//  TheCandyChallenge
-//
-//  Created by Simen Johannessen on 01/04/15.
-//  Copyright (c) 2015 Simen Lomås Johannessen. All rights reserved.
-//
-
 import Foundation
 
 struct UserService {
@@ -17,7 +9,7 @@ struct UserService {
     }
     
     static func getCurrentUser() -> PFUser! {
-        var currentUser = PFUser.currentUser()
+        let currentUser = PFUser.currentUser()
         return currentUser
     }
 }

@@ -1,11 +1,3 @@
-//
-//  WeatherService.swift
-//  TheCandyChallenge
-//
-//  Created by Simen Johannessen on 13/04/15.
-//  Copyright (c) 2015 Simen Lomås Johannessen. All rights reserved.
-//
-
 import Foundation
 import CoreLocation
 
@@ -34,7 +26,7 @@ class WeatherService: NSObject, CLLocationManagerDelegate {
 
     }
     
-    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [AnyObject]) {
         fetchWeather(manager.location.coordinate.latitude, lon: manager.location.coordinate.longitude)
     }
     
@@ -43,7 +35,7 @@ class WeatherService: NSObject, CLLocationManagerDelegate {
     }
     
     private func fetchWeather(lat: Double, lon: Double) {
-        println("FetchWeather")
+        print("FetchWeather")
         if isFetchingWeather { return }
         
         locationManager.stopUpdatingLocation()
@@ -57,29 +49,26 @@ class WeatherService: NSObject, CLLocationManagerDelegate {
         request.HTTPMethod = "GET"
         
         let task = session.dataTaskWithRequest(request, completionHandler: { (data, response, error) -> Void in
-            println("Finished getting weather")
+            print("Finished getting weather")
             self.isFetchingWeather = false
             
-            println("Response: \(response)")
+            print("Response: \(response)")
             var strData = NSString(data: data, encoding: NSUTF8StringEncoding)
-            println("Body: \(strData)")
+            print("Body: \(strData)")
             var err: NSError?
-            var json = NSJSONSerialization.JSONObjectWithData(data, options: .MutableLeaves, error: &err) as? NSDictionary
+            var json = NSJSONSerialization.JSONObjectWithData(data, options:nil, error: &err) as? NSDictionary
             
             if(err != nil) {
-                println(err!.localizedDescription)
+                print(err!.localizedDescription)
                 let jsonStr = NSString(data: data, encoding: NSUTF8StringEncoding)
-                println("Error could not parse JSON: '\(jsonStr)'")
+                print("Error could not parse JSON: '\(jsonStr)'")
             }
             else {
-                if let parseJSON = json {
-                    if let weather = parseJSON["weather"] as? NSArray {
-                        self.parseJSON(weather)
-                    }
+                if let weather = json?["weather"] as? NSArray {
+                    self.parseJSON(weather)
                 }
                 else {
-                    let jsonStr = NSString(data: data, encoding: NSUTF8StringEncoding)
-                    println("Error could not parse JSON: \(jsonStr)")
+                    print("Error could not parse JSON")
                 }
             }
         })
@@ -93,7 +82,7 @@ class WeatherService: NSObject, CLLocationManagerDelegate {
     }
     
     private func mapWeather(main: String, description: String) {
-        println("Weather: \(main), description: \(description)")
+        print("Weather: \(main), description: \(description)")
         switch main {
             case "Clear":
                 self.delegate?.localWeather(Weather.clear)
@@ -102,7 +91,7 @@ class WeatherService: NSObject, CLLocationManagerDelegate {
             case "Rain":
                 self.delegate?.localWeather(Weather.rain)
             default:
-            println("Weather not mapped yet: \(main)")
+            print("Weather not mapped yet: \(main)")
         }
     }
 }

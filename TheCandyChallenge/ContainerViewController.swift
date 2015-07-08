@@ -14,15 +14,19 @@ class ContainerViewController: UIViewController, UIPageViewControllerDataSource,
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "goToViewNotification:", name: "NavigateToNewView", object: nil)
+//        NSNotificationCenter.defaultCenter().addObserver(self, selector: "goToViewNotification:", name: "NavigateToNewView", object: nil)
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        
         if (!UserService.hasSignedUp()) {
             self.goToView(Constants.VIEWS.WelcomeView.rawValue)
         } else {
-            createPageViewController()
+            ChallengeService.getMyChallenge({ (userChallenge) -> Void in
+                print("Challenge: \(userChallenge)")
+                self.createPageViewController()
+            })
         }
     }
     
@@ -76,7 +80,7 @@ class ContainerViewController: UIViewController, UIPageViewControllerDataSource,
             let vc = sb.instantiateViewControllerWithIdentifier("welcome") as! WelcomeViewController
             self.presentViewController(vc, animated: true, completion: nil)
         default:
-            println("No known key")
+            print("No known key")
         }
     }
 }

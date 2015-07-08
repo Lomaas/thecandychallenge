@@ -26,8 +26,7 @@ class RainView: UIView {
 
 
 extension Int {
-    static func random(range: Range<Int> ) -> Int
-    {
+    static func random(range: Range<Int> ) -> Int {
         var offset = 0
         
         if range.startIndex < 0   // allow negative ranges

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -31,27 +30,6 @@
                         </mask>
                     </variation>
                 </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="The Candy Challenge" textAlignment="center" lineBreakMode="middleTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="kId-c2-rCX">
-                    <rect key="frame" x="86" y="115" width="308" height="76"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="89" id="PT5-HY-2E9"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="36"/>
-                    <color key="textColor" red="0.0" green="0.81176470590000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <nil key="highlightedColor"/>
-                    <color key="shadowColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-                    <size key="shadowOffset" width="0.0" height="0.0"/>
-                    <variation key="default">
-                        <mask key="constraints">
-                            <exclude reference="PT5-HY-2E9"/>
-                        </mask>
-                    </variation>
-                    <variation key="widthClass=compact">
-                        <mask key="constraints">
-                            <include reference="PT5-HY-2E9"/>
-                        </mask>
-                    </variation>
-                </label>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30 days without candy - can you make it?" textAlignment="center" lineBreakMode="middleTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="C9z-OZ-Fm7">
                     <rect key="frame" x="86" y="115" width="308" height="76"/>
                     <constraints>
@@ -75,21 +53,7 @@
             </subviews>
             <color key="backgroundColor" name="controlDarkShadowColor" catalog="System" colorSpace="catalog"/>
             <constraints>
-                <constraint firstItem="kId-c2-rCX" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="53" id="3vl-T3-Pln">
-                    <variation key="widthClass=compact" constant="137"/>
-                </constraint>
-                <constraint firstItem="kId-c2-rCX" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="bottom" multiplier="1/3" constant="1" id="5cJ-9S-tgC">
-                    <variation key="widthClass=compact" constant="58.5"/>
-                </constraint>
-                <constraint firstAttribute="trailing" secondItem="kId-c2-rCX" secondAttribute="trailing" constant="45" id="7Xo-4b-3PI">
-                    <variation key="widthClass=compact" constant="53"/>
-                </constraint>
-                <constraint firstItem="kId-c2-rCX" firstAttribute="centerX" secondItem="C9z-OZ-Fm7" secondAttribute="centerX" id="7tI-ln-D4X"/>
                 <constraint firstItem="8ie-xW-0ye" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="80D-1I-hPd"/>
-                <constraint firstItem="kId-c2-rCX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="62" id="A1v-Gr-82R">
-                    <variation key="widthClass=compact" constant="54"/>
-                </constraint>
-                <constraint firstAttribute="centerX" secondItem="kId-c2-rCX" secondAttribute="centerX" id="Koa-jz-hwk"/>
                 <constraint firstAttribute="bottom" secondItem="8ie-xW-0ye" secondAttribute="bottom" constant="20" id="Kzo-t9-V3l"/>
                 <constraint firstItem="8ie-xW-0ye" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" symbolic="YES" id="MfP-vx-nX0"/>
                 <constraint firstItem="C9z-OZ-Fm7" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="88" id="Oal-5f-7Xe">
@@ -97,9 +61,6 @@
                 </constraint>
                 <constraint firstAttribute="centerX" secondItem="8ie-xW-0ye" secondAttribute="centerX" id="ZEH-qu-HZ9"/>
                 <constraint firstAttribute="bottom" secondItem="8ie-xW-0ye" secondAttribute="bottom" constant="216" id="aQu-iK-Aeu"/>
-                <constraint firstItem="kId-c2-rCX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" symbolic="YES" id="fvb-Df-36g">
-                    <variation key="widthClass=compact" constant="88"/>
-                </constraint>
                 <constraint firstItem="C9z-OZ-Fm7" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="115" id="iSf-bx-g0g">
                     <variation key="widthClass=compact" constant="35"/>
                 </constraint>
@@ -113,10 +74,6 @@
                 <mask key="constraints">
                     <exclude reference="Oal-5f-7Xe"/>
                     <exclude reference="iSf-bx-g0g"/>
-                    <exclude reference="3vl-T3-Pln"/>
-                    <exclude reference="7Xo-4b-3PI"/>
-                    <exclude reference="7tI-ln-D4X"/>
-                    <exclude reference="A1v-Gr-82R"/>
                     <exclude reference="80D-1I-hPd"/>
                     <exclude reference="aQu-iK-Aeu"/>
                 </mask>
@@ -128,13 +85,6 @@
                 <mask key="constraints">
                     <include reference="Oal-5f-7Xe"/>
                     <include reference="iSf-bx-g0g"/>
-                    <include reference="3vl-T3-Pln"/>
-                    <exclude reference="5cJ-9S-tgC"/>
-                    <include reference="7Xo-4b-3PI"/>
-                    <include reference="7tI-ln-D4X"/>
-                    <include reference="A1v-Gr-82R"/>
-                    <exclude reference="Koa-jz-hwk"/>
-                    <exclude reference="fvb-Df-36g"/>
                     <include reference="80D-1I-hPd"/>
                     <exclude reference="Kzo-t9-V3l"/>
                     <exclude reference="MfP-vx-nX0"/>

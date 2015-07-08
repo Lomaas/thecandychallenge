@@ -8,8 +8,8 @@ class ContainerViewController: UIViewController, UIPageViewControllerDataSource,
     lazy var _controllers : [UIViewController] = {
         let progressView = self.storyboard?.instantiateViewControllerWithIdentifier("ProgressViewController") as! ProgressViewController
         let dayView = self.storyboard?.instantiateViewControllerWithIdentifier("DayViewController") as! DayViewController
-        let formView = self.storyboard?.instantiateViewControllerWithIdentifier("FormViewController") as! FormViewController
-        return [dayView, progressView, formView]
+        let settingsView = self.storyboard?.instantiateViewControllerWithIdentifier("FormViewController") as! SettingsViewController
+        return [dayView, progressView, settingsView]
     }()
     
     override func viewDidLoad() {
@@ -20,11 +20,15 @@ class ContainerViewController: UIViewController, UIPageViewControllerDataSource,
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
+        if let _ = pageViewController {
+            return
+        }
+        
         if (!UserService.hasSignedUp()) {
             self.goToView(Constants.VIEWS.WelcomeView.rawValue)
         } else {
             ChallengeService.getMyChallenge({ (userChallenge) -> Void in
-                print("Challenge: \(userChallenge)")
+                println("Challenge: \(userChallenge)")
                 self.createPageViewController()
             })
         }
@@ -80,7 +84,7 @@ class ContainerViewController: UIViewController, UIPageViewControllerDataSource,
             let vc = sb.instantiateViewControllerWithIdentifier("welcome") as! WelcomeViewController
             self.presentViewController(vc, animated: true, completion: nil)
         default:
-            print("No known key")
+            println("No known key")
         }
     }
 }

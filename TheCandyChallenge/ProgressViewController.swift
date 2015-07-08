@@ -13,7 +13,7 @@ struct Days {
 }
 
 class ProgressViewController: UIViewController {
-    var challenge: PFObject!
+    var challenge: Challenge!
     var itemIndex: Int = 1
 
     @IBOutlet weak var dayViewContainer: UIView!
@@ -24,12 +24,10 @@ class ProgressViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        ChallengeService.getMyChallenge({ (userChallenge: PFObject) -> Void in
+        ChallengeService.getMyChallenge({ (userChallenge: Challenge) -> Void in
             self.challenge = userChallenge
-            print("Has challenge with objectID: \(self.challenge.objectId)")
-            userChallenge.pinInBackground()
+            print("Has challenge with createdDate: \(self.challenge.createdDate)")
             self.updateScreen()
-            
         })
     }
     
@@ -39,10 +37,7 @@ class ProgressViewController: UIViewController {
     
     func updateScreen() {
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
-            print("Day since started: \(self.challenge!.createdAt)")
-            self.calories.text = self.challenge["calories"] as? String
-            self.daysLabel.text = self.getDaysSinceStarted(self.challenge!.createdAt!)
-            self.moneySaved.text = self.challenge["moneySaved"] as? String
+            self.daysLabel.text = self.getDaysSinceStarted(self.challenge.createdDate)
         })
     }
     

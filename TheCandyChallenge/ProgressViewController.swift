@@ -16,10 +16,8 @@ class ProgressViewController: UIViewController {
     var challenge: Challenge!
     var itemIndex: Int = 1
 
-    @IBOutlet weak var dayViewContainer: UIView!
-    @IBOutlet weak var moneySaved: UILabel!
-    @IBOutlet weak var calories: UILabel!
     @IBOutlet weak var daysLabel: UILabel!
+    @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -1,7 +1,7 @@
 import UIKit
 
 class ContainerViewController: UIViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
-    var pageIndex = 0
+    var pageIndex = 1
     private var pageViewController: UIPageViewController?
     var challenge: PFObject?
     
@@ -38,7 +38,7 @@ class ContainerViewController: UIViewController, UIPageViewControllerDataSource,
         let pageController = self.storyboard!.instantiateViewControllerWithIdentifier("PageController") as! UIPageViewController
         pageController.dataSource = self
         
-        let firstController = _controllers[0]
+        let firstController = _controllers[pageIndex]
         let startingViewControllers: NSArray = [firstController]
         pageController.setViewControllers(startingViewControllers as [AnyObject], direction: UIPageViewControllerNavigationDirection.Forward, animated: false, completion: nil)
     

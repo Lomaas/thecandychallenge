@@ -26,6 +26,4 @@ class Enemy: Printable {
         self.date = date
         self.amount = amount
     }
-    
-    
 }

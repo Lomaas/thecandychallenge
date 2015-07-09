@@ -1,16 +1,15 @@
 //
-//  InviteFriendTableViewCell.swift
+//  FriendTableViewCell.swift
 //  TheCandyChallenge
 //
-//  Created by Simen Johannessen on 08/07/15.
+//  Created by Simen Johannessen on 09/07/15.
 //  Copyright (c) 2015 Simen Lomås Johannessen. All rights reserved.
 //
 
 import UIKit
 
-class InviteFriendTableViewCell: UITableViewCell {
+class FriendTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var checkmarkImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     
     override func awakeFromNib() {
@@ -20,4 +19,5 @@ class InviteFriendTableViewCell: UITableViewCell {
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
+
 }

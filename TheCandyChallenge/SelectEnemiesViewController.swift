@@ -2,13 +2,19 @@ import UIKit
 
 class SelectEnemiesViewController: UIViewController {
     var challenge: Challenge!
+    var fromWelcomeView: Bool?
     
     @IBOutlet weak var counterChockolade: UILabel!
     @IBOutlet weak var counterSoda: UILabel!
     
     @IBAction func didPressDone(sender: AnyObject) {
         ChallengeService.mapToPFObjectChallenge(challenge)
-        dismissViewControllerAnimated(true, completion: nil)
+        
+        if fromWelcomeView == true {
+            performSegueWithIdentifier("goToContainerView", sender: nil)
+        } else {
+            dismissViewControllerAnimated(true, completion: nil)
+        }
     }
     
     @IBAction func didPressDecreaseChockolade(sender: AnyObject) {

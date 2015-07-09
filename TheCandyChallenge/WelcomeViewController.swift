@@ -2,10 +2,25 @@ import UIKit
 
 class WelcomeViewController: UIViewController {
 
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var loginFacebookButton: UIButton!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         FBSDKProfile.enableUpdatesOnAccessTokenChange(true)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "onProfileUpdated:", name:FBSDKProfileDidChangeNotification, object: nil)
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "goToChooseEnemies" {
+            let vc = segue.destinationViewController as! SelectEnemiesViewController
+            vc.fromWelcomeView = true
+        }
     }
     
     func onProfileUpdated(notification: NSNotification) {
@@ -13,15 +28,13 @@ class WelcomeViewController: UIViewController {
     }
     
     @IBAction func test(sender: AnyObject) {
+        activityIndicator.startAnimating()
+        loginFacebookButton.hidden = true
+        
         PFFacebookUtils.logInInBackgroundWithReadPermissions(["public_profile", "email", "user_friends"], block: { (user, error) -> Void in
             if (user != nil) {
-                if (user!.isNew) {
-                    println("User signed up")
-                    self.returnUserData()
-                } else {
-                    println("User logged in")
-                    self.returnUserData()
-                }
+                println("User logged in")
+                self.returnUserData()
             }
         })
     }
@@ -61,7 +74,7 @@ class WelcomeViewController: UIViewController {
     
     func finishedUserSetup() {
         ChallengeService.createChallenge()
-        self.performSegueWithIdentifier("goToInviteFriends", sender: nil)
+        self.performSegueWithIdentifier("goToChooseEnemies", sender: nil)
     }
 }
 

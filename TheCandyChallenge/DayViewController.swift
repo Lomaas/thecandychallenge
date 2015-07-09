@@ -15,7 +15,7 @@ class DayViewController: UIViewController, WeatherServiceDelegate, CLLocationMan
     @IBOutlet weak var mainText: UILabel!
 
     @IBAction func interactionButtonPressed(sender: UIButton) {
-        print("Interaction button pressed")
+        println("Interaction button pressed")
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     

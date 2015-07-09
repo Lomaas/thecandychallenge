@@ -10,7 +10,6 @@
 		85151E191AE405DA0003B148 /* DayService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85151E181AE405DA0003B148 /* DayService.swift */; };
 		853411FF1B4D97E600CC539C /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 853411FE1B4D97E600CC539C /* Enemy.swift */; };
 		8578AAB81AD92A8F004A2CE6 /* DayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8578AAB71AD92A8F004A2CE6 /* DayViewController.swift */; };
-		8578AABA1AD99D48004A2CE6 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8578AAB91AD99D48004A2CE6 /* HealthKit.framework */; };
 		8578AABF1ADAB151004A2CE6 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8578AABE1ADAB151004A2CE6 /* SettingsViewController.swift */; };
 		8578AAC11ADC281F004A2CE6 /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8578AAC01ADC281F004A2CE6 /* WeatherService.swift */; };
 		8578AAC51ADC6452004A2CE6 /* RainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8578AAC41ADC6452004A2CE6 /* RainView.swift */; };
@@ -18,6 +17,7 @@
 		8578D0171B4DB542007ECE49 /* SelectEnemiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8578D0161B4DB542007ECE49 /* SelectEnemiesViewController.swift */; };
 		8578D0191B4DB9B4007ECE49 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8578D0181B4DB9B4007ECE49 /* Friend.swift */; };
 		8578D01B1B4DB9CB007ECE49 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8578D01A1B4DB9CB007ECE49 /* User.swift */; };
+		8578D01D1B4DE0A5007ECE49 /* FriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8578D01C1B4DE0A5007ECE49 /* FriendTableViewCell.swift */; };
 		8586EF8B1AC34C1F00F47C20 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8586EF8A1AC34C1F00F47C20 /* AppDelegate.swift */; };
 		8586EF8D1AC34C1F00F47C20 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8586EF8C1AC34C1F00F47C20 /* WelcomeViewController.swift */; };
 		8586EF901AC34C1F00F47C20 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8586EF8E1AC34C1F00F47C20 /* Main.storyboard */; };
@@ -64,7 +64,6 @@
 		85151E181AE405DA0003B148 /* DayService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayService.swift; sourceTree = "<group>"; };
 		853411FE1B4D97E600CC539C /* Enemy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
 		8578AAB71AD92A8F004A2CE6 /* DayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayViewController.swift; sourceTree = "<group>"; };
-		8578AAB91AD99D48004A2CE6 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		8578AABB1AD99D48004A2CE6 /* TheCandyChallenge.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TheCandyChallenge.entitlements; sourceTree = "<group>"; };
 		8578AABE1ADAB151004A2CE6 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		8578AAC01ADC281F004A2CE6 /* WeatherService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
@@ -75,6 +74,7 @@
 		8578D0161B4DB542007ECE49 /* SelectEnemiesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectEnemiesViewController.swift; sourceTree = "<group>"; };
 		8578D0181B4DB9B4007ECE49 /* Friend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
 		8578D01A1B4DB9CB007ECE49 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		8578D01C1B4DE0A5007ECE49 /* FriendTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendTableViewCell.swift; sourceTree = "<group>"; };
 		8586EF851AC34C1F00F47C20 /* TheCandyChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheCandyChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8586EF891AC34C1F00F47C20 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8586EF8A1AC34C1F00F47C20 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -128,7 +128,6 @@
 				85C32E661ACB2EED0053EFF7 /* MobileCoreServices.framework in Frameworks */,
 				85C32E621ACB2EDE0053EFF7 /* CoreGraphics.framework in Frameworks */,
 				85C32E601ACB2ED70053EFF7 /* CFNetwork.framework in Frameworks */,
-				8578AABA1AD99D48004A2CE6 /* HealthKit.framework in Frameworks */,
 				85C32E5E1ACB2ED00053EFF7 /* AudioToolbox.framework in Frameworks */,
 				85C32E5A1ACB28410053EFF7 /* FBSDKLoginKit.framework in Frameworks */,
 				85BF633F1ADD8DF6004A7B42 /* ParseFacebookUtilsV4.framework in Frameworks */,
@@ -159,6 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				8578D0131B4DAF1E007ECE49 /* InviteFriendTableViewCell.swift */,
+				8578D01C1B4DE0A5007ECE49 /* FriendTableViewCell.swift */,
 			);
 			name = cells;
 			sourceTree = "<group>";
@@ -176,7 +176,6 @@
 		8586EF7C1AC34C1F00F47C20 = {
 			isa = PBXGroup;
 			children = (
-				8578AAB91AD99D48004A2CE6 /* HealthKit.framework */,
 				85C32E501ACB26150053EFF7 /* frameworks */,
 				8586EF871AC34C1F00F47C20 /* TheCandyChallenge */,
 				8586EF9D1AC34C1F00F47C20 /* TheCandyChallengeTests */,
@@ -365,7 +364,7 @@
 						DevelopmentTeam = H8L8VRZJUX;
 						SystemCapabilities = {
 							com.apple.HealthKit = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -425,6 +424,7 @@
 				85C32E811ACC22C60053EFF7 /* UserService.swift in Sources */,
 				853411FF1B4D97E600CC539C /* Enemy.swift in Sources */,
 				85C32E8B1ACC46D10053EFF7 /* ChallengeService.swift in Sources */,
+				8578D01D1B4DE0A5007ECE49 /* FriendTableViewCell.swift in Sources */,
 				85C32E771ACB3D990053EFF7 /* PasswordGenerator.swift in Sources */,
 				8578D0171B4DB542007ECE49 /* SelectEnemiesViewController.swift in Sources */,
 				8578D01B1B4DB9CB007ECE49 /* User.swift in Sources */,
@@ -567,7 +567,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = TheCandyChallenge/TheCandyChallenge.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -592,9 +591,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = TheCandyChallenge/TheCandyChallenge.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"/Users/simen johannessen/Development/TheCandyChallenge\"",
@@ -606,7 +603,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.lomas.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "0d75602f-5fe5-4818-97aa-3eb29fd2f051";
 				SWIFT_OBJC_BRIDGING_HEADER = "TheCandyChallenge/TheCandyChallenge-Bridging-Header.h";
 			};
 			name = Release;

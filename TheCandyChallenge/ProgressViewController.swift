@@ -13,8 +13,11 @@ struct Days {
 }
 
 class ProgressViewController: UIViewController {
+    let friendTableViewCellIdentifier = "FriendTableViewCell"
+
     var challenge: Challenge!
     var itemIndex: Int = 1
+    var dataArray = [Friend]()
 
     @IBOutlet weak var daysLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
@@ -24,6 +27,7 @@ class ProgressViewController: UIViewController {
         
         ChallengeService.getMyChallenge({ (userChallenge: Challenge) -> Void in
             self.challenge = userChallenge
+            self.dataArray = userChallenge.friends
             print("Has challenge with createdDate: \(self.challenge.createdDate)")
             self.updateScreen()
         })
@@ -35,13 +39,36 @@ class ProgressViewController: UIViewController {
     
     func updateScreen() {
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
-            self.daysLabel.text = self.getDaysSinceStarted(self.challenge.createdDate)
+            self.daysLabel.text = self.getTimeSinceStarted(self.challenge.createdDate)
         })
     }
     
-    func getDaysSinceStarted(date: NSDate) -> String {
+    func getTimeSinceStarted(date: NSDate) -> String {
         let components: NSCalendarUnit = NSCalendarUnit.CalendarUnitDay | NSCalendarUnit.CalendarUnitHour | NSCalendarUnit.CalendarUnitSecond | NSCalendarUnit.CalendarUnitMinute
         let date = NSCalendar.currentCalendar().components(components, fromDate: date, toDate: NSDate(), options: nil)
         return "\(date.day) days  \(date.hour) hours \(date.minute) minutes"
+    }
+}
+
+extension ProgressViewController: UITableViewDataSource, UITableViewDelegate {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return dataArray.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier(friendTableViewCellIdentifier, forIndexPath: indexPath) as! FriendTableViewCell
+        cell.nameLabel.text = dataArray[indexPath.row].name
+        cell.timeWithout.text = getTimeSinceStarted(dataArray[indexPath.row].startDate)
+        cell.mainEnemyLabel.text = "Main enemy: \(dataArray[indexPath.row].mainEnemy)"
+
+        return cell
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
     }
 }

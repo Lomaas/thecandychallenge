@@ -4,11 +4,31 @@ import Foundation
 struct ChallengeService {
     static let className = "Challenge"
     
+    static func findAndAddUsersToFriend(friendsIds: [String]) {
+        let query = PFQuery(className: ChallengeService.className)
+        query.whereKey("fbId", containedIn: friendsIds)
+        
+        query.findObjectsInBackgroundWithBlock({ (result, error) -> Void in
+            println("Result: \(result), error: \(error)")
+            
+            if error == nil {
+                if let res = result {
+                    ChallengeService.getMyChallengeFromLocalStorage({ (userChallenge) -> Void in
+                        userChallenge["friends"] = res
+                        userChallenge.saveInBackground()
+                        }, errorHandler: { () -> Void in
+                            println("Error saving updated challenge")
+                    })
+                }
+            } else {
+                print("error fetching friends")
+            }
+        })
+    }
+    
     private static func getMyChallenge(successHandler: (userChallenge: PFObject) -> Void, errorHandler: () -> Void) {
         var query = PFQuery(className: ChallengeService.className)
-        
         query.whereKey("user", equalTo: PFUser.currentUser()!)
-        
         query.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
             if error == nil {
                 println("Successfully retrieved \(objects!.count) Challenges.")
@@ -27,14 +47,11 @@ struct ChallengeService {
         })
     }
     
-    static func storeChallenge(challenge: Challenge) {
-        
-    }
-    
     static func createChallenge() -> Challenge {
         let userChallenge = PFObject(className: ChallengeService.className)
         userChallenge["date"] = NSDate()
         userChallenge["user"] = PFUser.currentUser()
+        userChallenge["fbId"] = PFUser.currentUser()?.objectForKey("fbId")
         userChallenge["enemies"] = []
         userChallenge["friends"] = []
         userChallenge.pinInBackground()
@@ -79,10 +96,10 @@ struct ChallengeService {
         })
     }
     
-    static func mapToPFObjectChallenge(challenge: Challenge) {
+    static func updateChallenge(challenge: Challenge) {
         ChallengeService.getMyChallengeFromLocalStorage({ (userChallenge) -> Void in
             userChallenge["enemies"] = ChallengeService.parseEnemiesToJson(challenge)
-            userChallenge["friends"] = ChallengeService.parseFriendsToJson(challenge)
+            userChallenge["friends"] = challenge.friends
             userChallenge.pinInBackground()
             userChallenge.saveInBackground()
         }, errorHandler: { () -> Void in
@@ -90,15 +107,15 @@ struct ChallengeService {
         })
     }
     
-    static func maptoChallengeModel(challenge: PFObject) -> Challenge {
+    private static func maptoChallengeModel(challenge: PFObject) -> Challenge {
         let createdDate = challenge.createdAt == nil ? NSDate() : challenge.createdAt!
         let enemies = ChallengeService.parseEnemies(challenge["enemies"] as! [AnyObject])
-        let friends = ChallengeService.parseFriends(challenge["friends"] as! [AnyObject])
-        println("Enemies: \(enemies)")
-        return Challenge(createdDate: createdDate, enemies: enemies, friends: friends)
+        let friends = ChallengeService.parseFriends(challenge["friends"] as! [PFObject])
+        let name = (challenge["user"] as! PFUser).objectForKey("name") as! String
+        return Challenge(name: name, createdDate: createdDate, enemies: enemies, friends: friends)
     }
     
-    static func parseEnemies(input : [AnyObject]) -> [Enemy] {
+    private static func parseEnemies(input : [AnyObject]) -> [Enemy] {
         if let enemies = input as? [[String : AnyObject]] {
             var returnEnemies = [Enemy]()
             for enemy in enemies {
@@ -113,17 +130,28 @@ struct ChallengeService {
         return [Enemy(type: 2, date: NSDate(), amount: 3)]
     }
     
-    static func parseEnemiesToJson(challenge: Challenge) -> [[String : AnyObject]] {
+    private static func parseEnemiesToJson(challenge: Challenge) -> [[String : AnyObject]] {
         return challenge.enemies.map({ (enemy) -> [String : AnyObject] in
             return ["date" : enemy.date, "type" : enemy.type, "amount" : enemy.amount]
         })
     }
     
-    static func parseFriends([AnyObject]) -> [Friend] {
-        return [Friend()]
+    private static func parseFriends(challenges: [PFObject]) -> [Friend] {
+        var friends = [Friend]()
+        
+        for pfChallenge in challenges {
+            let challenge = maptoChallengeModel(pfChallenge)
+            let date = challenge.createdDate
+            let mainEnemy = challenge.findMainEnemy().fromTypeToString()
+            
+            friends.append(Friend(name: challenge.name, startDate: date, mainEnemy: mainEnemy))
+        }
+        
+        
+        return friends
     }
     
-    static func parseFriendsToJson(challenge: Challenge) -> [[String : AnyObject]] {
+    private static func parseFriendsToJson(challenge: Challenge) -> [[String : AnyObject]] {
         return challenge.friends.map({ (friend) -> [String : AnyObject] in
             return ["fbId" : "ksjafklsdj"]
         })

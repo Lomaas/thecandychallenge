@@ -26,4 +26,16 @@ class Enemy: Printable {
         self.date = date
         self.amount = amount
     }
+    
+    func fromTypeToString() -> String {
+        switch type {
+        case Enemies.chocklade.rawValue:
+            return "Chockolade"
+        case Enemies.soda.rawValue:
+            return "Soda"
+        default:
+            println("enemy not mapped out")
+            return "None"
+        }
+    }
 }

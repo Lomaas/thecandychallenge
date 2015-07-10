@@ -8,20 +8,21 @@ struct ChallengeService {
         let query = PFQuery(className: ChallengeService.className)
         query.whereKey("fbId", containedIn: friendsIds)
         
-        query.findObjectsInBackgroundWithBlock({ (result, error) -> Void in
-            println("Result: \(result), error: \(error)")
-            
+        query.findObjectsInBackgroundWithBlock({ (result, error) -> Void in            
             if error == nil {
                 if let res = result {
                     ChallengeService.getMyChallengeFromLocalStorage({ (userChallenge) -> Void in
                         userChallenge["friends"] = res
+                        userChallenge.pinInBackground()
                         userChallenge.saveInBackground()
-                        }, errorHandler: { () -> Void in
+                        NSNotificationCenter.defaultCenter().postNotificationName("NewDataAvailable", object: nil)
+
+                    }, errorHandler: { () -> Void in
                             println("Error saving updated challenge")
                     })
                 }
             } else {
-                print("error fetching friends")
+                println("error fetching friends")
             }
         })
     }
@@ -91,13 +92,18 @@ struct ChallengeService {
                 responseHandler(userChallenge: ChallengeService.maptoChallengeModel(userChallenge, friends: nil))
                 return
             }
-
+            var returned = 0
+            var friendsReturnArray = [PFObject]()
             for friend in friends {
                 friend.fetchIfNeededInBackgroundWithBlock {
                     (friend: PFObject?, error: NSError?) -> Void in
                     
                     let fbid = friend?.objectForKey("fbId") as! String
-                    responseHandler(userChallenge: ChallengeService.maptoChallengeModel(userChallenge, friends: [friend!]))
+                    returned++
+                    friendsReturnArray.append(friend!)
+                    if returned == friends.count {
+                        responseHandler(userChallenge: ChallengeService.maptoChallengeModel(userChallenge, friends: friendsReturnArray))
+                    }
                 }
             }
         }
@@ -123,10 +129,9 @@ struct ChallengeService {
         })
     }
     
-    static func updateChallenge(challenge: Challenge) {
+    static func updateChallengeWithEnemies(challenge: Challenge) {
         ChallengeService.getMyChallengeFromLocalStorage({ (userChallenge) -> Void in
             userChallenge["enemies"] = ChallengeService.parseEnemiesToJson(challenge)
-            userChallenge["friends"] = challenge.friends
             userChallenge.pinInBackground()
             userChallenge.saveInBackground()
         }, errorHandler: { () -> Void in
@@ -170,17 +175,11 @@ struct ChallengeService {
             let challenge = maptoChallengeModel(pfChallenge, friends: nil)
             let date = challenge.createdDate
             let mainEnemy = challenge.findMainEnemy().fromTypeToString()
-            
-            friends.append(Friend(name: challenge.name, startDate: date, mainEnemy: mainEnemy))
+            let id = pfChallenge["fbId"] as! String
+            friends.append(Friend(id: id, name: challenge.name, startDate: date, mainEnemy: mainEnemy))
         }
         
         
         return friends
-    }
-    
-    private static func parseFriendsToJson(challenge: Challenge) -> [[String : AnyObject]] {
-        return challenge.friends.map({ (friend) -> [String : AnyObject] in
-            return ["fbId" : "ksjafklsdj"]
-        })
     }
 }

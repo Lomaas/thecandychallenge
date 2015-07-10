@@ -7,22 +7,21 @@ class InviteFriendsViewController: UIViewController, UITextFieldDelegate {
     var challenge: Challenge!
     var dataArray = [Friend]()
     var friendsIds = [String]()
+    var isChanged = false
 
     @IBOutlet weak var searchField: UITextField!
     @IBOutlet weak var tableView: UITableView!
     
     @IBAction func didPressDone(sender: AnyObject) {
-        ChallengeService.findAndAddUsersToFriend(friendsIds)
+        if isChanged {
+            ChallengeService.findAndAddUsersToFriend(friendsIds)
+        }
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        ChallengeService.getMyChallenge { (userChallenge) -> Void in
-            self.challenge = userChallenge
-        }
-        
+
         tableView.dataSource = self
         tableView.delegate = self
         
@@ -36,7 +35,14 @@ class InviteFriendsViewController: UIViewController, UITextFieldDelegate {
                 var friendObjects = result.valueForKey("data") as! [NSDictionary]
                 
                 for friendObject in friendObjects {
-                    self.dataArray.append(Friend(friendObject["id"] as! String, friendObject["name"] as! String, false))
+                    var id =  friendObject["id"] as! String
+                    var selected = self.isFriend(id)
+
+                    if selected {
+                        self.friendsIds.append(id)
+                    }
+                    
+                    self.dataArray.append(Friend(id, friendObject["name"] as! String, selected))
                 }
                 self.tableView.reloadData()
             }
@@ -49,6 +55,15 @@ class InviteFriendsViewController: UIViewController, UITextFieldDelegate {
                 friendsIds.removeAtIndex(index)
             }
         }
+    }
+    
+    private func isFriend(id: String) -> Bool {
+        for (index, friend) in enumerate(challenge.friends) {
+            if friend.id == id {
+                return true
+            }
+        }
+        return false
     }
 }
 
@@ -64,16 +79,22 @@ extension InviteFriendsViewController: UITableViewDataSource, UITableViewDelegat
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(inviteFriendTableViewCellIdentifier, forIndexPath: indexPath) as! InviteFriendTableViewCell
         cell.nameLabel.text = dataArray[indexPath.row].name
+        println("checked. \(dataArray[indexPath.row].selected)")
+        cell.checkmarkImageView.image = dataArray[indexPath.row].selected ? UIImage(named: "checked") : nil
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: false)
+        isChanged = true
         if dataArray[indexPath.row].selected {
             removeFriend(dataArray[indexPath.row].id)
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
         } else {
              friendsIds.append(dataArray[indexPath.row].id)
         }
+        
         dataArray[indexPath.row].selected  = !dataArray[indexPath.row].selected
+        tableView.reloadData()
     }
 }

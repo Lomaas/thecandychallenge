@@ -14,7 +14,7 @@ struct Days {
 
 class ProgressViewController: UIViewController {
     let friendTableViewCellIdentifier = "FriendTableViewCell"
-
+    
     var challenge: Challenge!
     var itemIndex: Int = 1
     var dataArray = [Friend]()
@@ -25,24 +25,39 @@ class ProgressViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "getData:", name: "NewDataAvailable", object: nil)
+        
         tableView.delegate = self
         tableView.dataSource = self
-        
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        getData()
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        // fix go to enemies bug
+        if segue.identifier == "goToEnemies" {
+            let vc = segue.destinationViewController as! SelectEnemiesViewController
+            vc.challenge = challenge
+        } else if segue.identifier == "goToInviteFriends" {
+            let vc = segue.destinationViewController as! InviteFriendsViewController
+            vc.challenge = challenge
+        }
+    }
+    
+    func getData(notification: NSNotification) {
+        getData()
+    }
+    
+    func getData() {
         ChallengeService.getMyChallenge({ (userChallenge: Challenge) -> Void in
             self.challenge = userChallenge
             self.dataArray = userChallenge.friends
             print("Has challenge with createdDate: \(self.challenge.createdDate)")
             self.updateScreen()
         })
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-    }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // fix go to enemies bug
-        
     }
     
     func updateScreen() {
@@ -55,7 +70,7 @@ class ProgressViewController: UIViewController {
     func getTimeSinceStarted(date: NSDate) -> String {
         let components: NSCalendarUnit = NSCalendarUnit.CalendarUnitDay | NSCalendarUnit.CalendarUnitHour | NSCalendarUnit.CalendarUnitSecond | NSCalendarUnit.CalendarUnitMinute
         let date = NSCalendar.currentCalendar().components(components, fromDate: date, toDate: NSDate(), options: nil)
-        return "\(date.day) days  \(date.hour) hours \(date.minute) minutes"
+        return "\(date.day) days \(date.hour) hours \(date.minute) minutes"
     }
 }
 
@@ -78,6 +93,6 @@ extension ProgressViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
+        tableView.deselectRowAtIndexPath(indexPath, animated: false)
     }
 }

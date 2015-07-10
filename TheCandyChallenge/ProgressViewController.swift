@@ -25,6 +25,9 @@ class ProgressViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.delegate = self
+        tableView.dataSource = self
+        
         ChallengeService.getMyChallenge({ (userChallenge: Challenge) -> Void in
             self.challenge = userChallenge
             self.dataArray = userChallenge.friends
@@ -37,9 +40,15 @@ class ProgressViewController: UIViewController {
         super.viewDidAppear(animated)
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        // fix go to enemies bug
+        
+    }
+    
     func updateScreen() {
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
             self.daysLabel.text = self.getTimeSinceStarted(self.challenge.createdDate)
+            self.tableView.reloadData()
         })
     }
     

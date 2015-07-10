@@ -50,7 +50,8 @@ struct ChallengeService {
     static func createChallenge() -> Challenge {
         let userChallenge = PFObject(className: ChallengeService.className)
         userChallenge["date"] = NSDate()
-        userChallenge["user"] = PFUser.currentUser()
+        userChallenge["userObjectId"] = PFUser.currentUser()?.objectId
+        userChallenge["name"] = PFUser.currentUser()?.objectForKey("name")
         userChallenge["fbId"] = PFUser.currentUser()?.objectForKey("fbId")
         userChallenge["enemies"] = []
         userChallenge["friends"] = []
@@ -64,7 +65,7 @@ struct ChallengeService {
             }
         }
         
-        return ChallengeService.maptoChallengeModel(userChallenge)
+        return ChallengeService.maptoChallengeModel(userChallenge, friends: nil)
     }
     
     private static func getMyChallengeFromLocalStorage(succesHandler: (userChallenge: PFObject) -> Void, errorHandler: () -> Void) {
@@ -84,12 +85,38 @@ struct ChallengeService {
     }
     
     static func getMyChallenge(responseHandler: (userChallenge: Challenge) -> Void) {
-        ChallengeService.getMyChallengeFromLocalStorage({ (userChallenge: PFObject) -> Void in
-            responseHandler(userChallenge: ChallengeService.maptoChallengeModel(userChallenge))
-        }, errorHandler: { () -> Void in
-            
+        func handler(userChallenge: PFObject) {
+            var friends = userChallenge["friends"] as! [PFObject]
+            if friends.count == 0 {
+                responseHandler(userChallenge: ChallengeService.maptoChallengeModel(userChallenge, friends: nil))
+                return
+            }
+
+            for friend in friends {
+                friend.fetchIfNeededInBackgroundWithBlock {
+                    (friend: PFObject?, error: NSError?) -> Void in
+                    
+                    let fbid = friend?.objectForKey("fbId") as! String
+                    responseHandler(userChallenge: ChallengeService.maptoChallengeModel(userChallenge, friends: [friend!]))
+                }
+            }
+        }
+        
+        ChallengeService.getMyChallengeFromLocalStorage(handler, errorHandler: { () -> Void in
             ChallengeService.getMyChallenge({ (userChallenge) -> Void in
-                responseHandler(userChallenge: ChallengeService.maptoChallengeModel(userChallenge))
+                var friends = userChallenge["friends"] as! [PFObject]
+                if friends.count == 0 {
+                    responseHandler(userChallenge: ChallengeService.maptoChallengeModel(userChallenge, friends: nil))
+                    return
+                }
+                for friend in friends {
+                    friend.fetchIfNeededInBackgroundWithBlock {
+                        (friend: PFObject?, error: NSError?) -> Void in
+                        let fbid = friend?.objectForKey("fbId") as! String
+                        println("\(fbid)")
+                        responseHandler(userChallenge: ChallengeService.maptoChallengeModel(userChallenge, friends: [friend!]))
+                    }
+                }
             }, errorHandler: { () -> Void in
                 responseHandler(userChallenge: ChallengeService.createChallenge())
             })
@@ -107,11 +134,11 @@ struct ChallengeService {
         })
     }
     
-    private static func maptoChallengeModel(challenge: PFObject) -> Challenge {
+    private static func maptoChallengeModel(challenge: PFObject, friends: [PFObject]?) -> Challenge {
         let createdDate = challenge.createdAt == nil ? NSDate() : challenge.createdAt!
         let enemies = ChallengeService.parseEnemies(challenge["enemies"] as! [AnyObject])
-        let friends = ChallengeService.parseFriends(challenge["friends"] as! [PFObject])
-        let name = (challenge["user"] as! PFUser).objectForKey("name") as! String
+        let friends = friends != nil ? ChallengeService.parseFriends(friends!) : [Friend]()
+        let name = challenge["name"] as! String
         return Challenge(name: name, createdDate: createdDate, enemies: enemies, friends: friends)
     }
     
@@ -140,7 +167,7 @@ struct ChallengeService {
         var friends = [Friend]()
         
         for pfChallenge in challenges {
-            let challenge = maptoChallengeModel(pfChallenge)
+            let challenge = maptoChallengeModel(pfChallenge, friends: nil)
             let date = challenge.createdDate
             let mainEnemy = challenge.findMainEnemy().fromTypeToString()
             

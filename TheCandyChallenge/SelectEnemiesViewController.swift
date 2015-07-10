@@ -51,10 +51,6 @@ class SelectEnemiesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        ChallengeService.getMyChallenge { (userChallenge) -> Void in
-            self.challenge = userChallenge
-            self.updateView()
-        }
     }
     
     private func updateView() {

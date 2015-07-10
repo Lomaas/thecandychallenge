@@ -20,6 +20,7 @@ class WelcomeViewController: UIViewController {
         if segue.identifier == "goToChooseEnemies" {
             let vc = segue.destinationViewController as! SelectEnemiesViewController
             vc.fromWelcomeView = true
+            vc.challenge = sender as! Challenge
         }
     }
     
@@ -73,8 +74,9 @@ class WelcomeViewController: UIViewController {
     }
     
     func finishedUserSetup() {
-        ChallengeService.createChallenge()
-        self.performSegueWithIdentifier("goToChooseEnemies", sender: nil)
+        let challenge = ChallengeService.createChallenge()
+        self.performSegueWithIdentifier("goToChooseEnemies", sender: challenge)
+        
     }
 }
 

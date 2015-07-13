@@ -5,7 +5,6 @@ class WelcomeViewController: UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var loginFacebookButton: UIButton!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         FBSDKProfile.enableUpdatesOnAccessTokenChange(true)
@@ -47,12 +46,10 @@ class WelcomeViewController: UIViewController {
                 println("Error: \(error)")
             } else {
                 println("fetched user: \(result)")
-                let name : NSString = result.valueForKey("name") as! NSString
-                println("User Name is: \(name)")
+                let name = result.valueForKey("name") as! String
                 let email = result.valueForKey("email") as! String
-                let fbId : String = result.valueForKey("id") as! String
-                self.storeUserDataToServer(email, name: name as String, fbId: fbId)
-                println("User Email is: \(email)")
+                let fbId = result.valueForKey("id") as! String
+                self.storeUserDataToServer(email, name: name, fbId: fbId)
             }
         })
     }

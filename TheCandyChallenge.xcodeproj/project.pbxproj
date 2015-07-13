@@ -49,6 +49,7 @@
 		85C32E831ACC243C0053EFF7 /* ProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C32E821ACC243C0053EFF7 /* ProgressViewController.swift */; };
 		85C32E891ACC469C0053EFF7 /* Challenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C32E881ACC469C0053EFF7 /* Challenge.swift */; };
 		85C32E8B1ACC46D10053EFF7 /* ChallengeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C32E8A1ACC46D10053EFF7 /* ChallengeService.swift */; };
+		85EB21D51B54470E007C4696 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85EB21D41B5446FC007C4696 /* Charts.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 8586EF841AC34C1F00F47C20;
 			remoteInfo = TheCandyChallenge;
+		};
+		85EB21D31B5446FC007C4696 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 85EB21CF1B5446FC007C4696 /* Charts.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5BA8EC401A9D14DC00CE82E1;
+			remoteInfo = Charts;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -112,6 +120,7 @@
 		85C32E821ACC243C0053EFF7 /* ProgressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressViewController.swift; sourceTree = "<group>"; };
 		85C32E881ACC469C0053EFF7 /* Challenge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Challenge.swift; sourceTree = "<group>"; };
 		85C32E8A1ACC46D10053EFF7 /* ChallengeService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeService.swift; sourceTree = "<group>"; };
+		85EB21CF1B5446FC007C4696 /* Charts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Charts.xcodeproj; path = "../../../Downloads/ios-charts-master/Charts/Charts.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +128,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				85EB21D51B54470E007C4696 /* Charts.framework in Frameworks */,
 				85C32E641ACB2EE40053EFF7 /* CoreLocation.framework in Frameworks */,
 				85C32E721ACB2F280053EFF7 /* libsqlite3.dylib in Frameworks */,
 				85C32E701ACB2F1F0053EFF7 /* libz.dylib in Frameworks */,
@@ -200,6 +210,7 @@
 				8578AABB1AD99D48004A2CE6 /* TheCandyChallenge.entitlements */,
 				8586EF8E1AC34C1F00F47C20 /* Main.storyboard */,
 				8586EF8A1AC34C1F00F47C20 /* AppDelegate.swift */,
+				85EB21CE1B5446F6007C4696 /* external */,
 				8578D0121B4DAEEE007ECE49 /* cells */,
 				85C32E751ACB3D4B0053EFF7 /* util */,
 				85C32E871ACC46840053EFF7 /* model */,
@@ -314,6 +325,22 @@
 			name = model;
 			sourceTree = "<group>";
 		};
+		85EB21CE1B5446F6007C4696 /* external */ = {
+			isa = PBXGroup;
+			children = (
+				85EB21CF1B5446FC007C4696 /* Charts.xcodeproj */,
+			);
+			name = external;
+			sourceTree = "<group>";
+		};
+		85EB21D01B5446FC007C4696 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				85EB21D41B5446FC007C4696 /* Charts.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -388,6 +415,12 @@
 			mainGroup = 8586EF7C1AC34C1F00F47C20;
 			productRefGroup = 8586EF861AC34C1F00F47C20 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 85EB21D01B5446FC007C4696 /* Products */;
+					ProjectRef = 85EB21CF1B5446FC007C4696 /* Charts.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				8586EF841AC34C1F00F47C20 /* TheCandyChallenge */,
@@ -395,6 +428,16 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		85EB21D41B5446FC007C4696 /* Charts.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Charts.framework;
+			remoteRef = 85EB21D31B5446FC007C4696 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		8586EF831AC34C1F00F47C20 /* Resources */ = {

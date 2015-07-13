@@ -15,6 +15,6 @@ class Challenge {
     
     func findMainEnemy() -> Enemy {
         enemies.sort { $0.amount > $1.amount }
-        return enemies.last!
+        return enemies.first!
     }
 }

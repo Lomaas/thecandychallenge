@@ -1,6 +1,7 @@
 import Foundation
 import UIKit
 import HealthKit
+import Charts
 
 struct Days {
     static let sunday = 1
@@ -15,15 +16,28 @@ struct Days {
 class ProgressViewController: UIViewController {
     let friendTableViewCellIdentifier = "FriendTableViewCell"
     
+    @IBOutlet weak var pieChartView: PieChartView!
     var challenge: Challenge!
     var itemIndex: Int = 1
     var dataArray = [Friend]()
 
-    @IBOutlet weak var daysLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        pieChartView.noDataText = "NoData :("
+        pieChartView.delegate = self
+
+//        pieChartView.usePercentValuesEnabled = true
+        pieChartView.holeTransparent = true
+        pieChartView.holeRadiusPercent = 0.58
+//        pieChartView.transparentCircleRadiusPercent = 0.5
+        pieChartView.descriptionText = "Summary"
+        pieChartView.drawCenterTextEnabled = true
+//        pieChartView.drawHoleEnabled = true
+        pieChartView.centerTextColor = UIColor.blueColor()
+        pieChartView.centerTextFont = UIFont(name: "Avenir Next", size: 20)!
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "getData:", name: "NewDataAvailable", object: nil)
         
@@ -62,15 +76,40 @@ class ProgressViewController: UIViewController {
     
     func updateScreen() {
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
-            self.daysLabel.text = self.getTimeSinceStarted(self.challenge.createdDate)
             self.tableView.reloadData()
+            
+            self.setChart(
+                self.challenge.enemies.map() { return $0.fromTypeToString() },
+                values: self.challenge.enemies.map() { return Double($0.price) }
+            )
+            
+            self.pieChartView.centerText = self.getTimeSinceStarted(self.challenge.createdDate)
+            self.view.setNeedsLayout()
         })
     }
     
     func getTimeSinceStarted(date: NSDate) -> String {
         let components: NSCalendarUnit = NSCalendarUnit.CalendarUnitDay | NSCalendarUnit.CalendarUnitHour | NSCalendarUnit.CalendarUnitSecond | NSCalendarUnit.CalendarUnitMinute
         let date = NSCalendar.currentCalendar().components(components, fromDate: date, toDate: NSDate(), options: nil)
-        return "\(date.day) days \(date.hour) hours \(date.minute) minutes"
+        return "\(date.day)d \(date.hour)h \(date.minute)m"
+    }
+    
+    func setChart(dataPoints: [String], values: [Double]) {
+        
+        var dataEntries: [ChartDataEntry] = []
+        
+        for i in 0..<dataPoints.count {
+            let dataEntry = ChartDataEntry(value: values[i], xIndex: i)
+            dataEntries.append(dataEntry)
+        }
+        
+        let pieChartDataSet = PieChartDataSet(yVals: dataEntries, label: "Kroner")
+        pieChartDataSet.sliceSpace = 5
+        let pieChartData = PieChartData(xVals: dataPoints, dataSet: pieChartDataSet)
+        pieChartView.data = pieChartData
+
+        pieChartDataSet.colors = [UIColor(red: 144/255, green: 235/255, blue: 255/255, alpha: 1), UIColor(red: 254/255, green: 209/255, blue: 145/255, alpha: 1)]
+        
     }
 }
 
@@ -88,11 +127,14 @@ extension ProgressViewController: UITableViewDataSource, UITableViewDelegate {
         cell.nameLabel.text = dataArray[indexPath.row].name
         cell.timeWithout.text = getTimeSinceStarted(dataArray[indexPath.row].startDate)
         cell.mainEnemyLabel.text = "Main enemy: \(dataArray[indexPath.row].mainEnemy)"
-
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
     }
+}
+
+extension ProgressViewController: ChartViewDelegate {
+    
 }

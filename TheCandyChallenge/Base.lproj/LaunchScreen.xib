@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
@@ -10,27 +10,7 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Copyright (c) 2015 Simen Lomås Johannessen. All rights reserved." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="8ie-xW-0ye">
-                    <rect key="frame" x="20" y="439" width="441" height="21"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="22" id="rkU-6p-9Cq"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                    <nil key="highlightedColor"/>
-                    <variation key="default">
-                        <mask key="constraints">
-                            <exclude reference="rkU-6p-9Cq"/>
-                        </mask>
-                    </variation>
-                    <variation key="widthClass=compact" misplaced="YES">
-                        <rect key="frame" x="20" y="438" width="441" height="22"/>
-                        <mask key="constraints">
-                            <include reference="rkU-6p-9Cq"/>
-                        </mask>
-                    </variation>
-                </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30 days without candy - can you make it?" textAlignment="center" lineBreakMode="middleTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="C9z-OZ-Fm7">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The Candy Challenge - can you make it?" textAlignment="center" lineBreakMode="middleTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="C9z-OZ-Fm7">
                     <rect key="frame" x="86" y="115" width="308" height="76"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="89" id="KN0-eB-FjQ"/>
@@ -53,17 +33,13 @@
             </subviews>
             <color key="backgroundColor" name="controlDarkShadowColor" catalog="System" colorSpace="catalog"/>
             <constraints>
-                <constraint firstItem="8ie-xW-0ye" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="80D-1I-hPd"/>
-                <constraint firstAttribute="bottom" secondItem="8ie-xW-0ye" secondAttribute="bottom" constant="20" id="Kzo-t9-V3l"/>
-                <constraint firstItem="8ie-xW-0ye" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" symbolic="YES" id="MfP-vx-nX0"/>
                 <constraint firstItem="C9z-OZ-Fm7" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="88" id="Oal-5f-7Xe">
                     <variation key="widthClass=compact" constant="80"/>
                 </constraint>
-                <constraint firstAttribute="centerX" secondItem="8ie-xW-0ye" secondAttribute="centerX" id="ZEH-qu-HZ9"/>
-                <constraint firstAttribute="bottom" secondItem="8ie-xW-0ye" secondAttribute="bottom" constant="216" id="aQu-iK-Aeu"/>
                 <constraint firstItem="C9z-OZ-Fm7" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="115" id="iSf-bx-g0g">
                     <variation key="widthClass=compact" constant="35"/>
                 </constraint>
+                <constraint firstAttribute="trailing" secondItem="C9z-OZ-Fm7" secondAttribute="trailing" constant="36" id="vne-YB-sFv"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -74,8 +50,7 @@
                 <mask key="constraints">
                     <exclude reference="Oal-5f-7Xe"/>
                     <exclude reference="iSf-bx-g0g"/>
-                    <exclude reference="80D-1I-hPd"/>
-                    <exclude reference="aQu-iK-Aeu"/>
+                    <exclude reference="vne-YB-sFv"/>
                 </mask>
             </variation>
             <variation key="widthClass=compact">
@@ -85,11 +60,7 @@
                 <mask key="constraints">
                     <include reference="Oal-5f-7Xe"/>
                     <include reference="iSf-bx-g0g"/>
-                    <include reference="80D-1I-hPd"/>
-                    <exclude reference="Kzo-t9-V3l"/>
-                    <exclude reference="MfP-vx-nX0"/>
-                    <exclude reference="ZEH-qu-HZ9"/>
-                    <include reference="aQu-iK-Aeu"/>
+                    <include reference="vne-YB-sFv"/>
                 </mask>
             </variation>
             <point key="canvasLocation" x="548" y="553"/>

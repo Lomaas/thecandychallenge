@@ -17,6 +17,10 @@ class Enemy: Printable {
         }
     }
     
+    var price: Int {
+        return amount * self.getPriceForUnit()
+    }
+    
     var description: String {
         return "\(type), date: \(date), amount: \(amount)"
     }
@@ -36,6 +40,18 @@ class Enemy: Printable {
         default:
             println("enemy not mapped out")
             return "None"
+        }
+    }
+    
+    func getPriceForUnit() -> Int {
+        switch type {
+        case Enemies.chocklade.rawValue:
+            return 30
+        case Enemies.soda.rawValue:
+            return 18
+        default:
+            println("enemy not mapped out")
+            return 0
         }
     }
 }

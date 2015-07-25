@@ -46,8 +46,8 @@ class WelcomeViewController: UIViewController {
                 println("Error: \(error)")
             } else {
                 println("fetched user: \(result)")
-                let name = result.valueForKey("name") as! String
-                let email = result.valueForKey("email") as! String
+                let name = result.valueForKey("name") as? String ?? "No name"
+                let email = result.valueForKey("email") as? String ?? "NoEmail@email.com"
                 let fbId = result.valueForKey("id") as! String
                 self.storeUserDataToServer(email, name: name, fbId: fbId)
             }

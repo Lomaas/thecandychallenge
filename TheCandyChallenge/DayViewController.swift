@@ -16,7 +16,7 @@ class DayViewController: UIViewController, WeatherServiceDelegate, CLLocationMan
 
     @IBAction func interactionButtonPressed(sender: UIButton) {
         println("Interaction button pressed")
-        self.dismissViewControllerAnimated(true, completion: nil)
+        
     }
     
     override func viewDidLoad() {

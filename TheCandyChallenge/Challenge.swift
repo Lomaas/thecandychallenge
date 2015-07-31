@@ -13,7 +13,7 @@ class Challenge {
         self.friends = friends
     }
     
-    func findMainEnemy() -> Enemy {
+    func findMainEnemy() -> Enemy? {
         enemies.sort { $0.amount > $1.amount }
         return enemies.first!
     }

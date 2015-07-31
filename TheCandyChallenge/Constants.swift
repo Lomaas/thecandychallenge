@@ -12,5 +12,6 @@ struct Constants {
     enum VIEWS: Int {
         case ProgressView, WelcomeView, InviteFriendsView
     }
+    static let challengeUpdated = "ChallengeUpdated"
 }
 

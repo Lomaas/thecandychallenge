@@ -8,7 +8,7 @@ class SelectEnemiesViewController: UIViewController {
     @IBOutlet weak var counterSoda: UILabel!
     
     @IBAction func didPressDone(sender: AnyObject) {
-        ChallengeService.updateChallengeWithEnemies(challenge)
+        ChallengeService.sharedInstance.updateChallengeWithEnemies(challenge)
         
         if fromWelcomeView == true {
             performSegueWithIdentifier("goToContainerView", sender: nil)

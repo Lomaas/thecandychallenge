@@ -71,8 +71,14 @@ class WelcomeViewController: UIViewController {
     }
     
     func finishedUserSetup() {
-        let challenge = ChallengeService.createChallenge()
-        self.performSegueWithIdentifier("goToChooseEnemies", sender: challenge)
+        ChallengeService.sharedInstance.hasChallenge { (challenge) -> Void in
+            if let challenge = challenge {
+                self.performSegueWithIdentifier("goToChooseEnemies", sender: challenge)
+            } else {
+                let challenge = ChallengeService.sharedInstance.createChallenge()
+                self.performSegueWithIdentifier("goToChooseEnemies", sender: challenge)
+            }
+        }
         
     }
 }

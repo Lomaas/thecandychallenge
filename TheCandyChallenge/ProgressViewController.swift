@@ -25,7 +25,8 @@ class ProgressViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        ChallengeService.sharedInstance.getMyChallenge()
+
         pieChartView.noDataText = "NoData :("
         pieChartView.delegate = self
 
@@ -47,7 +48,9 @@ class ProgressViewController: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        getData()
+        if let challenge = challenge {
+            updateScreen()
+        }
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -66,12 +69,10 @@ class ProgressViewController: UIViewController {
     }
     
     func getData() {
-        ChallengeService.getMyChallenge({ (userChallenge: Challenge) -> Void in
-            self.challenge = userChallenge
-            self.dataArray = userChallenge.friends
-            print("Has challenge with createdDate: \(self.challenge.createdDate)")
-            self.updateScreen()
-        })
+        challenge = ChallengeService.sharedInstance.challenge
+        dataArray = challenge.friends
+        print("Has challenge with createdDate: \(challenge.createdDate)")
+        updateScreen()
     }
     
     func updateScreen() {
@@ -95,7 +96,6 @@ class ProgressViewController: UIViewController {
     }
     
     func setChart(dataPoints: [String], values: [Double]) {
-        
         var dataEntries: [ChartDataEntry] = []
         
         for i in 0..<dataPoints.count {

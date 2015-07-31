@@ -14,7 +14,7 @@ class InviteFriendsViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func didPressDone(sender: AnyObject) {
         if isChanged {
-            ChallengeService.findAndAddUsersToFriend(friendsIds)
+            ChallengeService.sharedInstance.findAndAddUsersToFriend(friendsIds)
         }
         self.dismissViewControllerAnimated(true, completion: nil)
     }

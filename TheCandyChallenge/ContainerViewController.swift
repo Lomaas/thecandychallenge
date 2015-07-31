@@ -3,7 +3,6 @@ import UIKit
 class ContainerViewController: UIViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     var pageIndex = 1
     private var pageViewController: UIPageViewController?
-    var challenge: PFObject?
     
     lazy var _controllers : [UIViewController] = {
         let progressView = self.storyboard?.instantiateViewControllerWithIdentifier("ProgressViewController") as! ProgressViewController
@@ -14,7 +13,6 @@ class ContainerViewController: UIViewController, UIPageViewControllerDataSource,
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        NSNotificationCenter.defaultCenter().addObserver(self, selector: "goToViewNotification:", name: "NavigateToNewView", object: nil)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -27,10 +25,7 @@ class ContainerViewController: UIViewController, UIPageViewControllerDataSource,
         if (!UserService.hasSignedUp()) {
             self.goToView(Constants.VIEWS.WelcomeView.rawValue)
         } else {
-            ChallengeService.getMyChallenge({ (userChallenge) -> Void in
-                println("Challenge: \(userChallenge)")
-                self.createPageViewController()
-            })
+            self.createPageViewController()
         }
     }
     

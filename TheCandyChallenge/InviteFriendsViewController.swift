@@ -58,9 +58,11 @@ class InviteFriendsViewController: UIViewController, UITextFieldDelegate {
     }
     
     private func isFriend(id: String) -> Bool {
-        for (index, friend) in enumerate(challenge.friends) {
-            if friend.id == id {
-                return true
+        if let friends = challenge.friends {
+            for (index, friend) in enumerate(friends) {
+                if friend.id == id {
+                    return true
+                }
             }
         }
         return false

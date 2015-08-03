@@ -12,14 +12,11 @@ class ChallengeService {
     }
     
     init() {
-        // Get local challenge first
-        self.getMyChallengeFromLocalStorage()
-        // Trigger request to get updated challenge from server
-        self.getMyChallenge()
+        getMyChallengeFromLocalStorage()
     }
     
     func getMyChallenge() {
-        self.getMyChallenge({ (userChallenge) -> Void in
+        getMyChallenge({ (userChallenge) -> Void in
             self.handler(userChallenge)
         }, errorHandler: { () -> Void in
                 
@@ -84,7 +81,7 @@ class ChallengeService {
         var friends = userChallenge["friends"] as! [PFObject]
         
         if friends.count == 0 {
-            self.challenge = self.maptoChallengeModel(userChallenge, friends: nil)
+            self.challenge = self.maptoChallengeModel(userChallenge)
         }
         
         var returned = 0
@@ -106,7 +103,7 @@ class ChallengeService {
     
     func hasChallenge(responseHandler: (challenge: Challenge?) -> Void) {
         self.getMyChallenge({ (userChallenge) -> Void in
-            let challenge = self.maptoChallengeModel(userChallenge, friends: nil)
+            let challenge = self.maptoChallengeModel(userChallenge)
             userChallenge.pinInBackground()
             self.challenge = challenge
             responseHandler(challenge: challenge)
@@ -133,7 +130,7 @@ class ChallengeService {
             }
         }
         
-        return self.maptoChallengeModel(userChallenge, friends: nil)
+        return self.maptoChallengeModel(userChallenge)
     }
     
     func updateChallengeWithEnemies(challenge: Challenge) {
@@ -151,7 +148,7 @@ class ChallengeService {
         let createdDate = challenge.createdAt == nil ? NSDate() : challenge.createdAt!
         let enemies = self.parseEnemies(challenge["enemies"] as! [AnyObject])
         let name = challenge["name"] as! String
-        return Challenge(name: name, createdDate: createdDate, enemies: enemies, friends: friends)
+        return Challenge(name: name, createdDate: createdDate, enemies: enemies)
     }
     
     private func parseEnemies(input : [AnyObject]) -> [Enemy] {
@@ -175,8 +172,8 @@ class ChallengeService {
         })
     }
     
-    private func parseFriend(userChallenge: PFObject) {
-        let challenge = maptoChallengeModel(userChallenge, friends: nil)
+    private func parseFriend(userChallenge: PFObject) -> Friend {
+        let challenge = maptoChallengeModel(userChallenge)
         let date = challenge.createdDate
         let mainEnemy = challenge.findMainEnemy() != nil ?
             challenge.findMainEnemy()!.fromTypeToString() : "None"

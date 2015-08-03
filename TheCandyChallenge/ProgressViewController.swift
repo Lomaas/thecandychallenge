@@ -25,7 +25,6 @@ class ProgressViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        ChallengeService.sharedInstance.getMyChallenge()
 
         pieChartView.noDataText = "NoData :("
         pieChartView.delegate = self
@@ -70,7 +69,6 @@ class ProgressViewController: UIViewController {
     
     func getData() {
         challenge = ChallengeService.sharedInstance.challenge
-        dataArray = challenge.friends
         print("Has challenge with createdDate: \(challenge.createdDate)")
         updateScreen()
     }

@@ -17,7 +17,6 @@ class ProgressViewController: UIViewController {
     let friendTableViewCellIdentifier = "FriendTableViewCell"
     
     @IBOutlet weak var pieChartView: PieChartView!
-    var challenge: Challenge!
     var itemIndex: Int = 1
     var dataArray = [Friend]()
 
@@ -25,9 +24,11 @@ class ProgressViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "getData:", name: "NewDataAvailable", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateViewWithChallenge:", name: "ChallengeFetched", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateFriendsList:", name: "FriendsFetched", object: nil)
         
-        ChallengeService.sharedInstance.getMyChallengeFromLocalStorage()
+        updateFriendsList()
+        
         pieChartView.noDataText = "NoData :("
         pieChartView.delegate = self
 
@@ -47,42 +48,53 @@ class ProgressViewController: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        if let challenge = challenge {
-            updateScreen()
-        }
+        getData()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // fix go to enemies bug
         if segue.identifier == "goToEnemies" {
             let vc = segue.destinationViewController as! SelectEnemiesViewController
-            vc.challenge = challenge
         } else if segue.identifier == "goToInviteFriends" {
             let vc = segue.destinationViewController as! InviteFriendsViewController
-            vc.challenge = challenge
         }
     }
     
-    func getData(notification: NSNotification) {
+    func updateViewWithChallenge(notification: NSNotification) {
         getData()
     }
     
-    func getData() {
-        challenge = ChallengeService.sharedInstance.challenge
-        print("Has challenge with createdDate: \(challenge.createdDate)")
-        updateScreen()
+    func updateFriendsList(notification: NSNotification) {
+        updateFriendsList()
     }
     
-    func updateScreen() {
+    func updateFriendsList() {
+        if let friends = Friends.get() {
+            dataArray = friends.friends
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                self.tableView.reloadData()
+                self.view.setNeedsLayout()
+
+            })
+        }
+    }
+    
+    func getData() {
+        if let challenge = Challenge.get() {
+            updateScreen(challenge)
+            print("Has challenge with createdDate: \(challenge.createdDate)")
+        }
+    }
+    
+    func updateScreen(challenge: Challenge) {
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
-            self.tableView.reloadData()
             
             self.setChart(
-                self.challenge.enemies.map() { return $0.fromTypeToString() },
-                values: self.challenge.enemies.map() { return Double($0.price) }
+                challenge.enemies.map() { return $0.fromTypeToString() },
+                values: challenge.enemies.map() { return Double($0.price) }
             )
             
-            self.pieChartView.centerText = self.getTimeSinceStarted(self.challenge.createdDate)
+            self.pieChartView.centerText = self.getTimeSinceStarted(challenge.createdDate)
             self.view.setNeedsLayout()
         })
     }
@@ -116,6 +128,7 @@ extension ProgressViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        println("Count: \(dataArray.count)")
         return dataArray.count
     }
     

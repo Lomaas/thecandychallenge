@@ -22,10 +22,15 @@ class ContainerViewController: UIViewController, UIPageViewControllerDataSource,
         if (!UserService.hasSignedUp()) {
             self.goToView(Constants.VIEWS.WelcomeView.rawValue)
         } else {
+            if let challenge = Challenge.get() {
+                self.createPageViewController()
+                return
+            }
+            
             ChallengeService.sharedInstance.hasChallenge { (challenge) -> Void in
                 if challenge == nil {
                     let challenge = ChallengeService.sharedInstance.createChallenge()
-                    self.performSegueWithIdentifier("goToChooseEnemies", sender: challenge)
+                    self.performSegueWithIdentifier("goToChooseEnemies", sender: nil)
                 } else {
                     self.createPageViewController()
                 }

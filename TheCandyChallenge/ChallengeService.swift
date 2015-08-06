@@ -4,15 +4,12 @@ import Foundation
 class ChallengeService {
     static let sharedInstance = ChallengeService()
     static let className = "Challenge"
+
+    private var tempFriends: [Friend]!
     
-    var challenge: Challenge! {
-        didSet {
-            NSNotificationCenter.defaultCenter().postNotificationName("NewDataAvailable", object: nil)
-        }
-    }
-    
+
     init() {
-        getMyChallengeFromLocalStorage()
+
     }
     
     func getMyChallenge() {
@@ -30,7 +27,6 @@ class ChallengeService {
                 if let res = result {
                     self.getMyChallenge({ (userChallenge) -> Void in
                         userChallenge["friends"] = res
-                        userChallenge.pinInBackground()
                         userChallenge.saveInBackground()
                         self.handler(userChallenge)
                     }, errorHandler: { () -> Void in
@@ -67,23 +63,13 @@ class ChallengeService {
             }
         })
     }
-    
-    func getMyChallengeFromLocalStorage() {
-        let query = PFQuery(className: ChallengeService.className)
-        query.fromLocalDatastore()
-        query.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
-            if error == nil && objects?.count > 0 {
-                if let userChallenge = objects!.first as? PFObject {
-                    self.handler(userChallenge)
-                }
-            }
-        })
-    }
-    
+
     func handler(userChallenge: PFObject) {
-        userChallenge.pinInBackground()
         var friends = userChallenge["friends"] as! [PFObject]
-        self.challenge = self.maptoChallengeModel(userChallenge)
+        let challenge = self.maptoChallengeModel(userChallenge)
+        challenge.save()
+        self.tempFriends = [Friend]()
+        
         var returned = 0
         var friendsReturnArray = [PFObject]()
         
@@ -95,9 +81,14 @@ class ChallengeService {
                 if let friend = friend {
                     let fbid = friend.objectForKey("fbId") as! String
                     friendsReturnArray.append(friend)
-                    let parsedFriend = self.parseFriend(userChallenge)
-                    self.challenge.friends.append(parsedFriend)
-                    NSNotificationCenter.defaultCenter().postNotificationName("NewDataAvailable", object: nil)
+                    let parsedFriend = self.parseFriend(friend)
+                    self.tempFriends.append(parsedFriend)
+                    if returned == friends.count {
+                        println("Returned is equal friends count")
+                        let saveFriends = Friends(friends: self.tempFriends)
+                        saveFriends.save()
+                        NSNotificationCenter.defaultCenter().postNotificationName("FriendsFetched", object: nil)
+                    }
                 }
             }
         }
@@ -106,8 +97,7 @@ class ChallengeService {
     func hasChallenge(responseHandler: (challenge: Challenge?) -> Void) {
         self.getMyChallenge({ (userChallenge) -> Void in
             let challenge = self.maptoChallengeModel(userChallenge)
-            userChallenge.pinInBackground()
-            self.challenge = challenge
+            challenge.save()
             responseHandler(challenge: challenge)
         }, errorHandler: { () -> Void in
             responseHandler(challenge: nil)
@@ -122,7 +112,7 @@ class ChallengeService {
         userChallenge["fbId"] = PFUser.currentUser()?.objectForKey("fbId")
         userChallenge["enemies"] = []
         userChallenge["friends"] = []
-        userChallenge.pinInBackground()
+
         userChallenge.saveInBackgroundWithBlock { (success, error) -> Void in
             if success {
                 println("user challenged saved")
@@ -131,14 +121,16 @@ class ChallengeService {
                 println("Error: \(error) \(error.userInfo)")
             }
         }
-        
-        return self.maptoChallengeModel(userChallenge)
+        let challenge = self.maptoChallengeModel(userChallenge)
+        challenge.save()
+        return challenge
     }
     
     func updateChallengeWithEnemies(challenge: Challenge) {
+        challenge.save()
+        
         self.getMyChallenge({ (userChallenge) -> Void in
             userChallenge["enemies"] = self.parseEnemiesToJson(challenge)
-            userChallenge.pinInBackground()
             userChallenge.saveInBackground()
             self.handler(userChallenge)
         }, errorHandler: { () -> Void in
@@ -150,7 +142,7 @@ class ChallengeService {
         let createdDate = challenge.createdAt == nil ? NSDate() : challenge.createdAt!
         let enemies = self.parseEnemies(challenge["enemies"] as! [AnyObject])
         let name = challenge["name"] as! String
-        return Challenge(name: name, createdDate: createdDate, enemies: enemies, friends: [Friend]())
+        return Challenge(name: name, createdDate: createdDate, enemies: enemies)
     }
     
     private func parseEnemies(input : [AnyObject]) -> [Enemy] {

@@ -4,7 +4,7 @@ import UIKit
 class InviteFriendsViewController: UIViewController, UITextFieldDelegate {
     let inviteFriendTableViewCellIdentifier = "InviteFriendTableViewCell"
     typealias Friend = (id: String, name: String, selected: Bool)
-    var challenge: Challenge!
+    var friends: Friends?
     var dataArray = [Friend]()
     var friendsIds = [String]()
     var isChanged = false
@@ -21,6 +21,10 @@ class InviteFriendsViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let storedFriends = Friends.get() {
+            self.friends = storedFriends
+        }
 
         tableView.dataSource = self
         tableView.delegate = self
@@ -58,10 +62,13 @@ class InviteFriendsViewController: UIViewController, UITextFieldDelegate {
     }
     
     private func isFriend(id: String) -> Bool {
-        for (index, friend) in enumerate(challenge.friends) {
-            if friend.id == id {
-                return true
+        if let friends = friends {
+            for (index, friend) in enumerate(friends.friends) {
+                if friend.id == id {
+                    return true
+                }
             }
+            
         }
         return false
     }

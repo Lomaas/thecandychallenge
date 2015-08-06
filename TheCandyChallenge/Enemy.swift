@@ -6,7 +6,10 @@ enum Enemies: Int {
     case soda = 3
 }
 
-class Enemy: Printable {
+@objc
+class Enemy: NSObject, Printable, NSCoding {
+    static let key = "Enemy"
+    
     let type: Int
     let date: NSDate
     var amount: Int {
@@ -21,7 +24,7 @@ class Enemy: Printable {
         return amount * self.getPriceForUnit()
     }
     
-    var description: String {
+    override var description: String {
         return "\(type), date: \(date), amount: \(amount)"
     }
     
@@ -29,6 +32,38 @@ class Enemy: Printable {
         self.type = type
         self.date = date
         self.amount = amount
+    }
+    
+    func save() {
+        let encodedObject = NSKeyedArchiver.archivedDataWithRootObject(self)
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setObject(encodedObject, forKey: Enemy.key)
+    }
+    
+    static func get() -> Enemy? {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        let encodedObject = defaults.objectForKey(Enemy.key) as? NSData
+        var enemy: Enemy?
+        
+        if let encodedObject = encodedObject {
+            enemy = NSKeyedUnarchiver.unarchiveObjectWithData(encodedObject) as? Enemy
+        }
+        
+        return enemy;
+    }
+    
+    // MARK: NSCoding
+    
+    required init(coder aDecoder: NSCoder) {
+        self.type = aDecoder.decodeObjectForKey("type") as! Int
+        self.date = aDecoder.decodeObjectForKey("date") as! NSDate
+        self.amount = aDecoder.decodeObjectForKey("amount") as! Int
+    }
+    
+    func encodeWithCoder(_aCoder: NSCoder) {
+        _aCoder.encodeObject(self.type, forKey: "type")
+        _aCoder.encodeObject(self.date, forKey: "date")
+        _aCoder.encodeObject(self.amount, forKey: "amount")
     }
     
     func fromTypeToString() -> String {

@@ -23,7 +23,6 @@ class WeatherService: NSObject, CLLocationManagerDelegate {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
-
     }
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [AnyObject]) {

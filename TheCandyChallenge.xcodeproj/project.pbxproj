@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		85151E191AE405DA0003B148 /* DayService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85151E181AE405DA0003B148 /* DayService.swift */; };
+		851D2F1F1B74004E002CB45F /* Friends.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851D2F1E1B74004E002CB45F /* Friends.swift */; };
 		851EC8671B4F2B2700CD0D90 /* FacebookFriendsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851EC8661B4F2B2700CD0D90 /* FacebookFriendsService.swift */; };
 		853411FF1B4D97E600CC539C /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 853411FE1B4D97E600CC539C /* Enemy.swift */; };
 		856A650C1B639BC10017043F /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 856A650B1B639BB60017043F /* Charts.framework */; };
@@ -19,7 +20,6 @@
 		8578D0141B4DAF1E007ECE49 /* InviteFriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8578D0131B4DAF1E007ECE49 /* InviteFriendTableViewCell.swift */; };
 		8578D0171B4DB542007ECE49 /* SelectEnemiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8578D0161B4DB542007ECE49 /* SelectEnemiesViewController.swift */; };
 		8578D0191B4DB9B4007ECE49 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8578D0181B4DB9B4007ECE49 /* Friend.swift */; };
-		8578D01B1B4DB9CB007ECE49 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8578D01A1B4DB9CB007ECE49 /* User.swift */; };
 		8578D01D1B4DE0A5007ECE49 /* FriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8578D01C1B4DE0A5007ECE49 /* FriendTableViewCell.swift */; };
 		8586EF8B1AC34C1F00F47C20 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8586EF8A1AC34C1F00F47C20 /* AppDelegate.swift */; };
 		8586EF8D1AC34C1F00F47C20 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8586EF8C1AC34C1F00F47C20 /* WelcomeViewController.swift */; };
@@ -93,6 +93,7 @@
 
 /* Begin PBXFileReference section */
 		85151E181AE405DA0003B148 /* DayService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayService.swift; sourceTree = "<group>"; };
+		851D2F1E1B74004E002CB45F /* Friends.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Friends.swift; sourceTree = "<group>"; };
 		851EC8661B4F2B2700CD0D90 /* FacebookFriendsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookFriendsService.swift; sourceTree = "<group>"; };
 		853411FE1B4D97E600CC539C /* Enemy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
 		856A65061B639BB60017043F /* Charts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Charts.xcodeproj; path = "../../../Downloads/ios-charts-master 3/Charts/Charts.xcodeproj"; sourceTree = "<group>"; };
@@ -106,7 +107,6 @@
 		8578D0131B4DAF1E007ECE49 /* InviteFriendTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteFriendTableViewCell.swift; sourceTree = "<group>"; };
 		8578D0161B4DB542007ECE49 /* SelectEnemiesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectEnemiesViewController.swift; sourceTree = "<group>"; };
 		8578D0181B4DB9B4007ECE49 /* Friend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
-		8578D01A1B4DB9CB007ECE49 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		8578D01C1B4DE0A5007ECE49 /* FriendTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendTableViewCell.swift; sourceTree = "<group>"; };
 		8586EF851AC34C1F00F47C20 /* TheCandyChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheCandyChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8586EF891AC34C1F00F47C20 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -350,7 +350,7 @@
 				85C32E881ACC469C0053EFF7 /* Challenge.swift */,
 				853411FE1B4D97E600CC539C /* Enemy.swift */,
 				8578D0181B4DB9B4007ECE49 /* Friend.swift */,
-				8578D01A1B4DB9CB007ECE49 /* User.swift */,
+				851D2F1E1B74004E002CB45F /* Friends.swift */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -490,6 +490,7 @@
 			files = (
 				85151E191AE405DA0003B148 /* DayService.swift in Sources */,
 				85C32E891ACC469C0053EFF7 /* Challenge.swift in Sources */,
+				851D2F1F1B74004E002CB45F /* Friends.swift in Sources */,
 				8578AABF1ADAB151004A2CE6 /* SettingsViewController.swift in Sources */,
 				851EC8671B4F2B2700CD0D90 /* FacebookFriendsService.swift in Sources */,
 				85C32E811ACC22C60053EFF7 /* UserService.swift in Sources */,
@@ -498,7 +499,6 @@
 				8578D01D1B4DE0A5007ECE49 /* FriendTableViewCell.swift in Sources */,
 				85C32E771ACB3D990053EFF7 /* PasswordGenerator.swift in Sources */,
 				8578D0171B4DB542007ECE49 /* SelectEnemiesViewController.swift in Sources */,
-				8578D01B1B4DB9CB007ECE49 /* User.swift in Sources */,
 				8578D0141B4DAF1E007ECE49 /* InviteFriendTableViewCell.swift in Sources */,
 				8586EF8D1AC34C1F00F47C20 /* WelcomeViewController.swift in Sources */,
 				85C32E831ACC243C0053EFF7 /* ProgressViewController.swift in Sources */,

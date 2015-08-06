@@ -51,6 +51,9 @@ class SelectEnemiesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let storedChallenge = Challenge.get() {
+            self.challenge = storedChallenge
+        }
         updateView()
     }
     

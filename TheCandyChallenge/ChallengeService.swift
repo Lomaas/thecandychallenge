@@ -45,6 +45,10 @@ class ChallengeService {
     
     private func getMyChallenge(successHandler: (userChallenge: PFObject) -> Void, errorHandler: () -> Void) {
         var query = PFQuery(className: ChallengeService.className)
+        
+        if PFUser.currentUser() == nil {
+            return
+        }
         query.whereKey("fbId", equalTo: PFUser.currentUser()!.objectForKey("fbId")!)
         query.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
             if error == nil {
@@ -79,13 +83,10 @@ class ChallengeService {
     func handler(userChallenge: PFObject) {
         userChallenge.pinInBackground()
         var friends = userChallenge["friends"] as! [PFObject]
-        
-        if friends.count == 0 {
-            self.challenge = self.maptoChallengeModel(userChallenge)
-        }
-        
+        self.challenge = self.maptoChallengeModel(userChallenge)
         var returned = 0
         var friendsReturnArray = [PFObject]()
+        
         for friend in friends {
             friend.fetchIfNeededInBackgroundWithBlock {
                 (friend: PFObject?, error: NSError?) -> Void in
@@ -95,7 +96,8 @@ class ChallengeService {
                     let fbid = friend.objectForKey("fbId") as! String
                     friendsReturnArray.append(friend)
                     let parsedFriend = self.parseFriend(userChallenge)
-                    self.challenge = self.maptoChallengeModel(userChallenge)
+                    self.challenge.friends.append(parsedFriend)
+                    NSNotificationCenter.defaultCenter().postNotificationName("NewDataAvailable", object: nil)
                 }
             }
         }
@@ -148,7 +150,7 @@ class ChallengeService {
         let createdDate = challenge.createdAt == nil ? NSDate() : challenge.createdAt!
         let enemies = self.parseEnemies(challenge["enemies"] as! [AnyObject])
         let name = challenge["name"] as! String
-        return Challenge(name: name, createdDate: createdDate, enemies: enemies)
+        return Challenge(name: name, createdDate: createdDate, enemies: enemies, friends: [Friend]())
     }
     
     private func parseEnemies(input : [AnyObject]) -> [Enemy] {

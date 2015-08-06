@@ -11,13 +11,13 @@ import UIKit
 class FriendTableViewCell: UITableViewCell {
 
     @IBOutlet weak var nameLabel: UILabel!
-    
+    @IBOutlet weak var timeWithout: UILabel!
+    @IBOutlet weak var mainEnemyLabel: UILabel!
+
     override func awakeFromNib() {
         super.awakeFromNib()
     }
-    @IBOutlet weak var timeWithout: UILabel!
 
-    @IBOutlet weak var mainEnemyLabel: UILabel!
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }

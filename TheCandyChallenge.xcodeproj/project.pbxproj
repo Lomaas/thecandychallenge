@@ -647,7 +647,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"/Users/simen johannessen/Development/TheCandyChallenge\"",
+					"\"/Users/simen johannessen/Privat/TheCandyChallenge\"",
 					"$(PROJECT_DIR)",
 					"\"/Users/simen johannessen/Documents/FacebookSDK\"",
 				);
@@ -670,7 +670,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"/Users/simen johannessen/Development/TheCandyChallenge\"",
+					"\"/Users/simen johannessen/Privat/TheCandyChallenge\"",
 					"$(PROJECT_DIR)",
 					"\"/Users/simen johannessen/Documents/FacebookSDK\"",
 				);

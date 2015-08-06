@@ -25,7 +25,9 @@ class ProgressViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "getData:", name: "NewDataAvailable", object: nil)
+        
+        ChallengeService.sharedInstance.getMyChallengeFromLocalStorage()
         pieChartView.noDataText = "NoData :("
         pieChartView.delegate = self
 
@@ -38,8 +40,6 @@ class ProgressViewController: UIViewController {
 //        pieChartView.drawHoleEnabled = true
         pieChartView.centerTextColor = UIColor.blueColor()
         pieChartView.centerTextFont = UIFont(name: "Avenir Next", size: 20)!
-        
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "getData:", name: "NewDataAvailable", object: nil)
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -107,7 +107,6 @@ class ProgressViewController: UIViewController {
         pieChartView.data = pieChartData
 
         pieChartDataSet.colors = [UIColor(red: 144/255, green: 235/255, blue: 255/255, alpha: 1), UIColor(red: 254/255, green: 209/255, blue: 145/255, alpha: 1)]
-        
     }
 }
 

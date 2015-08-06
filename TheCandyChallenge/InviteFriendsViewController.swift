@@ -58,11 +58,9 @@ class InviteFriendsViewController: UIViewController, UITextFieldDelegate {
     }
     
     private func isFriend(id: String) -> Bool {
-        if let friends = challenge.friends {
-            for (index, friend) in enumerate(friends) {
-                if friend.id == id {
-                    return true
-                }
+        for (index, friend) in enumerate(challenge.friends) {
+            if friend.id == id {
+                return true
             }
         }
         return false
@@ -89,6 +87,7 @@ extension InviteFriendsViewController: UITableViewDataSource, UITableViewDelegat
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
         isChanged = true
+        
         if dataArray[indexPath.row].selected {
             removeFriend(dataArray[indexPath.row].id)
             tableView.deselectRowAtIndexPath(indexPath, animated: true)

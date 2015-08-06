@@ -10,11 +10,7 @@ class ContainerViewController: UIViewController, UIPageViewControllerDataSource,
         let settingsView = self.storyboard?.instantiateViewControllerWithIdentifier("FormViewController") as! SettingsViewController
         return [dayView, progressView, settingsView]
     }()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
+
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -22,10 +18,18 @@ class ContainerViewController: UIViewController, UIPageViewControllerDataSource,
             return
         }
         
+        // add check for has Challenge!
         if (!UserService.hasSignedUp()) {
             self.goToView(Constants.VIEWS.WelcomeView.rawValue)
         } else {
-            self.createPageViewController()
+            ChallengeService.sharedInstance.hasChallenge { (challenge) -> Void in
+                if challenge == nil {
+                    let challenge = ChallengeService.sharedInstance.createChallenge()
+                    self.performSegueWithIdentifier("goToChooseEnemies", sender: challenge)
+                } else {
+                    self.createPageViewController()
+                }
+            }
         }
     }
     

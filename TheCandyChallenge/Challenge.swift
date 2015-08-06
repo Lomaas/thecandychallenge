@@ -4,9 +4,9 @@ class Challenge {
     let name: String
     let createdDate: NSDate
     var enemies: [Enemy]
-    var friends: [Friend]?
+    var friends: [Friend]
     
-    init(name: String, createdDate: NSDate, enemies: [Enemy], friends: [Friend]? = nil) {
+    init(name: String, createdDate: NSDate, enemies: [Enemy], friends: [Friend]) {
         self.name = name
         self.createdDate = createdDate
         self.enemies = enemies

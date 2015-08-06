@@ -78,8 +78,7 @@ class WelcomeViewController: UIViewController {
                 let challenge = ChallengeService.sharedInstance.createChallenge()
                 self.performSegueWithIdentifier("goToChooseEnemies", sender: challenge)
             }
-        }
-        
+        }        
     }
 }
 

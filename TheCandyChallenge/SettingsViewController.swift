@@ -13,6 +13,7 @@ class SettingsViewController: UIViewController {
         nameLabel.text = user["name"] as? String
         let userId = user["fbId"] as! String
         let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "/\(userId)/picture?redirect=false&type=large&width=640&height=640", parameters: nil)
+        
         graphRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
             if ((error) != nil) {
                 println("Error: \(error.localizedDescription)")

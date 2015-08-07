@@ -71,7 +71,6 @@ class ChallengeService {
         self.tempFriends = [Friend]()
         
         var returned = 0
-        var friendsReturnArray = [PFObject]()
         
         for friend in friends {
             friend.fetchIfNeededInBackgroundWithBlock {
@@ -79,10 +78,8 @@ class ChallengeService {
                 returned++
                 
                 if let friend = friend {
-                    let fbid = friend.objectForKey("fbId") as! String
-                    friendsReturnArray.append(friend)
-                    let parsedFriend = self.parseFriend(friend)
-                    self.tempFriends.append(parsedFriend)
+                    self.tempFriends.append(self.parseFriend(friend))
+                    
                     if returned == friends.count {
                         println("Returned is equal friends count")
                         let saveFriends = Friends(friends: self.tempFriends)
@@ -112,6 +109,7 @@ class ChallengeService {
         userChallenge["fbId"] = PFUser.currentUser()?.objectForKey("fbId")
         userChallenge["enemies"] = []
         userChallenge["friends"] = []
+        userChallenge["daysMissedInRow"] = 0
 
         userChallenge.saveInBackgroundWithBlock { (success, error) -> Void in
             if success {
@@ -126,11 +124,12 @@ class ChallengeService {
         return challenge
     }
     
-    func updateChallengeWithEnemies(challenge: Challenge) {
+    func updateChallenge(challenge: Challenge) {
         challenge.save()
         
         self.getMyChallenge({ (userChallenge) -> Void in
             userChallenge["enemies"] = self.parseEnemiesToJson(challenge)
+            userChallenge["daysMissedInRow"] = challenge.daysMissedInRow
             userChallenge.saveInBackground()
             self.handler(userChallenge)
         }, errorHandler: { () -> Void in
@@ -142,7 +141,8 @@ class ChallengeService {
         let createdDate = challenge.createdAt == nil ? NSDate() : challenge.createdAt!
         let enemies = self.parseEnemies(challenge["enemies"] as! [AnyObject])
         let name = challenge["name"] as! String
-        return Challenge(name: name, createdDate: createdDate, enemies: enemies)
+        let daysMissedInRow = challenge["daysMissedInRow"] as! Int
+        return Challenge(name: name, createdDate: createdDate, enemies: enemies, daysMissedInRow: daysMissedInRow)
     }
     
     private func parseEnemies(input : [AnyObject]) -> [Enemy] {
@@ -172,6 +172,6 @@ class ChallengeService {
         let mainEnemy = challenge.findMainEnemy() != nil ?
             challenge.findMainEnemy()!.fromTypeToString() : "None"
         let id = userChallenge["fbId"] as! String
-        return Friend(id: id, name: challenge.name, startDate: date, mainEnemy: mainEnemy)
+        return Friend(id: id, name: challenge.name, startDate: date, mainEnemy: mainEnemy, isForfeinted: challenge.isForfeinted())
     }
 }

@@ -134,9 +134,15 @@ extension ProgressViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(friendTableViewCellIdentifier, forIndexPath: indexPath) as! FriendTableViewCell
-        cell.nameLabel.text = dataArray[indexPath.row].name
-        cell.timeWithout.text = getTimeSinceStarted(dataArray[indexPath.row].startDate)
-        cell.mainEnemyLabel.text = "Main enemy: \(dataArray[indexPath.row].mainEnemy)"
+        let friend = dataArray[indexPath.row]
+        cell.nameLabel.text = friend.name
+        cell.timeWithout.text = getTimeSinceStarted(friend.startDate)
+        cell.mainEnemyLabel.text = "Main enemy: \(friend.mainEnemy)"
+
+        if friend.isForfeinted {
+            cell.backgroundColor = UIColor.redColor()
+        }
+        
         return cell
     }
     

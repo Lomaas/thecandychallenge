@@ -11,6 +11,15 @@ class ContainerViewController: UIViewController, UIPageViewControllerDataSource,
         return [dayView, progressView, settingsView]
     }()
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // Bootstrap notifcation system
+        if Notification.get() == nil {
+            let not = Notification(earlyDay: true, lateDay: false)
+            not.save()
+        }
+    }
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -23,6 +32,7 @@ class ContainerViewController: UIViewController, UIPageViewControllerDataSource,
             self.goToView(Constants.VIEWS.WelcomeView.rawValue)
         } else {
             if let challenge = Challenge.get() {
+                checkNotForfeinted(challenge)
                 self.createPageViewController()
                 return
             }
@@ -35,6 +45,12 @@ class ContainerViewController: UIViewController, UIPageViewControllerDataSource,
                     self.createPageViewController()
                 }
             }
+        }
+    }
+    
+    private func checkNotForfeinted(challenge: Challenge) {
+        if challenge.isForfeinted() {
+            performSegueWithIdentifier("goToChallengeOver", sender: nil)
         }
     }
     

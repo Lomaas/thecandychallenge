@@ -23,7 +23,7 @@ class DayViewController: UIViewController, WeatherServiceDelegate, CLLocationMan
         super.viewDidLoad()
         weatherService.delegate = self
 //        weatherService.startFetchingWeather()
-        isEarlyDay() ? showEarlyDayScreen() : showLateDayScreen()
+        DayService.isEarlyDay() ? showEarlyDayScreen() : showLateDayScreen()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -42,12 +42,6 @@ class DayViewController: UIViewController, WeatherServiceDelegate, CLLocationMan
     
     func isSunny() -> Bool {
         return false
-    }
-    
-    func isEarlyDay() -> Bool {
-        let components: NSCalendarUnit = NSCalendarUnit.CalendarUnitDay | NSCalendarUnit.CalendarUnitHour | NSCalendarUnit.CalendarUnitSecond | NSCalendarUnit.CalendarUnitMinute
-        let date = NSCalendar.currentCalendar().components(components, fromDate: NSDate())
-        return date.hour >= 21 ? false : true
     }
     
     // MARK: Show and add views

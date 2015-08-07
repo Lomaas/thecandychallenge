@@ -10,6 +10,7 @@ import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    var backgroundManager = BackgroundManager()
 
     var window: UIWindow?
     
@@ -24,6 +25,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             options = launchOptions!
         }
         PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(options)
+        LocalNotificationService.registerForNotification()
+
+        application.setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
 
@@ -52,6 +56,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
         return FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)
+    }
+    
+    func application(application: UIApplication, performFetchWithCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+        backgroundManager.scheduleNotification(completionHandler)
+    }
+    
+    func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forLocalNotification notification: UILocalNotification, completionHandler: () -> Void) {
+        var bgIdentifier: UIBackgroundTaskIdentifier!
+        
+        bgIdentifier = UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler({
+            UIApplication.sharedApplication().endBackgroundTask(bgIdentifier)
+        })
+        
+        print("notificationActionOneIdent \(identifier)")
+        
+        if identifier == notificationActionOneIdent {
+            if let not = Notification.get(),
+               let challenge = Challenge.get() {
+                not.reset()
+                challenge.daysMissedInRow = 0
+                ChallengeService.sharedInstance.updateChallenge(challenge)
+            }
+        } else if identifier == notificationActionTwoIdent {
+            if let challenge = Challenge.get() {
+                challenge.daysMissedInRow = 2
+                ChallengeService.sharedInstance.updateChallenge(challenge)
+            }
+        }
+        
+        completionHandler()
+        UIApplication.sharedApplication().endBackgroundTask(bgIdentifier)
+    }
+    
+    func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
+        
     }
 }
 

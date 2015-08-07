@@ -2,6 +2,16 @@ import Foundation
 
 struct DayService {
     
+    static func getText() -> (text: String, image: String, backgroundName: String?) {
+        return isEarlyDay() ? DayService.getEarlyDayScreen() : DayService.getLateDayScreen()
+    }
+    
+    static func isEarlyDay() -> Bool {
+        let components: NSCalendarUnit = NSCalendarUnit.CalendarUnitDay | NSCalendarUnit.CalendarUnitHour | NSCalendarUnit.CalendarUnitSecond | NSCalendarUnit.CalendarUnitMinute
+        let date = NSCalendar.currentCalendar().components(components, fromDate: NSDate())
+        return date.hour >= 21 ? false : true
+    }
+    
     static func getEarlyDayScreen() -> (text: String, image: String, backgroundName: String?) {
         var text: String
         var image: String

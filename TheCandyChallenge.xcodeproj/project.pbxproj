@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		85151E191AE405DA0003B148 /* DayService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85151E181AE405DA0003B148 /* DayService.swift */; };
 		851D2F1F1B74004E002CB45F /* Friends.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851D2F1E1B74004E002CB45F /* Friends.swift */; };
+		851D2F211B750DFB002CB45F /* LocalNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851D2F201B750DFB002CB45F /* LocalNotificationService.swift */; };
+		851D2F241B751289002CB45F /* BackgroundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851D2F231B751289002CB45F /* BackgroundManager.swift */; };
+		851D2F261B751AEA002CB45F /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851D2F251B751AEA002CB45F /* Notification.swift */; };
+		851D2F281B753174002CB45F /* ChallengeOverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851D2F271B753174002CB45F /* ChallengeOverViewController.swift */; };
 		851EC8671B4F2B2700CD0D90 /* FacebookFriendsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851EC8661B4F2B2700CD0D90 /* FacebookFriendsService.swift */; };
 		853411FF1B4D97E600CC539C /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 853411FE1B4D97E600CC539C /* Enemy.swift */; };
 		856A650C1B639BC10017043F /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 856A650B1B639BB60017043F /* Charts.framework */; };
@@ -94,6 +98,10 @@
 /* Begin PBXFileReference section */
 		85151E181AE405DA0003B148 /* DayService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayService.swift; sourceTree = "<group>"; };
 		851D2F1E1B74004E002CB45F /* Friends.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Friends.swift; sourceTree = "<group>"; };
+		851D2F201B750DFB002CB45F /* LocalNotificationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalNotificationService.swift; sourceTree = "<group>"; };
+		851D2F231B751289002CB45F /* BackgroundManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundManager.swift; sourceTree = "<group>"; };
+		851D2F251B751AEA002CB45F /* Notification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		851D2F271B753174002CB45F /* ChallengeOverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeOverViewController.swift; sourceTree = "<group>"; };
 		851EC8661B4F2B2700CD0D90 /* FacebookFriendsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookFriendsService.swift; sourceTree = "<group>"; };
 		853411FE1B4D97E600CC539C /* Enemy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
 		856A65061B639BB60017043F /* Charts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Charts.xcodeproj; path = "../../../Downloads/ios-charts-master 3/Charts/Charts.xcodeproj"; sourceTree = "<group>"; };
@@ -180,6 +188,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		851D2F221B75126C002CB45F /* manager */ = {
+			isa = PBXGroup;
+			children = (
+				851D2F231B751289002CB45F /* BackgroundManager.swift */,
+			);
+			name = manager;
+			sourceTree = "<group>";
+		};
 		856A65071B639BB60017043F /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -245,6 +261,7 @@
 				85C32E751ACB3D4B0053EFF7 /* util */,
 				85C32E871ACC46840053EFF7 /* model */,
 				85C32E551ACB27300053EFF7 /* bridge */,
+				851D2F221B75126C002CB45F /* manager */,
 				85C32E7D1ACC09FC0053EFF7 /* services */,
 				8578AAC61ADC6620004A2CE6 /* views */,
 				85C32E861ACC39AD0053EFF7 /* viewcontrollers */,
@@ -324,6 +341,7 @@
 			isa = PBXGroup;
 			children = (
 				85C32E801ACC22C60053EFF7 /* UserService.swift */,
+				851D2F201B750DFB002CB45F /* LocalNotificationService.swift */,
 				8578AAC01ADC281F004A2CE6 /* WeatherService.swift */,
 				851EC8661B4F2B2700CD0D90 /* FacebookFriendsService.swift */,
 				85151E181AE405DA0003B148 /* DayService.swift */,
@@ -338,6 +356,7 @@
 				85C32E7B1ACB4CA80053EFF7 /* ContainerViewController.swift */,
 				8578D0151B4DB051007ECE49 /* rootviews */,
 				85C32E4E1ACB14A90053EFF7 /* InviteFriendsViewController.swift */,
+				851D2F271B753174002CB45F /* ChallengeOverViewController.swift */,
 				8578D0161B4DB542007ECE49 /* SelectEnemiesViewController.swift */,
 				8586EF8C1AC34C1F00F47C20 /* WelcomeViewController.swift */,
 			);
@@ -348,6 +367,7 @@
 			isa = PBXGroup;
 			children = (
 				85C32E881ACC469C0053EFF7 /* Challenge.swift */,
+				851D2F251B751AEA002CB45F /* Notification.swift */,
 				853411FE1B4D97E600CC539C /* Enemy.swift */,
 				8578D0181B4DB9B4007ECE49 /* Friend.swift */,
 				851D2F1E1B74004E002CB45F /* Friends.swift */,
@@ -417,6 +437,9 @@
 						CreatedOnToolsVersion = 6.2;
 						DevelopmentTeam = H8L8VRZJUX;
 						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
 							com.apple.HealthKit = {
 								enabled = 0;
 							};
@@ -488,6 +511,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				851D2F281B753174002CB45F /* ChallengeOverViewController.swift in Sources */,
 				85151E191AE405DA0003B148 /* DayService.swift in Sources */,
 				85C32E891ACC469C0053EFF7 /* Challenge.swift in Sources */,
 				851D2F1F1B74004E002CB45F /* Friends.swift in Sources */,
@@ -496,6 +520,7 @@
 				85C32E811ACC22C60053EFF7 /* UserService.swift in Sources */,
 				853411FF1B4D97E600CC539C /* Enemy.swift in Sources */,
 				85C32E8B1ACC46D10053EFF7 /* ChallengeService.swift in Sources */,
+				851D2F211B750DFB002CB45F /* LocalNotificationService.swift in Sources */,
 				8578D01D1B4DE0A5007ECE49 /* FriendTableViewCell.swift in Sources */,
 				85C32E771ACB3D990053EFF7 /* PasswordGenerator.swift in Sources */,
 				8578D0171B4DB542007ECE49 /* SelectEnemiesViewController.swift in Sources */,
@@ -503,11 +528,13 @@
 				8586EF8D1AC34C1F00F47C20 /* WelcomeViewController.swift in Sources */,
 				85C32E831ACC243C0053EFF7 /* ProgressViewController.swift in Sources */,
 				85C32E7C1ACB4CA80053EFF7 /* ContainerViewController.swift in Sources */,
+				851D2F261B751AEA002CB45F /* Notification.swift in Sources */,
 				8578AAC11ADC281F004A2CE6 /* WeatherService.swift in Sources */,
 				85C32E4F1ACB14A90053EFF7 /* InviteFriendsViewController.swift in Sources */,
 				8586EF8B1AC34C1F00F47C20 /* AppDelegate.swift in Sources */,
 				85C32E7F1ACC0A2D0053EFF7 /* Constants.swift in Sources */,
 				8578AAC51ADC6452004A2CE6 /* RainView.swift in Sources */,
+				851D2F241B751289002CB45F /* BackgroundManager.swift in Sources */,
 				8578D0191B4DB9B4007ECE49 /* Friend.swift in Sources */,
 				8578AAB81AD92A8F004A2CE6 /* DayViewController.swift in Sources */,
 			);

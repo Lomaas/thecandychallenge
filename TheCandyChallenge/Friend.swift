@@ -8,12 +8,14 @@ class Friend: NSObject, NSCoding {
     let name: String
     let startDate: NSDate
     let mainEnemy: String
+    let isForfeinted: Bool
     
-    init(id: String, name: String, startDate: NSDate, mainEnemy: String) {
+    init(id: String, name: String, startDate: NSDate, mainEnemy: String, isForfeinted: Bool) {
         self.id = id
         self.name = name
         self.startDate = startDate
         self.mainEnemy = mainEnemy
+        self.isForfeinted = isForfeinted
     }
     
     func save() {
@@ -41,6 +43,11 @@ class Friend: NSObject, NSCoding {
         self.name = aDecoder.decodeObjectForKey("name") as! String
         self.startDate = aDecoder.decodeObjectForKey("startDate") as! NSDate
         self.mainEnemy = aDecoder.decodeObjectForKey("mainEnemy") as! String
+        if let isForfeinted = aDecoder.decodeObjectForKey("isForfeinted") as? Bool {
+            self.isForfeinted = isForfeinted
+        } else {
+            self.isForfeinted = false
+        }
     }
     
     func encodeWithCoder(_aCoder: NSCoder) {
@@ -48,5 +55,6 @@ class Friend: NSObject, NSCoding {
         _aCoder.encodeObject(self.name, forKey: "name")
         _aCoder.encodeObject(self.startDate, forKey: "startDate")
         _aCoder.encodeObject(self.mainEnemy, forKey: "mainEnemy")
+        _aCoder.encodeObject(self.isForfeinted, forKey: "isForfeinted")
     }
 }

@@ -39,7 +39,8 @@ class Challenge: NSObject, NSCoding {
         self.name = aDecoder.decodeObjectForKey("name") as! String
         self.createdDate = aDecoder.decodeObjectForKey("createdDate") as! NSDate
         self.enemies = aDecoder.decodeObjectForKey("enemies") as! [Enemy]
-        self.daysMissedInRow = aDecoder.decodeObjectForKey("daysMissedInRow") as! Int
+        self.daysMissedInRow = aDecoder.decodeObjectForKey("daysMissedInRow") as? Int == nil ?
+            0 : aDecoder.decodeObjectForKey("daysMissedInRow") as! Int
     }
     
     func encodeWithCoder(_aCoder: NSCoder) {

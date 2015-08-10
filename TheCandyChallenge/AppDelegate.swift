@@ -72,12 +72,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("notificationActionOneIdent \(identifier)")
         
         if identifier == notificationActionOneIdent {
-            if let not = Notification.get(),
-               let challenge = Challenge.get() {
-                not.reset()
-                challenge.daysMissedInRow = 0
-                ChallengeService.sharedInstance.updateChallenge(challenge)
-            }
+            BackgroundManager.userConfimedNoCandy()
         } else if identifier == notificationActionTwoIdent {
             if let challenge = Challenge.get() {
                 challenge.daysMissedInRow = 2

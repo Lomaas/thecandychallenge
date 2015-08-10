@@ -16,7 +16,7 @@ class DayViewController: UIViewController, WeatherServiceDelegate, CLLocationMan
 
     @IBAction func interactionButtonPressed(sender: UIButton) {
         println("Interaction button pressed")
-        
+        BackgroundManager.userConfimedNoCandy()
     }
     
     override func viewDidLoad() {

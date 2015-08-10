@@ -10,14 +10,21 @@ import UIKit
 
 class ChallengeOverViewController: UIViewController {
 
+    var challenge: Challenge!
+    
     @IBOutlet weak var nameLabel: UILabel!
+    
+    @IBAction func didPressStartNewChallenge(sender: AnyObject) {
+        challenge.createdDate = NSDate()
+        challenge.daysMissedInRow = 0
+        ChallengeService.sharedInstance.updateChallenge(challenge)
+
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let user = UserService.getCurrentUser()!
         nameLabel.text = user["name"] as? String
-    }
-
-    @IBAction func didPressStartNewChallenge(sender: AnyObject) {
-        
     }
 }

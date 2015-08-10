@@ -130,6 +130,7 @@ class ChallengeService {
         self.getMyChallenge({ (userChallenge) -> Void in
             userChallenge["enemies"] = self.parseEnemiesToJson(challenge)
             userChallenge["daysMissedInRow"] = challenge.daysMissedInRow
+            userChallenge["date"] = challenge.createdDate
             userChallenge.saveInBackground()
             self.handler(userChallenge)
         }, errorHandler: { () -> Void in

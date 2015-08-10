@@ -5,7 +5,7 @@ class Challenge: NSObject, NSCoding {
     static let key = "challenge1"
     
     let name: String
-    let createdDate: NSDate
+    var createdDate: NSDate
     var enemies: [Enemy]
     var daysMissedInRow: Int
     

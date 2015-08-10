@@ -16,7 +16,7 @@ class ContainerViewController: UIViewController, UIPageViewControllerDataSource,
         
         // Bootstrap notifcation system
         if Notification.get() == nil {
-            let not = Notification(earlyDay: true, lateDay: false)
+            let not = Notification(earlyDay: false, lateDay: false)
             not.save()
         }
     }
@@ -48,9 +48,16 @@ class ContainerViewController: UIViewController, UIPageViewControllerDataSource,
         }
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "goToChallengeOver" {
+            let vc = segue.destinationViewController as! ChallengeOverViewController
+            vc.challenge = sender as! Challenge
+        }
+    }
+    
     private func checkNotForfeinted(challenge: Challenge) {
         if challenge.isForfeinted() {
-            performSegueWithIdentifier("goToChallengeOver", sender: nil)
+            performSegueWithIdentifier("goToChallengeOver", sender: challenge)
         }
     }
     

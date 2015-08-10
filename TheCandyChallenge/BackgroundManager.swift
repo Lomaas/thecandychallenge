@@ -10,6 +10,15 @@ import Foundation
 
 class BackgroundManager {
     
+    static func userConfimedNoCandy() {
+        if let not = Notification.get(),
+            let challenge = Challenge.get() {
+                not.reset()
+                challenge.daysMissedInRow = 0
+                ChallengeService.sharedInstance.updateChallenge(challenge)
+        }
+    }
+    
     func scheduleNotification(completionHandler: (UIBackgroundFetchResult) -> Void) {
         println("Schedule notification")
         

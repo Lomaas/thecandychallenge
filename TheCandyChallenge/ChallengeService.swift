@@ -139,7 +139,7 @@ class ChallengeService {
     }
     
     private func maptoChallengeModel(challenge: PFObject) -> Challenge {
-        let createdDate = challenge.createdAt == nil ? NSDate() : challenge.createdAt!
+        let createdDate = challenge["date"] as! NSDate
         let enemies = self.parseEnemies(challenge["enemies"] as! [AnyObject])
         let name = challenge["name"] as! String
         let daysMissedInRow = challenge["daysMissedInRow"] as! Int
@@ -169,10 +169,9 @@ class ChallengeService {
     
     private func parseFriend(userChallenge: PFObject) -> Friend {
         let challenge = maptoChallengeModel(userChallenge)
-        let date = challenge.createdDate
         let mainEnemy = challenge.findMainEnemy() != nil ?
             challenge.findMainEnemy()!.fromTypeToString() : "None"
         let id = userChallenge["fbId"] as! String
-        return Friend(id: id, name: challenge.name, startDate: date, mainEnemy: mainEnemy, isForfeinted: challenge.isForfeinted())
+        return Friend(id: id, name: challenge.name, startDate: challenge.createdDate, mainEnemy: mainEnemy, isForfeinted: challenge.isForfeinted())
     }
 }

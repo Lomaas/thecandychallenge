@@ -22,7 +22,7 @@ class DayViewController: UIViewController, WeatherServiceDelegate, CLLocationMan
     override func viewDidLoad() {
         super.viewDidLoad()
         weatherService.delegate = self
-//        weatherService.startFetchingWeather()
+        weatherService.startFetchingWeather()
         DayService.isEarlyDay() ? showEarlyDayScreen() : showLateDayScreen()
     }
     

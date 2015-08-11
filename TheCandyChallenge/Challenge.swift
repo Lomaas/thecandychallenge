@@ -58,4 +58,9 @@ class Challenge: NSObject, NSCoding {
     func isForfeinted() -> Bool {
         return daysMissedInRow > 1
     }
+    
+    func restartChallenge() {
+        createdDate = NSDate()
+        daysMissedInRow = 0
+    }
 }

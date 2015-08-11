@@ -15,10 +15,8 @@ class ChallengeOverViewController: UIViewController {
     @IBOutlet weak var nameLabel: UILabel!
     
     @IBAction func didPressStartNewChallenge(sender: AnyObject) {
-        challenge.createdDate = NSDate()
-        challenge.daysMissedInRow = 0
+        challenge.restartChallenge()
         ChallengeService.sharedInstance.updateChallenge(challenge)
-
         dismissViewControllerAnimated(true, completion: nil)
     }
     

@@ -32,6 +32,7 @@ class ContainerViewController: UIViewController, UIPageViewControllerDataSource,
             self.goToView(Constants.VIEWS.WelcomeView.rawValue)
         } else {
             if let challenge = Challenge.get() {
+//                challenge.daysMissedInRow = 2
                 checkNotForfeinted(challenge)
                 self.createPageViewController()
                 return
